@@ -33,18 +33,18 @@ function FormLogin() {
 
    function Start() { 
 
-    const registrado = users.filter(user => user.user === username && user.password === passwordUser)
+    const registered = users.filter(user => user.user === username && user.password === passwordUser)
     
-    console.log(registrado);
+    console.log(registered);
 
  
     
-    if (registrado.length === 0) {
+    if (registered.length === 0) {
       console.log('Usuario no registrado');
       return;
     } 
     
-    const usuarioEncontrado = registrado [0]; 
+    const usuarioEncontrado = registered [0]; 
     
       //validar si ya hizo perfil
     if (usuarioEncontrado.perfilCreado) {
