@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import '../Styles/FormLogin.css'
 import { Link, useNavigate } from 'react-router-dom'
-import llamadosUsuarios from '../Services/llamadosUsuarios'
+import fetchUsers from '../Services/fetchUsers'
 import Cabritas from '../assets/img/CabritasClr.gif'
 
 function FormLogin() {
 
-  const [nombreUsuario,  SetNombreUsuario] = useState("")
-  const [passwordUsuario, SetPasswordUsuario] = useState("")
-  const [usuarios, SetUsuarios] = useState([])
+  const [username,  SetUsername] = useState("")
+  const [passwordUser, SetPasswordUser] = useState("")
+  const [users, SetUsers] = useState([])
   
   const navigate = useNavigate()
 
@@ -16,24 +16,24 @@ function FormLogin() {
 
     async function fetchDataUsers() {
 
-      const datos = await llamadosUsuarios.getUsuarios()
-      SetUsuarios(datos)
+      const datos = await fetchUsers.getUsers()
+      SetUsers(datos)
     };
 
     fetchDataUsers();
   }, []);
 
-   function nombre(evento) {
-    SetNombreUsuario(evento.target.value)
+   function chargeUsername(evento) {
+    SetUsername(evento.target.value)
    }
    
-   function password(evento) {
-     SetPasswordUsuario(evento.target.value)
+   function chargePasswordUser(evento) {
+     SetPasswordUser(evento.target.value)
    }
 
-   function Iniciar() { 
+   function Start() { 
 
-    const registrado = usuarios.filter(usuario => usuario.usuario === nombreUsuario && usuario.password === passwordUsuario)
+    const registrado = users.filter(user => user.user === username && user.password === passwordUser)
     
     console.log(registrado);
 
@@ -72,9 +72,9 @@ return (
         <div>  
           <div className='espLogin'>
             <p className='textLogin'>Lleve su producción <br /> por buen camino</p><br />
-            <input className='inp' value={nombreUsuario} placeholder="Nombre" required onChange={nombre} type="text"/><br /><br />
-            <input className='inp' value={passwordUsuario} placeholder="Contraseña" required onChange={password} type="password" /><br /><br />
-            <button onClick={Iniciar} className='btnIniciar'>Iniciar</button><br /><br />
+            <input className='inp' value={chargeUsername} placeholder="Nombre" required onChange={username} type="text"/><br /><br />
+            <input className='inp' value={chargePasswordUser} placeholder="Contraseña" required onChange={passwordUser} type="password" /><br /><br />
+            <button onClick={Start} className='btnIniciar'>Iniciar</button><br /><br />
             <p>¿Ya tienes una cuenta? <Link to = "/Register">Ir a registrarse</Link></p>      
           </div>
         </div>
