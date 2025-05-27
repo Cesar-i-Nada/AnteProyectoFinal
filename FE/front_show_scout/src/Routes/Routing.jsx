@@ -11,8 +11,11 @@ function Routing() {
     <div>
       <Router>
         <Routes>
-                
+          
+                {/* rutas publicas */}
                 <Route path="/" element={<Login/>}/>
+
+                {/* rutas privadas */}
                 <Route path="/Register" element={<PrivateRoute topSecret={<Register/>}/>}/>
                 
         </Routes>
