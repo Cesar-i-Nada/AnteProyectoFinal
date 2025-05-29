@@ -5,8 +5,8 @@ import fetchUsers from '../Services/fetchUsers'
 
 function Admin() {
 
-  const [nombreUsuario, SetNombreUsuario] = useState()
-  const [emailUsuario, SetEmailUsuario] = useState()
+  const [username, SetUsername] = useState()
+  const [emailUser, SetEmailUser] = useState()
   const [usuarios, SetUsuarios] = useState([])
   const [mostrar,setMostrar]=useState(false)
 
@@ -22,11 +22,11 @@ useEffect (() => {
   }, []);
 
   function nombre(evento) {
-    SetNombreUsuario(evento.target.value)
+    SetUsername(evento.target.value)
    }
    
    function email(evento) {
-     SetEmailUsuario(evento.target.value)
+     SetEmailUser(evento.target.value)
    }
    
 
@@ -39,8 +39,8 @@ fetchUsers.deleteUsers(id)
 async function editar(id) {
 
    const objetoEditar= {
-    usuario:nombreUsuario,
-   email:emailUsuario
+    usuario:username,
+   email:emailUser
    }
   await fetchUsers.updateUsers(objetoEditar,id)
 }
@@ -53,11 +53,11 @@ async function editar(id) {
             <p className='tituloAdmin'>REGISTROS Y DATOS DE USUARIOS</p><br />
             {usuarios.map((usuario,index) =>(
               <li key = {index}>
-                <strong>Nombre:</strong>{usuario.usuario}
+                <strong>Nombre:</strong>{usuario.username}
                 <br />
-                <strong>Password:</strong>{usuario.password}
+                <strong>Password:</strong>{usuario.passwordUser}
                 <br />
-                <strong>Email:</strong>{usuario.email} 
+                <strong>Email:</strong>{usuario.emailUser} 
                 <br />
                 <div>
                 <button className='filtrador' onClick={()=>{
