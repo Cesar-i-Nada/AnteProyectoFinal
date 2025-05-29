@@ -12,22 +12,11 @@ const [passwordUser, SetPasswordUser] = useState("")
 const [emailUser, SetEmailUser] = useState("")
 
 
-function chargeUsername(evento) {
- SetUsername(evento.target.value)
-}
-
-function chargePasswordUser(evento) {
-  SetPasswordUser(evento.target.value)
-}
-
-function chargeEmailUser(evento) {
-  SetEmailUser(evento.target.value)
-}
  function CrearRegistro() {
     const objUsuario ={
-        username: chargeUsername,
-        password: chargePasswordUser,
-        email: chargeEmailUser
+        username: username,
+        password: passwordUser,
+        email: emailUser
     }
 
    fetchUsers.postUsers(objUsuario)
@@ -42,9 +31,9 @@ return (
     <div className='espRegister'>
       <h1 className='titulo'>Registrese</h1>
       <p className='titulo'>para comenzar su viaje en la creación de obras escénicas</p><br />
-      <input className='inp' value={chargeUsername} placeholder="Nombre" required onChange={username} type="text"/><br /><br />   
-      <input className='inp' value={chargeEmailUser} placeholder="Email" required onChange={emailUser} type="email" /><br /><br />
-      <input className='inp' value={chargePasswordUser} placeholder="Password" required onChange={passwordUser} type="password"/><br /><br />
+      <input className='inp'  placeholder="Nombre" required onChange={(e)=>SetUsername(e.target.value)} type="text"/><br /><br />   
+      <input className='inp'  placeholder="Email" required onChange={(e)=>SetEmailUser(e.target.value)} type="email" /><br /><br />
+      <input className='inp'  placeholder="Password" required onChange={(e)=>SetPasswordUser(e.target.value)} type="password"/><br /><br />
       <button onClick={CrearRegistro} className='btnRegistrar'>Registrarse</button><br /><br />
       <Link to={"/"}>Ir a Login</Link>
     </div>

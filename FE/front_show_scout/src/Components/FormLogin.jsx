@@ -23,21 +23,11 @@ function FormLogin() {
     fetchDataUsers();
   }, []);
 
-   function chargeUsername(evento) {
-    SetUsername(evento.target.value)
-   }
-   
-   function chargePasswordUser(evento) {
-     SetPasswordUser(evento.target.value)
-   }
-
-   function Start() { 
+function Start() { 
 
     const registered = users.filter(user => user.user === username && user.password === passwordUser)
     
     console.log(registered);
-
- 
     
     if (registered.length === 0) {
       console.log('Usuario no registrado');
@@ -56,13 +46,10 @@ function FormLogin() {
       localStorage.setItem("usuario",JSON.stringify(usuarioEncontrado))
       navigate('/CreateProfile')
     }
-
-    
    }
 
 return (
 <div>
-    
     
     <div className="container">
         <div>
@@ -72,15 +59,14 @@ return (
         <div>  
           <div className='espLogin'>
             <p className='textLogin'>Lleve su producción <br /> por buen camino</p><br />
-            <input className='inp' value={chargeUsername} placeholder="Nombre" required onChange={username} type="text"/><br /><br />
-            <input className='inp' value={chargePasswordUser} placeholder="Contraseña" required onChange={passwordUser} type="password" /><br /><br />
+            <input className='inp' placeholder="Nombre" required onChange={(e)=>SetUsername(e.target.value)}type="text"/><br /><br />
+            <input className='inp' placeholder="Contraseña" required onChange={(e)=>SetPasswordUser(e.target.value)} type="password" /><br /><br />
             <button onClick={Start} className='btnIniciar'>Iniciar</button><br /><br />
             <p>¿Ya tienes una cuenta? <Link to = "/Register">Ir a registrarse</Link></p>      
           </div>
         </div>
 
       </div>
-
 
         <div className="textDiv">
           <h1>Herramientas para producir danza, teatro o circo.</h1>
