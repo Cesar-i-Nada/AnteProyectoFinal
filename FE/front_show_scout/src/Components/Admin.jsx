@@ -7,7 +7,7 @@ function Admin() {
 
   const [username, SetUsername] = useState()
   const [emailUser, SetEmailUser] = useState()
-  const [usuarios, SetUsuarios] = useState([])
+  const [users, SetUsers] = useState([])
   const [mostrar,setMostrar]=useState(false)
 
 useEffect (() => {
@@ -15,7 +15,7 @@ useEffect (() => {
     async function fetchDataUsers() {
 
       const datos = await fetchUsers.getUsers()
-      SetUsuarios(datos)
+      SetUsers(datos)
     };
 
     fetchDataUsers();
@@ -30,7 +30,6 @@ useEffect (() => {
    }
    
 
-
 function eliminar(id) {
 
 fetchUsers.deleteUsers(id)
@@ -40,7 +39,7 @@ async function editar(id) {
 
    const objetoEditar= {
     usuario:username,
-   email:emailUser
+    email:emailUser
    }
   await fetchUsers.updateUsers(objetoEditar,id)
 }
@@ -51,20 +50,20 @@ async function editar(id) {
         <div>
           <ul className='buscador'>
             <p className='tituloAdmin'>REGISTROS Y DATOS DE USUARIOS</p><br />
-            {usuarios.map((usuario,index) =>(
+            {users.map((users,index) =>(
               <li key = {index}>
-                <strong>Nombre:</strong>{usuario.username}
+                <strong>Nombre:</strong>{users.username}
                 <br />
-                <strong>Password:</strong>{usuario.passwordUser}
+                <strong>Password:</strong>{users.passwordUser}
                 <br />
-                <strong>Email:</strong>{usuario.emailUser} 
+                <strong>Email:</strong>{users.emailUser} 
                 <br />
                 <div>
                 <button className='filtrador' onClick={()=>{
                   setMostrar(!mostrar)
-                  localStorage.setItem("idUsuario",usuario.id)
+                  localStorage.setItem("idUsuario",users.id)
                 }}>Editar</button>
-                <button className='filtrador' onClick={()=>eliminar(usuario.id)}>Eliminar</button> </div><hr />
+                <button className='filtrador' onClick={()=>eliminar(users.id)}>Eliminar</button> </div><hr />
               </li>
             ))}
           </ul>
