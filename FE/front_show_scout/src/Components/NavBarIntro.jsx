@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../Styles/NavBarIntro.css'
 import { useTranslation } from 'react-i18next';
 import { Suspense } from 'react';
-import Logo from '../assets/img/FondoMoradoLogo.png'
+import Logo from '../assets/img/LogoFondoBlanco.png'
 
 
 function Welcome() {
@@ -17,7 +17,7 @@ function Welcome() {
           <nav className='navbarIntro'>
             <ul>
               <li className='linea'>
-                <img className='Logo' src="src/assets/img/FondoMoradoLogo.png"/>   
+                <img className='Logo' src="src/assets/img/LogoFondoBlanco.png"/>   
               </li>
               <div className='transSelectIntro'>
                 <li className='linea'>
