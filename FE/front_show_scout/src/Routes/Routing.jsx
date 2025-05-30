@@ -14,9 +14,9 @@ function Routing() {
           
                 {/* rutas publicas */}
                 <Route path="/" element={<Login/>}/>
+                <Route path="/Register" element={<Register/>}/>
 
                 {/* rutas privadas */}
-                <Route path="/Register" element={<PrivateRoute topSecret={<Register/>}/>}/>
                 <Route path="/AdminCentral" element={<PrivateRoute topSecret={<AdminCentral/>}/>}/>
 
         </Routes>
