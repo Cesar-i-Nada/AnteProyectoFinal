@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import UserDataListCreateView, UserDataDetailView,CompanyDataListCreateView, CompanyDataDetailView, OrganizationDataListCreateView, OrganizationDataDetailView, UserCompanyDataListCreateView,UserCompanyDataDetailView,UserOrganizationDataListCreateView, UserOrganizationDataDetailView
+from django.contrib import admin
+from .views import AgregarUserDataView, UserDataListCreateView, UserDataDetailView,CompanyDataListCreateView, CompanyDataDetailView, OrganizationDataListCreateView, OrganizationDataDetailView, UserCompanyDataListCreateView,UserCompanyDataDetailView,UserOrganizationDataListCreateView, UserOrganizationDataDetailView
 
 urlpatterns = [
+    path("crear-usuario/", AgregarUserDataView.as_view()),
     path('userData/', UserDataListCreateView.as_view(), name='user-list-create'),
     path('userData/<int:pk>/', UserDataDetailView.as_view(), name='user-edit-update'),
     path('companyData/', CompanyDataListCreateView.as_view(), name='user-list-create'),

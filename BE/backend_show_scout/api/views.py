@@ -1,6 +1,45 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData
 from .serializers import UserDataSerializer, CompanyDataSerializer, OrganizationDataSerializer, UserCompanyDataSerializer, UserOrganizationDataSerializer
+from django.contrib.auth.models import User
+from rest_framework.response import Response
+from django.shortcuts import render
+from rest_framework.views import APIView
+
+class AgregarUserDataView(APIView):
+    def post(self,request):
+        username = request.data.get("username")
+        password_user = request.data.get("password")
+        email = request.data.get("email")
+        first_name = request.data.get("first_name")
+        last_name = request.data.get("last_name")
+        
+        address_user = request.data.get("direccion")
+        user_age = request.data.get("user_age")
+        user_phone = request.data.get("user_phone")
+        user_type_profile = request.data.get("user_type_profile")
+        user_country = request.data.get("user_country")
+        
+        user = User.objects.create_user(
+            username=username,
+            password=password_user,
+            email=email,
+            first_name=first_name,
+            last_name=last_name
+            )
+    
+        UserData.objects.create(
+            user = user,
+            user_country = user_country,
+            address_user = address_user,
+            user_age = user_age,
+            user_phone = user_phone,
+            user_type_profile = user_type_profile
+        )
+        
+        return Response({
+            "message":"Usuario creado correctamente"
+        })
 
 class UserDataListCreateView(ListCreateAPIView):
     queryset = UserData.objects.all()
@@ -13,7 +52,7 @@ class UserDataDetailView(RetrieveUpdateDestroyAPIView):
 class CompanyDataListCreateView(ListCreateAPIView):
     queryset = CompanyData.objects.all()
     serializer_class = CompanyDataSerializer 
-    
+
 class CompanyDataDetailView(RetrieveUpdateDestroyAPIView):
     queryset = CompanyData.objects.all()
     serializer_class = CompanyDataSerializer
