@@ -5,6 +5,12 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from django.shortcuts import render
 from rest_framework.views import APIView
+from rest_framework.permissions import BasePermission
+
+class IsAdminUserGroup(BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.group.filter(name = 'admin').exists()
+    
 
 class AgregarUserDataView(APIView):
     def post(self,request):
