@@ -7,7 +7,10 @@ class UserData(models.Model):
     user_phone = models.CharField(max_length=50, blank=False, null=False)
     user_country = models.CharField(max_length=30, blank=False, null=False)
     user_type_profile = models.CharField(max_length=50, blank=False, null=False)
-    address_user = models.CharField(max_length=200, blank=False, null=False)
+    user_address = models.CharField(max_length=200, blank=False, null=False)
+    user_website = models.CharField(max_length=200, blank=False, null=False)
+    user_social_media = models.CharField(max_length=200, blank=False, null=False)
+    
 class CompanyData(models.Model):
     company_name = models.CharField(max_length=200, blank=False, null=False)
     company_funding = models.DateField(blank=False, null=False)
