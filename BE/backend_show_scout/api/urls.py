@@ -4,7 +4,6 @@ from .views import AgregarUserDataView, UserDataListCreateView, UserDataDetailVi
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path("crear-usuario/", AgregarUserDataView.as_view()),
     path('userData/', UserDataListCreateView.as_view(), name='user-list-create'),
     path('userData/<int:pk>/', UserDataDetailView.as_view(), name='user-edit-update'),
