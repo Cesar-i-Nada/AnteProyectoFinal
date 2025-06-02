@@ -1,7 +1,7 @@
-async function getUsers() {
+async function getPieces() {
     try {
         
-        const response = await fetch('http://127.0.0.1:8000/api/PiecesData', {
+        const response = await fetch('http://127.0.0.1:8000/api/piecesData', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,10 +23,10 @@ async function getUsers() {
 
 //////////LLAMADO POST//////////
 
-async function postUsers(userData) {
+async function postPieces(userData) {
   
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/PiecesData', {
+        const response = await fetch('http://127.0.0.1:8000/api/piecesData', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,10 +46,10 @@ async function postUsers(userData) {
 //////////////LLAMADO UPDATE/////////////
 
 
-async function updateUsers(obj,id) 
+async function updatePieces(obj,id) 
 {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/PiecesData'+id, {
+        const response = await fetch('http://127.0.0.1:8000/api/piecesData'+id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -69,9 +69,9 @@ async function updateUsers(obj,id)
 //////////////LLAMADO DELETE/////////////
 
 
-async function deleteUsers(id) {
+async function deletePieces(id) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/PiecesData/${id}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/piecesData/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -89,4 +89,4 @@ async function deleteUsers(id) {
     }
 }
 
-export default{ deleteUsers,getUsers,postUsers,updateUsers };
+export default{ deletePieces,getPieces,postPieces,updatePieces };

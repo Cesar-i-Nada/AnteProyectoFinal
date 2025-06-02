@@ -1,7 +1,7 @@
-async function getUsers() {
+async function getOrganizations() {
     try {
         
-        const response = await fetch('http://127.0.0.1:8000/api/OrganizationData', {
+        const response = await fetch('http://127.0.0.1:8000/api/organizationData', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,10 +23,10 @@ async function getUsers() {
 
 //////////LLAMADO POST//////////
 
-async function postUsers(userData) {
+async function postOrganizations(userData) {
   
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/OrganizationData', {
+        const response = await fetch('http://127.0.0.1:8000/api/organizationData', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,10 +46,10 @@ async function postUsers(userData) {
 //////////////LLAMADO UPDATE/////////////
 
 
-async function updateUsers(obj,id) 
+async function updateOrganizations(obj,id) 
 {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/OrganizationData'+id, {
+        const response = await fetch('http://127.0.0.1:8000/api/organizationData'+id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -69,9 +69,9 @@ async function updateUsers(obj,id)
 //////////////LLAMADO DELETE/////////////
 
 
-async function deleteUsers(id) {
+async function deleteOrganizations(id) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/OrganizationData/${id}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/organizationData/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -89,4 +89,4 @@ async function deleteUsers(id) {
     }
 }
 
-export default{ deleteUsers,getUsers,postUsers,updateUsers };
+export default{ deleteOrganizations,getOrganizations,postOrganizations,updateOrganizations };
