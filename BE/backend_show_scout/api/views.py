@@ -52,51 +52,51 @@ class AgregarUserDataView(APIView):
         })
 
 class UserDataListCreateView(ListCreateAPIView):
-    permission_classes = [IsAdminUserGroup, IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer 
     
 class UserDataDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer
     
 class CompanyDataListCreateView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = CompanyData.objects.all()
     serializer_class = CompanyDataSerializer 
 
 class CompanyDataDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = CompanyData.objects.all()
     serializer_class = CompanyDataSerializer
     
 class OrganizationDataListCreateView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = OrganizationData.objects.all()
     serializer_class = OrganizationDataSerializer 
     
 class OrganizationDataDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = OrganizationData.objects.all()
     serializer_class = OrganizationDataSerializer
     
 class UserCompanyDataListCreateView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = UserCompanyData.objects.all()
     serializer_class = UserCompanyDataSerializer 
     
 class UserCompanyDataDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = UserCompanyData.objects.all()
     serializer_class = UserCompanyDataSerializer
     
 class UserOrganizationDataListCreateView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = UserOrganizationData.objects.all()
     serializer_class = UserOrganizationDataSerializer 
     
 class UserOrganizationDataDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = UserOrganizationData.objects.all()
     serializer_class = UserOrganizationDataSerializer
