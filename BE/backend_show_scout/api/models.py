@@ -1,20 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 class UserData(models.Model):
+    #obligatorios
     username = models.CharField(max_length=50, blank=False, null=False)
-    user_first_name = models.CharField(max_length=50, blank=False, null=False)
-    user_last_name = models.CharField(max_length=50, blank=False, null=False)
     user_email = models.EmailField(max_length=255, unique=True, blank=False, null=False)
     user_password = models.CharField(max_length=16, blank=False, null=False)
-    user_age = models.IntegerField(blank=False, null=False)
-    user_phone = models.CharField(max_length=50, blank=False, null=False)
-    user_country = models.CharField(max_length=30, blank=False, null=False)
-    user_address = models.CharField(max_length=200, blank=False, null=False)
-    user_type_profile = models.CharField(max_length=50, blank=False, null=False)
-    user_website = models.CharField(max_length=200, blank=False, null=False)
-    user_social_media = models.CharField(max_length=200, blank=False, null=False)
     
+    #adicionales
+    user_first_name = models.CharField(max_length=50, default="")
+    user_last_name = models.CharField(max_length=50,default="")
+    user_age = models.IntegerField(default=0)
+    user_phone = models.CharField(max_length=50, default="")
+    user_country = models.CharField(max_length=30, default="")
+    user_address = models.CharField(max_length=200, default="")
+    user_type_profile = models.CharField(max_length=50, default="")
+    user_website = models.CharField(max_length=200, default="")
+    user_social_media = models.CharField(max_length=200,default="")
+                
 class CompanyData(models.Model):
     company_name = models.CharField(max_length=200, blank=False, null=False)
     company_funding = models.DateField(blank=False, null=False)

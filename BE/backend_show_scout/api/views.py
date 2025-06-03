@@ -28,24 +28,13 @@ class AgregarUserDataView(APIView):
         user_website = request.data.get("user_website")
         user_social_media = request.data("user_social_media")
         
-        user = User.objects.create_user(
-            username=username,
-            first_name=user_first_name,
-            last_name=user_last_name,
-            email=user_email,
-            password=user_password
-            )
-    
         UserData.objects.create(
-            user = user,
-            user_age = user_age,
-            user_phone = user_phone,
-            user_country = user_country,
-            user_address = user_address,
-            user_type_profile = user_type_profile,
-            user_website = user_website,
-            user_social_media = user_social_media
-        )
+                username=username,
+                user_first_name=user_first_name,
+                user_last_name=user_last_name,
+                user_email=user_email,
+                user_password=user_password
+            )
         
         return Response({
             "message":"Usuario creado correctamente"
