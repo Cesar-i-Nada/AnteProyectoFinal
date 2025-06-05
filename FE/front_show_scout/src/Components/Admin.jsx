@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import '../Styles/Admin.css'
-import {} from 'react-router-dom'
-import fetchUsers from '../Services/fetchUsers'
+  import fetchUsers from '../Services/fetchUsers'
+import fetchCompanies from '../Services/fetchCompanies'
+import fetchOrganizations from '../Services/fetchOrganizations'
 
 function Admin() {
 
@@ -50,6 +51,17 @@ async function editar(id) {
         <div>
           <ul className='buscador'>
             <p className='tituloAdmin'>REGISTROS Y DATOS DE USUARIOS</p><br />
+            
+            <div class="w3-sidebar w3-bar-block" style="display:none;z-index:5" id="mySidebar">
+              <button class="w3-bar-item w3-button w3-xxlarge" onclick="w3_close()">Close &times;</button>
+              <a href="#" class="w3-bar-item w3-button">Gestión de usuarios</a>
+              <a href="#" class="w3-bar-item w3-button">Gestión de Compañías</a>
+              <a href="#" class="w3-bar-item w3-button">Gestión de Organizaciones</a>
+              <a href="#" class="w3-bar-item w3-button">Gestión de Piezas</a>
+              <a href="#" class="w3-bar-item w3-button">Gestión de presupuesto</a>
+              <a href="#" class="w3-bar-item w3-button">Sistema de compra</a>
+              <a href="#" class="w3-bar-item w3-button">Salir</a>
+            </div>
             {users.map((users,index) =>(
               <li key = {index}>
                 <strong>Nombre:</strong>{users.username}
@@ -84,6 +96,15 @@ async function editar(id) {
 
 
   )
+
+
+
+
+
+
+
+     
+
 }
 
 export default Admin
