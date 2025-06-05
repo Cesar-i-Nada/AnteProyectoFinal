@@ -1,151 +1,40 @@
-import React from 'react'
-import {} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import {Link, useNavigate} from 'react-router-dom'
+import '../Styles/OrganizationsManagement.css'
+import fetchOrganizations from '../Services/fetchOrganizations'
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Organization_name</th>
-    <th>Organization_funding</th>
-    <th>Organization_phone</th>
-    <th>Organization_email</th>
-    <th>Organization_password</th>
-    <th>Organization_country</th>
-    <th>Organization_address</th>
-    <th>Organization_type_profile</th>
-    <th>Organization_website</th>
-    <th>Organization_social_media</th>
-    <th>Actions</th>
+function OrganizationsManagement() {
 
+  const [organizations, SetOrganizations] = useState([])
 
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
+  useEffect(() => {
+    async function fetchOrganizations() {
+      const datos = await fetchOrganizations.getOrganizations()
+      SetOrganizations(datos)
+    }
+    fetchOrganizations()
+  }, []);
+      
+return (
+  <div>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Organization_name</th>
+        <th>Organization_funding</th>
+        <th>Organization_phone</th>
+        <th>Organization_email</th>
+        <th>Organization_password</th>
+        <th>Organization_country</th>
+        <th>Organization_address</th>
+        <th>Organization_type_profile</th>
+        <th>Organization_website</th>
+        <th>Organization_social_media</th>
+        <th>Actions</th>
+      </tr>
+    </table>
+</div>
+);
+};
+
+export default OrganizationsManagement

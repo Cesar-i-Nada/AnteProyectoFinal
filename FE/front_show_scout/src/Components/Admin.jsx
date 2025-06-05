@@ -53,7 +53,7 @@ async function editar(id) {
             <p className='tituloAdmin'>REGISTROS Y DATOS DE USUARIOS</p><br />
             
             <div class="w3-sidebar w3-bar-block" style="display:none;z-index:5" id="mySidebar">
-              <button class="w3-bar-item w3-button w3-xxlarge" onclick="w3_close()">Close &times;</button>
+              <button class="w3-bar-item w3-button w3-xxlarge" onClick="w3_close()">Close &times;</button>
               <a href="#" class="w3-bar-item w3-button">Gestión de usuarios</a>
               <a href="#" class="w3-bar-item w3-button">Gestión de Compañías</a>
               <a href="#" class="w3-bar-item w3-button">Gestión de Organizaciones</a>
