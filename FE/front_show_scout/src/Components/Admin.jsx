@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import '../Styles/Admin.css'
-  import fetchUsers from '../Services/fetchUsers'
+import fetchUsers from '../Services/fetchUsers'
 import fetchCompanies from '../Services/fetchCompanies'
 import fetchOrganizations from '../Services/fetchOrganizations'
 
 function Admin() {
 
-  const [username, SetUsername] = useState()
-  const [emailUser, SetEmailUser] = useState()
+  const [username, SetUsername] = useState("")
+  const [user_first_name, SetUserFirstName] = useState("")
+  const [user_last_name, SetUserLastName] = useState("")
+  const [user_email, SetUserEmail] = useState("")
+  const [user_age, SetUserAge] = useState(0)
+  const [user_phone, SetUserPhone] = useState("")
+  const [user_country, SetUserCountry] = useState("")
+  const [user_address, SetUserAddress] = useState("")
+  const [user_type_profile, SetUserTypeProfile] = useState("")
+  const [user_website, SetUserWebsite] = useState("")
+  const [user_social_media, SetUserSocialMedia] = useState("")
   const [users, SetUsers] = useState([])
   const [mostrar,setMostrar]=useState(false)
   const [recarga,setRecarga] = useState(false)
@@ -22,15 +31,6 @@ useEffect (() => {
   }, [recarga]
 )
 
-  function nombre(evento) {
-    SetUsername(evento.target.value)
-   }
-   
-   function email(evento) {
-     SetEmailUser(evento.target.value)
-   }
-   
-
 function eliminar(id) {
   fetchUsers.deleteUsers(id)
   setRecarga(!recarga)
@@ -40,7 +40,16 @@ function eliminar(id) {
 async function editar(id) {
    const objetoEditar= {
     usuario:username,
-    email:emailUser
+    nombre:user_first_name,
+    apellido:user_last_name,
+    correo:user_email,
+    edad:user_age,
+    telefono:user_phone,
+    país:user_country,
+    dirección:user_address,
+    categoría:user_type_profile,
+    sitioWeb:user_website,
+    redes:user_social_media,
    }
    
   await fetchUsers.updateUsers(objetoEditar,id)
@@ -55,10 +64,37 @@ async function editar(id) {
             
             {users.map((users,index) =>(
               <li key = {index}>
-                <strong>Nombre:</strong>{users.username}
+                <strong>Username:</strong>{users.username}
                 <br />
                 <br />
-                <strong>Email:</strong>{users.user_email} 
+                <strong>Nombre:</strong>{users.user_first_name} 
+                <br />
+                <br />
+                <strong>Apellido:</strong>{users.user_last_name} 
+                <br />
+                <br />
+                <strong>Correo:</strong>{users.user_email} 
+                <br />
+                <br />
+                <strong>Edad:</strong>{users.user_age} 
+                <br />
+                <br />
+                <strong>Teléfono:</strong>{users.user_phone} 
+                <br />
+                <br />
+                <strong>País:</strong>{users.user_country} 
+                <br />
+                <br />
+                <strong>Dirección:</strong>{users.user_address} 
+                <br />
+                <br />
+                <strong>Categoría:</strong>{users.user_type_profile} 
+                <br />
+                <br />
+                <strong>Sitio Web:</strong>{users.user_website} 
+                <br />
+                <br />
+                <strong>Redes Sociales:</strong>{users.user_social_media} 
                 <br />
                 <div>
                 <button className='filtrador' onClick={()=>{
@@ -71,8 +107,17 @@ async function editar(id) {
           </ul>
           {mostrar && (
             <>
-                <input  onChange={nombre} type="text" placeholder='nombre'/>
-                <input  onChange={email} type="text" placeholder='correo'/>
+                <input  onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='alias'/>
+                <input  onChange={((e)=>SetUserFirstName(e.target.value))} type="text" placeholder='nombre'/>
+                <input  onChange={((e)=>SetUserLastName(e.target.value))} type="text" placeholder='apellido'/>
+                <input  onChange={((e)=>SetUserEmail(e.target.value))} type="text" placeholder='correo'/>
+                <input  onChange={((e)=>SetUserAge(e.target.value))} type="text" placeholder='edad'/>
+                <input  onChange={((e)=>SetUserPhone(e.target.value))} type="text" placeholder='telefono'/>
+                <input  onChange={((e)=>SetUserCountry(e.target.value))} type="text" placeholder='país'/>
+                <input  onChange={((e)=>SetUserAddress(e.target.value))} type="text" placeholder='dirección'/>
+                <input  onChange={((e)=>SetUserTypeProfile(e.target.value))} type="text" placeholder='dirección'/>
+                <input  onChange={((e)=>SetUserWebsite(e.target.value))} type="text" placeholder='sitioWeb'/>
+                <input  onChange={((e)=>SetUserSocialMedia(e.target.value))} type="text" placeholder='redesSociales'/>
                 <button className='filtrador' onClick={editar(localStorage.getItem("idUsuario"))}>Confirmar edición</button>
                 </>
               )
