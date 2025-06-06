@@ -1,7 +1,7 @@
 async function getOrganizations() {
     try {
         
-        const response = await fetch('http://127.0.0.1:8000/api/organizationData', {
+        const response = await fetch('http://127.0.0.1:8000/api/organizationData/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ async function getOrganizations() {
 async function postOrganizations(userData) {
   
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/organizationData', {
+        const response = await fetch('http://127.0.0.1:8000/api/organizationData/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ async function postOrganizations(userData) {
 async function updateOrganizations(obj,id) 
 {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/organizationData'+id, {
+        const response = await fetch('http://127.0.0.1:8000/api/organizationData/'+id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

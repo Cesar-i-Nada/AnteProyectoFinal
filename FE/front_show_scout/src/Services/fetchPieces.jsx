@@ -1,7 +1,7 @@
 async function getPieces() {
     try {
         
-        const response = await fetch('http://127.0.0.1:8000/api/piecesData', {
+        const response = await fetch('http://127.0.0.1:8000/api/piecesData/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ async function getPieces() {
 async function postPieces(userData) {
   
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/piecesData', {
+        const response = await fetch('http://127.0.0.1:8000/api/piecesData/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ async function postPieces(userData) {
 async function updatePieces(obj,id) 
 {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/piecesData'+id, {
+        const response = await fetch('http://127.0.0.1:8000/api/piecesData/'+id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
