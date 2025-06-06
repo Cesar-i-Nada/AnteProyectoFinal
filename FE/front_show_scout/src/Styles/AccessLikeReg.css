@@ -5,7 +5,6 @@
 .tituloAccessLikeReg {
     color: #8c52ff;
 }
-
 .abc{
     border: none;
     background: transparent;
@@ -24,7 +23,6 @@
   justify-content: center;
   background-color: #ffffff;
 }
-
 .flex-container > div {
   background-color: #f1f1f1;
   width: 300px;
@@ -34,8 +32,7 @@
   line-height: 75px;
   font-size: 30px;
 }
-
-.myButton {
+.myButtonR {
 	box-shadow: 3px 4px 0px 0px #8a2a21;
 	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
 	background-color:#c62d1f;
@@ -49,18 +46,11 @@
 	padding:7px 40px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #810e05;
-    
-
 }
-.myButton:hover {
+
+.myButtonR:hover {
 	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
 	background-color:#f24437;
-}
-.myButton:active {
-	position:absolute;
-    top: 1px;
-    justify-items: center;
-    
 }
 
 
@@ -77,3 +67,10 @@
 .color9 {color: #f24405;}
 .color10 {color: #e7191f;}
 .color11 {color: #8c52ff;}
+
+
+
+
+
+
+

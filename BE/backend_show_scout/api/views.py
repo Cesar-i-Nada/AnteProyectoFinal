@@ -47,6 +47,7 @@ class UserDataListCreateView(ListCreateAPIView):
     
 class UserDataDetailView(RetrieveUpdateDestroyAPIView):
     #permission_classes = [IsAuthenticated]
+    lookup_field = "id"
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer
     

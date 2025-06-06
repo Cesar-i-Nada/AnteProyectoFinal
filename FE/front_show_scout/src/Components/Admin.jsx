@@ -10,17 +10,17 @@ function Admin() {
   const [emailUser, SetEmailUser] = useState()
   const [users, SetUsers] = useState([])
   const [mostrar,setMostrar]=useState(false)
+  const [recarga,setRecarga] = useState(false)
 
 useEffect (() => {
-
     async function fetchDataUsers() {
-
       const datos = await fetchUsers.getUsers()
       SetUsers(datos)
     };
 
     fetchDataUsers();
-  }, []);
+  }, [recarga]
+)
 
   function nombre(evento) {
     SetUsername(evento.target.value)
@@ -32,16 +32,17 @@ useEffect (() => {
    
 
 function eliminar(id) {
+  fetchUsers.deleteUsers(id)
+  setRecarga(!recarga)
 
-fetchUsers.deleteUsers(id)
 }
 
 async function editar(id) {
-
    const objetoEditar= {
     usuario:username,
     email:emailUser
    }
+   
   await fetchUsers.updateUsers(objetoEditar,id)
 }
 
@@ -52,23 +53,12 @@ async function editar(id) {
           <ul className='buscador'>
             <p className='tituloAdmin'>REGISTROS Y DATOS DE USUARIOS</p><br />
             
-            <div class="w3-sidebar w3-bar-block" style="display:none;z-index:5" id="mySidebar">
-              <button class="w3-bar-item w3-button w3-xxlarge" onClick="w3_close()">Close &times;</button>
-              <a href="#" class="w3-bar-item w3-button">Gestión de usuarios</a>
-              <a href="#" class="w3-bar-item w3-button">Gestión de Compañías</a>
-              <a href="#" class="w3-bar-item w3-button">Gestión de Organizaciones</a>
-              <a href="#" class="w3-bar-item w3-button">Gestión de Piezas</a>
-              <a href="#" class="w3-bar-item w3-button">Gestión de presupuesto</a>
-              <a href="#" class="w3-bar-item w3-button">Sistema de compra</a>
-              <a href="#" class="w3-bar-item w3-button">Salir</a>
-            </div>
             {users.map((users,index) =>(
               <li key = {index}>
                 <strong>Nombre:</strong>{users.username}
                 <br />
-                <strong>Password:</strong>{users.passwordUser}
                 <br />
-                <strong>Email:</strong>{users.emailUser} 
+                <strong>Email:</strong>{users.user_email} 
                 <br />
                 <div>
                 <button className='filtrador' onClick={()=>{

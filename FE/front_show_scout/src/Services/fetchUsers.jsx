@@ -1,7 +1,7 @@
 async function getUsers() {
     try {
         
-        const response = await fetch('http://127.0.0.1:8000/api/userData', {
+        const response = await fetch('http://127.0.0.1:8000/api/userData/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ async function updateUsers(obj,id)
 
 async function deleteUsers(id) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/userData/${id}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/userData/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

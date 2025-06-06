@@ -8,19 +8,54 @@ function UsersManagement() {
   const [usuarios, SetUsuarios] = useState([])
 
   useEffect(() => {
-    async function fetchUsers() {
+    async function fetchUsersAdmin() {
       const datos = await fetchUsers.getUsers()
       SetUsuarios(datos)
+      console.log(datos);
     }
-    fetchUsers()
+    fetchUsersAdmin()
   }, []);
+
+  const navigate = useNavigate();
+
+  function eliminar(id) {
+    fetchUsers.deleteUsers(id)
+
+  }
+  async function editar(id){
+    const Editar = {
+      usuario: username,
+      email: userEmail,
+      password: userPassword,
+      age: userAge,
+      phone: userPhone,
+      country: userCountry,
+      address: userAddress,
+      type_profile: userTypeProfile,
+      website: userWebsite,
+      social_media: userSocialMedia,
+    }
+
+    await fetchUsers.updateUsers(objectEditar, id);
+    SetUsuarios(usuarios.map(usuario => usuario.id === id ? { ...usuario, ...objectEditar } : usuario));
+      navigate('/users-management');
+    
+  } 
+  UsersManagement();
+
+
+  }
       
 return (
   <div>
     <table>
       <tr>
-        <th>ID</th>
-        <th>Username</th>
+        <th>
+          ID
+        </th>
+        <th>
+          Username
+        </th>
         <th>User_first_name</th>
         <th>User_last_name</th>
         <th>User_email</th>

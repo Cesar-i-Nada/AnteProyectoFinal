@@ -15,17 +15,17 @@ function AccessLikeLog() {
         <div className="flex-container">
           <div>
             <img src="src/assets/img/catUser.png" alt="Categoría de usuario" width={300} height={300}/>
-            <button className='abc'><a href="#" class="myButton">Usuario</a></button>
+            <button className='abc'><a href="#" className="myButtonL">Usuario</a></button>
 
           </div><br />
           <div>
             <img src="src/assets/img/catComp.png" alt="Categoría de compañía" width={300} height={300}/>
-            <button className='abc'><a href="#" class="myButton">Compañía</a></button>
+            <button className='abc'><a href="#" className="myButtonL">Compañía</a></button>
           </div><br />
           
           <div>
             <img src="src/assets/img/catOrg.png" alt="Categoría de Organización" width={300} height={300}/>
-            <button  className='abc'><a href="#" class="myButton">Organización</a></button>
+            <button  className='abc'><a href="#" className="myButtonL">Organización</a></button>
           </div>
           
         </div>
