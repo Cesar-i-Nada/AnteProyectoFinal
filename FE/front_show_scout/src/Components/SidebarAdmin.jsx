@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -11,8 +10,9 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function SidebarAdmin() {
+function SidebarAdmin({mostrarUsuarios, showCompanies, showOrganizations}) {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -21,21 +21,30 @@ function SidebarAdmin() {
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {['Gestión de usuarios', 'Gestión de compañías', 'Gestión de organizaciones', 'Gestión de piezas', 'Gestión de presupuesto', 'Sistema de compras'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <ListItemButton onClick={mostrarUsuarios}>
+      <ListItemIcon>
+        <InboxIcon/>
+        <ListItemText primary={"Gestión de usuarios"}/>
+      </ListItemIcon>
+      </ListItemButton>
+
+      <ListItemButton onClick={showCompanies}>
+      <ListItemIcon>
+        <InboxIcon/>
+        <ListItemText primary={"Gestión de compañías"}/>
+      </ListItemIcon>
+      </ListItemButton>
+
+      <ListItemButton onClick={showOrganizations}>
+      <ListItemIcon>
+        <InboxIcon/>
+        <ListItemText primary={"Gestión de organizaciones"}/>
+      </ListItemIcon>
+      </ListItemButton>
+
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Salir'].map((text, index) => (
+        {['Salir'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -51,7 +60,7 @@ function SidebarAdmin() {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
+      <Button onClick={toggleDrawer(true)}>Menú de mantenimiento</Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
