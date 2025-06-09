@@ -17,8 +17,6 @@ function CreateProfileU() {
   const [user_type_profile, SetUserTypeProfile] = useState("")
   const [user_website, SetUserWebsite] = useState("")
   const [user_social_media, SetUserSocialMedia] = useState("")
-  const [mostrar,setMostrar]=useState(false)
-  const [recarga,setRecarga] = useState(false)
   const [users, SetUsers] = useState([])
   
   const navigate = useNavigate()
@@ -36,7 +34,7 @@ function CreateProfileU() {
 
 function Create() { 
 
-    const registered = users.filter(user => user.username === username && user.userPassword === userPassword)
+  const registered = users.filter(user => user.username === username && user.userPassword === user_password)
     
     console.log(registered);
     
@@ -71,18 +69,18 @@ return (
         <div>  
           <div className='espCreateU'>
             <p className='textCreateU'>Cree su perfil</p><br />
-            <input className='inp' onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='Alias'/>
-            <input className='inp' onChange={(e)=>SetUserPassword(e.target.value)} type="text" placeholder='Contraseña'/>
-            <input className='inp' onChange={(e)=>SetUserFirstName(e.target.value)} type="text" placeholder='Nombre'/>
-            <input className='inp' onChange={(e)=>SetUserLastName(e.target.value)} type="text" placeholder='Apellido'/>
-            <input className='inp' onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='Correo'/>
-            <input className='inp' onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='Edad'/>
-            <input className='inp' onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='Teléfono'/>
-            <input className='inp' onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='País'/>
-            <input className='inp' onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='Dirección'/>
-            <input className='inp' onChange={(e)=>SetUserTypeProfile(e.target.value)} type="text" placeholder='Tipo de perfil'/>
-            <input className='inp' onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='Sitio Web'/>
-            <input className='inp' onChange={(e)=>SetUserSocialMedia(e.target.value)} type="text" placeholder='Redes sociales'/>
+            <input className='inp' value={username} onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='Alias'/>
+            <input className='inp' value={user_password} onChange={(e)=>SetUserPassword(e.target.value)} type="text" placeholder='Contraseña'/>
+            <input className='inp' value={user_first_name} onChange={(e)=>SetUserFirstName(e.target.value)} type="text" placeholder='Nombre'/>
+            <input className='inp' value={user_last_name} onChange={(e)=>SetUserLastName(e.target.value)} type="text" placeholder='Apellido'/>
+            <input className='inp' value={user_email} onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='Correo'/>
+            <input className='inp' value={user_age} onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='Edad'/>
+            <input className='inp' value={user_phone} onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='Teléfono'/>
+            <input className='inp' value={user_country} onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='País'/>
+            <input className='inp' value={user_address} onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='Dirección'/>
+            <input className='inp' value={user_type_profile} onChange={(e)=>SetUserTypeProfile(e.target.value)} type="text" placeholder='Tipo de perfil'/>
+            <input className='inp' value={user_website} onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='Sitio Web'/>
+            <input className='inp' value={user_social_media} onChange={(e)=>SetUserSocialMedia(e.target.value)} type="text" placeholder='Redes sociales'/>
             <button onClick={Create} className='btnIniciar'>Crear</button><br /><br />
           </div>
         </div>
