@@ -49,16 +49,16 @@ async function postUsers(userData) {
 async function updateUsers(obj,id) 
 {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/userData/'+id, {
+        const response = await fetch('http://127.0.0.1:8000/api/userData/'+id+"/", {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(obj)
         });
-
-     
-        return await response.json();
+        const respuesta = await response.json()
+        console.log(respuesta);
+        return respuesta
     } catch (error) {
         console.error('Error update user:', error);
         throw error;
