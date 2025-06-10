@@ -18,7 +18,7 @@ function Admin() {
   const [mostrar,setMostrar]=useState(false)
   const [recarga,setRecarga] = useState(false)
 
-useEffect (() => {
+  useEffect (() => {
     async function fetchDataUsers() {
       const datos = await fetchUsers.getUsers()
       SetUsers(datos)
@@ -31,7 +31,6 @@ useEffect (() => {
 function eliminar(id) {
   fetchUsers.deleteUsers(id)
   setRecarga(!recarga)
-
 }
 
 async function editar(id) {
@@ -51,87 +50,65 @@ async function editar(id) {
    
   const peticion =await fetchUsers.updateUsers(objetoEditar,id)
    console.log(peticion);
-   
 }
 
   return (
     
     <div>
-        <div>
-          <ul className='buscador'>
-            <p className='tituloAdmin'>REGISTROS Y DATOS DE USUARIOS</p><br />
+      <div>
+        <ul className='buscador'>
+          <p className='tituloUsers'>REGISTROS Y DATOS DE USUARIOS</p><br />
             
             {users.map((users,index) =>(
               <li key = {index}>
-                <div>
-                  <table>
-  <tr>
-    <th>Alias</th>{users.username}
-    <th>Nombre</th>{users.user_first_name}
-    <th>Apellido</th>{users.user_last_name}
-    <th>Correo</th>{users.user_email}
-    <th>Edad</th>{users.user_age}
-    <th>Teléfono</th>{users.user_phone}
-    <th>País</th>{users.user_country}
-    <th>Dirección</th>{users.user_address}
-    <th>Categoría</th>{users.user_type_profile}
-    <th>Sitio Web</th>{users.user_website}
-    <th>Redes Sociales</th>{users.user_social_media}
-  </tr>
-  </table>
-                </div>
-                <strong>Username:</strong>{users.username}
-                <br />
-                <strong>Nombre:</strong>{users.user_first_name} 
-                <br />
-                <strong>Apellido:</strong>{users.user_last_name} 
-                <br />
-                <strong>Correo:</strong>{users.user_email} 
-                <br />
-                <strong>Edad:</strong>{users.user_age} 
-                <br />
-                <strong>Teléfono:</strong>{users.user_phone} 
-                <br />
-                <strong>País:</strong>{users.user_country} 
-                <br />
-                <strong>Dirección:</strong>{users.user_address}
-                <br />
-                <strong>Categoría:</strong>{users.user_type_profile} 
-                <br />
-                <strong>Sitio Web:</strong>{users.user_website} 
-                <br />
-                <strong>Redes Sociales:</strong>{users.user_social_media} 
-                <div>
-                <button className='filtrador' onClick={()=>{
-                  setMostrar(!mostrar)
-                  localStorage.setItem("idUsuario",users.id)
-                }}>Editar</button>
-                <button className='filtrador' onClick={()=>eliminar(users.id)}>Eliminar</button> </div><hr />
+                <table>
+                  <tr>
+                    <th>Alias</th>{users.username}
+                    <th>Nombre</th>{users.user_first_name}
+                    <th>Apellido</th>{users.user_last_name}
+                    <th>Correo</th>{users.user_email}
+                    <th>Edad</th>{users.user_age}
+                    <th>Teléfono</th>{users.user_phone}
+                    <th>País</th>{users.user_country}
+                    <th>Dirección</th>{users.user_address}
+                    <th>Categoría</th>{users.user_type_profile}
+                    <th>Sitio Web</th>{users.user_website}
+                    <th>Redes Sociales</th>{users.user_social_media}
+                  </tr>
+                </table>  
+                       
+            <div>
+              <button className='filtrador' onClick={()=>{
+                setMostrar(!mostrar)
+                localStorage.setItem("idUsuario",users.id)
+              }
+                }>Editar</button>
+                  <button className='filtrador' onClick={()=>eliminar(users.id)
+                  
+                }>Eliminar</button> </div><hr />
               </li>
             ))}
           </ul>
-          {mostrar && (
-            <>
-                <input  onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='alias'/>
-                <input  onChange={(e)=>SetUserFirstName(e.target.value)} type="text" placeholder='nombre'/>
-                <input  onChange={(e)=>SetUserLastName(e.target.value)} type="text" placeholder='apellido'/>
-                <input  onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='correo'/>
-                <input  onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='edad'/>
-                <input  onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='telefono'/>
-                <input  onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='país'/>
-                <input  onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='dirección'/>
-                <input  onChange={(e)=>SetUserTypeProfile(e.target.value)} type="text" placeholder='tipo perfil'/>
-                <input  onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='sitioWeb'/>
-                <input  onChange={(e)=>SetUserSocialMedia(e.target.value)} type="text" placeholder='redesSociales'/>
-                <button className='filtrador' onClick={()=>editar(localStorage.getItem("idUsuario"))}>Confirmar edición</button>
-                </>
-              )
-              }
-        </div>
+            {mostrar && (
+              <>
+              <input  onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='alias'/>
+              <input  onChange={(e)=>SetUserFirstName(e.target.value)} type="text" placeholder='nombre'/>
+              <input  onChange={(e)=>SetUserLastName(e.target.value)} type="text" placeholder='apellido'/>
+              <input  onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='correo'/>
+              <input  onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='edad'/>
+              <input  onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='telefono'/>
+              <input  onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='país'/>
+              <input  onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='dirección'/>
+              <input  onChange={(e)=>SetUserTypeProfile(e.target.value)} type="text" placeholder='tipo perfil'/>
+              <input  onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='sitioWeb'/>
+              <input  onChange={(e)=>SetUserSocialMedia(e.target.value)} type="text" placeholder='redesSociales'/>
+              <button className='filtrador' onClick={()=>editar(localStorage.getItem("idUsuario"))}>Confirmar edición</button>
+              </>
+          )
+        }
+      </div>
     </div>
-
   )
-  
 }
 
 export default Admin
