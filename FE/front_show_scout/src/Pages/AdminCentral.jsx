@@ -10,7 +10,6 @@ function AdminCentral() {
   const [organizationsData, setOrganizationsData] = useState(false)
 
 
-  
   function mostrarTablaDUsuarios() {
     setDatosUsuarios(true)
   }
@@ -26,17 +25,15 @@ function AdminCentral() {
   
   return (
     <div>
-        <SidebarAdmin mostrarUsuarios={mostrarTablaDUsuarios}/>
+        <SidebarAdmin mostrarUsuarios={mostrarTablaDUsuarios} showCompanies={showCompaniesTable} showOrganizations={showOrganizationsTable}/>
         {datosUsuarios &&
           <UsersManagement />
         }
 
-        <SidebarAdmin showCompanies={showCompaniesTable}/>
         {companiesData &&
           <CompaniesManagement />
         }
 
-        <SidebarAdmin showOrganizations={showOrganizationsTable}/>
         {organizationsData &&
           <OrganizationsManagement />
         }

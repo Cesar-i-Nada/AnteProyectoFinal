@@ -12,6 +12,16 @@ import MailIcon from '@mui/icons-material/Mail';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
+import { faSitemap } from '@fortawesome/free-solid-svg-icons';
+import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+
+import '../Styles/SidebarAdmin.css'
+
+
+
 function SidebarAdmin({mostrarUsuarios, showCompanies, showOrganizations}) {
   const [open, setOpen] = useState(false);
 
@@ -22,22 +32,22 @@ function SidebarAdmin({mostrarUsuarios, showCompanies, showOrganizations}) {
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <ListItemButton onClick={mostrarUsuarios}>
-      <ListItemIcon>
-        <InboxIcon/>
+      <FontAwesomeIcon icon={faCircleUser} />
+      <ListItemIcon >
         <ListItemText primary={"Gestión de usuarios"}/>
       </ListItemIcon>
       </ListItemButton>
 
       <ListItemButton onClick={showCompanies}>
+      <FontAwesomeIcon icon={faPeopleGroup} />
       <ListItemIcon>
-        <InboxIcon/>
         <ListItemText primary={"Gestión de compañías"}/>
       </ListItemIcon>
       </ListItemButton>
 
       <ListItemButton onClick={showOrganizations}>
+      <FontAwesomeIcon icon={faSitemap} />
       <ListItemIcon>
-        <InboxIcon/>
         <ListItemText primary={"Gestión de organizaciones"}/>
       </ListItemIcon>
       </ListItemButton>
@@ -48,7 +58,7 @@ function SidebarAdmin({mostrarUsuarios, showCompanies, showOrganizations}) {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ?<FontAwesomeIcon icon={faDoorOpen} /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -60,7 +70,7 @@ function SidebarAdmin({mostrarUsuarios, showCompanies, showOrganizations}) {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>Menú de mantenimiento</Button>
+      <Button onClick={toggleDrawer(true)} className='menuSidebar'>Menú de mantenimiento</Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
