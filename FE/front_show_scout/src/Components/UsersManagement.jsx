@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import '../Styles/Admin.css'
+import '../Styles/UsersManagement.css'
 import fetchUsers from '../Services/fetchUsers'
 
 function Admin() {

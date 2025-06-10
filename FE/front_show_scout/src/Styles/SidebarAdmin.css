@@ -1,4 +1,6 @@
-.menuSidebar{
+.menuSidebar {
+    margin-top: 10px;
+    margin-left: 5px;
     background-color: #F24405;
     border-radius: 20px;
     cursor: pointer;

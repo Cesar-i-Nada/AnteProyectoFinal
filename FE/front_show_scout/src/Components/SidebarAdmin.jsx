@@ -70,7 +70,7 @@ function SidebarAdmin({mostrarUsuarios, showCompanies, showOrganizations}) {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)} className='menuSidebar'>Menú de mantenimiento</Button>
+      <button onClick={toggleDrawer(true)} className='menuSidebar'>Menú de mantenimiento</button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
