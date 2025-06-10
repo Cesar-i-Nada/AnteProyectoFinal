@@ -1,11 +1,11 @@
 import React from 'react'
-import NavBarIntro from '../Components/NavBarIntro'
+import NavBarGeneral from '../Components/NavBarGeneral'
 import CreateProfileU from '../Components/CreateProfileU'
 
 function ProfileUForm() {
   return (
     <div>
-        <NavBarIntro />
+        <NavBarGeneral />
         <CreateProfileU />
     </div>
   )

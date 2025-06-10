@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../Styles/UsersManagement.css'
 import fetchUsers from '../Services/fetchUsers'
 
-function Admin() {
+function AdminUsers() {
   const [username, SetUsername] = useState("")
   const [user_first_name, SetUserFirstName] = useState("")
   const [user_last_name, SetUserLastName] = useState("")
@@ -61,21 +61,43 @@ async function editar(id) {
             
             {users.map((users,index) =>(
               <li key = {index}>
-                <table>
-                  <tr>
-                    <th>Alias</th>{users.username}
-                    <th>Nombre</th>{users.user_first_name}
-                    <th>Apellido</th>{users.user_last_name}
-                    <th>Correo</th>{users.user_email}
-                    <th>Edad</th>{users.user_age}
-                    <th>Teléfono</th>{users.user_phone}
-                    <th>País</th>{users.user_country}
-                    <th>Dirección</th>{users.user_address}
-                    <th>Categoría</th>{users.user_type_profile}
-                    <th>Sitio Web</th>{users.user_website}
-                    <th>Redes Sociales</th>{users.user_social_media}
-                  </tr>
-                </table>  
+                <tableContainer>
+                  <table className='usersTable'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Alias{users.username}</TableCell>
+                        <TableCell>Nombre{users.user_first_name}</TableCell>
+                        <TableCell>Apellido{users.user_last_name}</TableCell>
+                        <TableCell>Correo{users.user_email}</TableCell>
+                        <TableCell>Edad{users.user_age}</TableCell>
+                        <TableCell>Teléfono{users.user_phone}</TableCell>
+                        <TableCell>País{users.user_country}</TableCell>
+                        <TableCell>Dirección{users.user_address}</TableCell>
+                        <TableCell>Categoría{users.user_type_profile}</TableCell>
+                        <TableCell>Sitio Web{users.user_website}</TableCell>
+                        <TableCell>Redes Sociales{users.user_social_media}</TableCell>
+                      </TableRow>
+                   </TableHead>
+                   
+                   <TableBody>
+                    {users.map(celda=>(
+                      <TableRoW>
+                        <TableCell>{celda.alias}</TableCell>
+                        <TableCell>{celda.nombre}</TableCell>
+                        <TableCell>{celda.apellido}</TableCell>
+                        <TableCell>{celda.correo}</TableCell>
+                        <TableCell>{celda.edad}</TableCell>
+                        <TableCell>{celda.telefono}</TableCell>
+                        <TableCell>{celda.pais}</TableCell>
+                        <TableCell>{celda.direccion}</TableCell>
+                        <TableCell>{celda.categoria}</TableCell>
+                        <TableCell>{celda.sitio}</TableCell>
+                        <TableCell>{celda.redes}</TableCell>
+                      </TableRoW>
+                    ))}
+                   </TableBody>
+                  </table>
+                </tableContainer>  
                        
             <div>
               <button className='filtrador' onClick={()=>{
@@ -111,4 +133,4 @@ async function editar(id) {
   )
 }
 
-export default Admin
+export default AdminUsers

@@ -10,7 +10,7 @@ function CreateProfileU() {
   const [user_first_name, SetUserFirstName] = useState("")
   const [user_last_name, SetUserLastName] = useState("")    
   const [user_email, SetUserEmail] = useState("")
-  const [user_age, SetUserAge] = useState(0)
+  const [user_age, SetUserAge] = useState("")
   const [user_phone, SetUserPhone] = useState("")
   const [user_country, SetUserCountry] = useState("")
   const [user_address, SetUserAddress] = useState("")
@@ -76,7 +76,7 @@ return (
             <input className='inp' value={user_email} onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='Correo'/>
             <input className='inp' value={user_age} onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='Edad'/>
             <input className='inp' value={user_phone} onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='Teléfono'/>
-            <input className='inp' value={user_country} onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='País'/>
+            <input className='inp' value={user_country} onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='País' />
             <input className='inp' value={user_address} onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='Dirección'/>
             <input className='inp' value={user_type_profile} onChange={(e)=>SetUserTypeProfile(e.target.value)} type="text" placeholder='Tipo de perfil'/>
             <input className='inp' value={user_website} onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='Sitio Web'/>
