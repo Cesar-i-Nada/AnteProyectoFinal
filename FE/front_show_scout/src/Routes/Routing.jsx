@@ -28,7 +28,6 @@ function Routing() {
 
                 <Route path="/BocetopageA" element={<BocetopageA/>}/>
 
-
                 {/* rutas privadas */}
                 <Route path="/AdminCentral" element={<PrivateRoute topSecret={<AdminCentral/>}/>}/>
                 <Route path="/AccessLikeR" element={<PrivateRoute topSecret={<AccessLikeR/>}/>}/>
