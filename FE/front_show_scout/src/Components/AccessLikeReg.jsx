@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Styles/AccessLikeReg.css'
-import {} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 function AccessLikeReg() {
