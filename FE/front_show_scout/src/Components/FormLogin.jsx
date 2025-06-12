@@ -59,7 +59,7 @@ return (
         <div>  
           <div className='espLogin'>
             <p className='textLogin'>Lleve su producción <br /> por buen camino</p><br />
-            <input className='inp' placeholder="Nombre" required onChange={(e)=>SetUsername(e.target.value)}type="text"/><br /><br />
+            <input className='inp' placeholder="Alias" required onChange={(e)=>SetUsername(e.target.value)}type="text"/><br /><br />
             <input className='inp' placeholder="Contraseña" required onChange={(e)=>SetPasswordUser(e.target.value)} type="password" /><br /><br />
             <button onClick={Start} className='btnIniciar'>Iniciar</button><br /><br />
             <p>¿Ya tienes una cuenta? <Link to = "/Register">Ir a registrarse</Link></p>      

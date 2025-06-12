@@ -31,7 +31,7 @@ return (
     <div className='espRegister'>
       <h1 className='titulo'>Registrese</h1>
       <p className='titulo'>para comenzar su viaje en la creación de obras escénicas</p><br />
-      <input className='inp'  placeholder="Nombre de usuario" required onChange={(e)=>SetUsername(e.target.value)} type="text"/><br /><br />   
+      <input className='inp'  placeholder="Alias" required onChange={(e)=>SetUsername(e.target.value)} type="text"/><br /><br />   
       <input className='inp'  placeholder="Correo electrónico" required onChange={(e)=>SetEmailUser(e.target.value)} type="email" /><br /><br />
       <input className='inp'  placeholder="Contraseña" required onChange={(e)=>SetPasswordUser(e.target.value)} type="password"/><br /><br />
       <button onClick={CrearRegistro} className='btnRegistrar'>Registrarse</button><br /><br />
