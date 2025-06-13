@@ -21,8 +21,10 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import fetchUsers from '../Services/fetchUsers';
+import EditIcon from '@mui/icons-material/Edit';
 
-function createData(id, username, user_first_name, user_last_name, user_email, user_age, user_phone, user_country, user_address, user_type_profile, user_website, user_social_media,) {
+function createData(id, username, user_first_name, user_last_name, user_email, user_age, user_phone, user_country, user_address, user_type_profile, user_website, user_social_media) {
   return {
     id,
     username,
@@ -232,11 +234,14 @@ function EnhancedTableToolbar(props) {
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
+          <Tooltip title="Edit">
           <IconButton>
             <DeleteIcon />
-          </IconButton>
+            <EditIcon />
+          </IconButton>   
         </Tooltip>
-      ) : (
+        </Tooltip>   
+      ) : (       
         <Tooltip title="Filter list">
           <IconButton>
             <FilterListIcon />
@@ -258,6 +263,21 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [usuarios, setUsuarios] = React.useState([]);
+
+  React.useEffect(() => {
+      const traeUsuarios = async () => {
+        try {
+          const peticion = await fetchUsers.getUsers();
+          console.log(peticion);
+          setUsuarios(peticion);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      traeUsuarios()
+  },[])
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -273,6 +293,7 @@ export default function EnhancedTable() {
     }
     setSelected([]);
   };
+
 
   const handleClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
@@ -293,6 +314,8 @@ export default function EnhancedTable() {
     setSelected(newSelected);
   };
 
+  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -306,17 +329,8 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const visibleRows = React.useMemo(
-    () =>
-      [...rows]
-        .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage],
-  );
+  
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -337,61 +351,59 @@ export default function EnhancedTable() {
               rowCount={rows.length}
             />
             <TableBody>
-              {visibleRows.map((row, index) => {
-                const isItemSelected = selected.includes(row.id);
-                const labelId = `enhanced-table-checkbox-${index}`;
-
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.id)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.id}
-                    selected={isItemSelected}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          'aria-labelledby': labelId,
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.username}</TableCell>
-                    <TableCell align="right">{row.user_first_name}</TableCell>
-                    <TableCell align="right">{row.user_last_name}</TableCell>
-                    <TableCell align="right">{row.user_email}</TableCell>
-                    <TableCell align="right">{row.user_age}</TableCell>
-                    <TableCell align="right">{row.user_phone}</TableCell>
-                    <TableCell align="right">{row.user_country}</TableCell>
-                    <TableCell align="right">{row.user_address}</TableCell>
-                    <TableCell align="right">{row.user_type_profile}</TableCell>
-                    <TableCell align="right">{row.user_website}</TableCell>
-                    <TableCell align="right">{row.user_social_media}</TableCell>
-                  </TableRow>
-                );
+        
+                {usuarios.map((usuario)=>{
+                
+                return(
+                  <>
+                <TableRow>
+                   <TableCell align="right">
+                      {usuario.username}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_first_name}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_last_name}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_email}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_age}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_phone}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_country}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_address}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_type_profile}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_website}
+                   </TableCell>
+                   <TableCell align="right">
+                      {usuario.user_social_media}
+                   </TableCell>
+                </TableRow>
+                </>
+              )
               })}
-              {emptyRows > 0 && (
+                {usuarios > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: (dense ? 33 : 53) * usuarios,
                   }}
                 >
-                  <TableCell colSpan={11} />
+              <TableCell colSpan={11} />
                 </TableRow>
               )}
+
             </TableBody>
           </Table>
         </TableContainer>

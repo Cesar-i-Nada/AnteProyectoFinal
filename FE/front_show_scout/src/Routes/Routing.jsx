@@ -9,6 +9,8 @@ import ProfileUForm from '../Pages/ProfileUForm';
 import ProfileCForm from '../Pages/ProfileCForm';
 import ProfileOForm from '../Pages/ProfileOForm';
 import BocetopageA from '../Pages/BocetopageA';
+import Boceto2page from '../Pages/Boceto2page';
+
 
 import PrivateRoute from './PrivateRoute';
 
@@ -27,6 +29,8 @@ function Routing() {
                 <Route path="/AdminCentral" element={<AdminCentral/>}/>
 
                 <Route path="/BocetopageA" element={<BocetopageA/>}/>
+                <Route path="/Boceto2page" element={<Boceto2page/>}/>
+
 
                 {/* rutas privadas */}
                 <Route path="/AdminCentral" element={<PrivateRoute topSecret={<AdminCentral/>}/>}/>

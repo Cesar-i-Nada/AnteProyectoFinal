@@ -12,7 +12,7 @@ class UserData(models.Model):
     user_age = models.IntegerField(default=0)
     user_phone = models.CharField(max_length=50, default="")
     user_country = models.CharField(max_length=30, default="")
-    user_address = models.CharField(max_length=200, default="")
+    user_address = models.CharField(max_length=200, default="") 
     user_type_profile = models.CharField(max_length=50, default="")
     user_website = models.CharField(max_length=200, default="")
     user_social_media = models.CharField(max_length=200,default="")
