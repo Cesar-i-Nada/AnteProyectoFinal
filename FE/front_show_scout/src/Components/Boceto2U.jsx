@@ -107,18 +107,13 @@ function EnhancedTableToolbar({ numSelected }) {
         </Typography>
       )}
       {numSelected > 0 ? (
-        <Tooltip title="Editar">
-          <Tooltip title="Eliminar">
+        <Tooltip title="Editar o eliminar">
           <IconButton>
+            <DeleteIcon />
             <EditIcon />
           </IconButton>
         </Tooltip>
-              
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-        ) : (
+      ) : (
         <Tooltip title="Filtrar">
           <IconButton>
             <FilterListIcon />

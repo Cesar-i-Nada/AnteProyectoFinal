@@ -15,11 +15,11 @@ class IsAdminUserGroup(BasePermission):
 class AgregarUserDataView(APIView):
     def post(self,request):
         username = request.data.get("username")
-        user_first_name = request.data.get("first_name")
-        user_last_name = request.data.get("last_name")
         user_email = request.data.get("email")
         user_password = request.data.get("password")
         
+        user_first_name = request.data.get("first_name")
+        user_last_name = request.data.get("last_name")
         user_age = request.data.get("user_age")
         user_phone = request.data.get("user_phone")
         user_country = request.data.get("user_country")
@@ -33,7 +33,14 @@ class AgregarUserDataView(APIView):
                 user_first_name=user_first_name,
                 user_last_name=user_last_name,
                 user_email=user_email,
-                user_password=user_password
+                user_password=user_password,
+                user_age=user_age,
+                user_phone=user_phone,
+                user_country=user_country,
+                user_address=user_address,
+                user_type_profile=user_type_profile,
+                user_website=user_website,
+                user_social_media=user_social_media
             )
         
         return Response({
