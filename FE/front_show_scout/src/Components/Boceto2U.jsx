@@ -108,21 +108,7 @@ function EnhancedTableToolbar({ numSelected }) {
           Gestión de usuarios
         </Typography>
       )}
-      {numSelected > 0 ? (
-        <Tooltip title="Editar o eliminar">
-          
-          <IconButton>
-            <DeleteIcon />
-            <EditIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filtrar">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      
     </Toolbar>
   );
 }

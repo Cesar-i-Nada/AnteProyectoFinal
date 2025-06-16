@@ -18,11 +18,14 @@ class UserData(models.Model):
     user_social_media = models.CharField(max_length=200,default="")
                 
 class CompanyData(models.Model):
+    #obligatorios
     company_name = models.CharField(max_length=200, blank=False, null=False)
-    company_funding = models.DateField(blank=False, null=False)
-    company_phone = models.CharField(max_length=50, blank=False, null=False)
     company_email = models.EmailField(max_length=255, unique=True, blank=False, null=False)
     company_password = models.CharField(max_length=16, blank=False, null=False)
+    
+    #adicionales
+    company_funding = models.DateField(blank=False, null=False)
+    company_phone = models.CharField(max_length=50, blank=False, null=False)
     company_country = models.CharField(max_length=30, blank=False, null=False)
     company_address = models.CharField(max_length=200, blank=False, null=False)
     company_type_profile = models.CharField(max_length=50, blank=False, null=False)
@@ -30,11 +33,14 @@ class CompanyData(models.Model):
     company_social_media = models.CharField(max_length=200, blank=False, null=False) 
     
 class OrganizationData(models.Model):
+    #obligatorios
     organization_name = models.CharField(max_length=200, blank=False, null=False)
-    organization_funding = models.DateField(blank=False, null=False)
-    organization_phone = models.CharField(max_length=50, blank=False, null=False)
     organization_email = models.EmailField(max_length=255, unique=True, blank=False, null=False)
     organization_password = models.CharField(max_length=16, blank=False, null=False)
+    
+    #adicionales
+    organization_funding = models.DateField(blank=False, null=False)
+    organization_phone = models.CharField(max_length=50, blank=False, null=False)
     organization_country = models.CharField(max_length=30, blank=False, null=False)
     organization_address = models.CharField(max_length=200, blank=False, null=False)
     organization_type_profile = models.CharField(max_length=50, blank=False, null=False)
