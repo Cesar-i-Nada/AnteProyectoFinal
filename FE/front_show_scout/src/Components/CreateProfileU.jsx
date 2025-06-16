@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../Styles/CreateProfileU.css'
 import { useNavigate } from 'react-router-dom'
 import fetchUsers from '../Services/fetchUsers'
+import axios from 'axios';
 
 function CreateProfileU() {
 

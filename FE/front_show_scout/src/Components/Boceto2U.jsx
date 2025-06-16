@@ -36,6 +36,8 @@ const headCells = [
   { id: 'user_type_profile', numeric: true, disablePadding: false, label: 'Categoría' },
   { id: 'user_website', numeric: true, disablePadding: false, label: 'Sitio oficial' },
   { id: 'user_social_media', numeric: true, disablePadding: false, label: 'Redes sociales' },
+  { id: 'actions', numeric: true, disablePadding: false, label: 'Acciones' },
+
 ];
 
 function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort }) {
@@ -108,6 +110,7 @@ function EnhancedTableToolbar({ numSelected }) {
       )}
       {numSelected > 0 ? (
         <Tooltip title="Editar o eliminar">
+          
           <IconButton>
             <DeleteIcon />
             <EditIcon />
@@ -126,6 +129,77 @@ function EnhancedTableToolbar({ numSelected }) {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+};
+
+export function EditUserDialog({ open, user, onClose, onSave }) {
+  const [formData, setFormData] = useState(user || {});
+
+  useEffect(() => {
+    setFormData(user || {});
+  }, [user]);
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSave = () => onSave(formData);
+
+  return (
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+      <DialogTitle>Editar usuario</DialogTitle>
+      <DialogContent>
+        {Object.entries(formData).map(([key, value]) => (
+          typeof value === 'string' || typeof value === 'number' ? (
+            <TextField
+              key={key}
+              margin="dense"
+              name={key}
+              label={key.replace(/_/g, ' ')}
+              fullWidth
+              value={value}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          ) : null
+        ))}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose}>Cancelar</Button>
+        <Button onClick={handleSave} variant="contained">Guardar</Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
+EditUserDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+};
+
+export function ConfirmDeleteDialog({ open, user, onClose, onConfirm }) {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Eliminar usuario</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          ¿Estás seguro de que deseas eliminar al usuario <strong>{user?.username}</strong>?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose}>Cancelar</Button>
+        <Button onClick={() => onConfirm(user?.id)} variant="contained" color="error">
+          Eliminar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
+ConfirmDeleteDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
 };
 
 export default function EnhancedTable() {
@@ -196,6 +270,7 @@ export default function EnhancedTable() {
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
+  
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -244,6 +319,12 @@ export default function EnhancedTable() {
                     <TableCell align="right">{row.user_type_profile}</TableCell>
                     <TableCell align="right">{row.user_website}</TableCell>
                     <TableCell align="right">{row.user_social_media}</TableCell>
+                    <TableCell align="right">
+                      <button>Eliminar</button>
+                    </TableCell>
+                    <TableCell align="right">
+                      <button>Actualizar</button>
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -272,3 +353,4 @@ export default function EnhancedTable() {
     </Box>
   );
 }
+
