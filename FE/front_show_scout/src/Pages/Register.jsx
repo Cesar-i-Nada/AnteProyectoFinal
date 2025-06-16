@@ -8,7 +8,7 @@ function Register() {
   return (
     <div>
       <NavBarIntro />
-      <div className='formRegisterM'>
+      <div className='formRegisterMargin'>
       <FormRegister />
       </div>
     </div>
