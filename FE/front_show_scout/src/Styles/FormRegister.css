@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.container {
+.containerR {
     display: grid;
     grid-template-columns: auto auto;
 }
@@ -22,12 +22,12 @@
     opacity: .75;
 }
 
-.inp {
+.inpR {
     border-radius:20px;
     text-align: center;
 }
 
-.titulo {
+.tituloR {
     color: #F24405;
 }
 
