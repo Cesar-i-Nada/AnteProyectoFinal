@@ -19,8 +19,9 @@
     opacity: .75;
 }
 
-.inpU {
+.inpU, select {
     border-radius:20px;
+    text-align: center;
 }
 
 .Cabritas {

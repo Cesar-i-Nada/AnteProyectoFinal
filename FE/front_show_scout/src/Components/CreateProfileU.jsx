@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, } from 'react'
 import '../Styles/CreateProfileU.css'
 import { useNavigate } from 'react-router-dom'
 import fetchUsers from '../Services/fetchUsers'
-import axios from 'axios';
+
 
 function CreateProfileU() {
 
@@ -56,8 +56,25 @@ function Create() {
       localStorage.setItem("usuario",JSON.stringify(usuarioEncontrado))
       navigate('/CreateProfile')
     }
-   }
+   
+  }
 
+const Object = {
+  user: 'username',
+  user_first_name: "user_first_name",
+  user_last_name: "user_last_name",
+  user_email: "user_email",
+  user_password: "user_password",
+  user_age: "user_age",
+  user_phone: "user_phone",
+  user_country: "user_country",
+  user_address: "user_addreess",
+  user_type_profile: "user_type_profile",
+  user_website: "user_website",
+  user_social_media: "user_social_media",
+  }
+
+  
 return (
 
 <div>
@@ -77,11 +94,34 @@ return (
             <input className='inpU' value={user_email} onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='Correo'/>
             <input className='inpU' value={user_age} onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='Edad'/>
             <input className='inpU' value={user_phone} onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='Teléfono'/>
-            <input className='inpU' value={user_country} onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='País' />
+
+            <select className='inpU' name="country" value={user_country} id="country-select" onChange={(e)=>SetUserCountry(e.target.value)}>
+            <option value="" disabled selected>Selecciona un país</option>
+            <option value="CR">Costa Rica</option>
+            <option value="MX">México</option>
+            <option value="AR">Argentina</option>
+            <option value="BR">Brasil</option>
+            <option value="US">Estados Unidos</option>
+            </select>
+
             <input className='inpU' value={user_address} onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='Dirección'/>
-            <input className='inpU' value={user_type_profile} onChange={(e)=>SetUserTypeProfile(e.target.value)} type="text" placeholder='Tipo de perfil'/>
+            
+            <select className='inpU' name="category" value={user_type_profile} id="type_profile-select" onChange={(e)=>SetUserTypeProfile(e.target.value)}>
+            <option value="" disabled selected>Selecciona un tipo de perfil</option>
+            <option value="I">Intérprete</option>
+            <option value="T">Técnico</option>
+            <option value="D">Director</option>
+            </select>
+            
             <input className='inpU' value={user_website} onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='Sitio Web'/>
-            <input className='inpU' value={user_social_media} onChange={(e)=>SetUserSocialMedia(e.target.value)} type="text" placeholder='Redes sociales'/>
+            
+            <select className='inpU' name="social_media" value={user_social_media} id="social_media-select" onChange={(e)=>SetUserSocialMedia(e.target.value)}>
+            <option value="" disabled selected>Selecciona una red social</option>
+            <option value="IG">Instagram</option>
+            <option value="FB">Facebook</option>
+            <option value="TT">Tik Tok</option>
+            </select>
+
             <button onClick={Create} className='btnIniciarU'>Crear</button><br /><br />
           </div>
         </div>

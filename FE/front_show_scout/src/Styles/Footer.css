@@ -1,4 +1,4 @@
-.flex-container {
+.flex-containerF {
     display: flex;
     flex-wrap: wrap;
     background-color: #8c52ff;
@@ -9,7 +9,7 @@
     list-style-type: none;
   }
   
-  .flex-container > div {
+  .flex-containerF > div {
     background-color: #8c52ff;
     width: 200px;
     margin: 6px;

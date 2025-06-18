@@ -4,7 +4,6 @@ import '../Styles/FormRegister.css'
 import Cabritas from '../assets/img/CabritasClr.gif'
 import fetchUsers from '../Services/fetchUsers'
 
-
 function FormRegister() {
 
 const [username,  SetUsername] = useState("")

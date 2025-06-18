@@ -21,7 +21,7 @@ function Welcome() {
                   <div className="dropdown-content">
                     <Link to={"/LightPlanMap"}>Plano de luces</Link>
                     <Link to={"/MoneyControl"}>Presupuesto</Link>
-                    <Link to={"/MoneyControl"}>Calendario</Link>
+                    
 
                   </div>
               </div>
@@ -30,7 +30,7 @@ function Welcome() {
                   <i className="fa fa-caret-down"></i>
                 </button>
                   <div className="dropdown-content">
-                    <Link to={"/ProfileACreated"}>Artista</Link>
+                    <Link to={"/ProfileACreated"}>Intérprete</Link>
                     <Link to={"/ProfileCCreated"}>Compañía</Link>
                     <Link to={"/ProfileOCreated"}>Organización</Link>
                   </div>

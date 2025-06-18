@@ -9,7 +9,7 @@ function Footer() {
   return (
     <div>
 
-      <div class="flex-container">
+      <div className="flex-containerF">
         <div>
             <ul className='listaFooter'>
               <li className='titleFooter'>Sobre nosotros</li><br />

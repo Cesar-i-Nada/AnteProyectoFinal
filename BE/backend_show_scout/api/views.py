@@ -1,17 +1,48 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import BasePermission, IsAuthenticated
 from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData
 from .serializers import UserDataSerializer, CompanyDataSerializer, OrganizationDataSerializer, UserCompanyDataSerializer, UserOrganizationDataSerializer
 from django.contrib.auth.models import User
-from rest_framework.response import Response
 from django.shortcuts import render
-from rest_framework.views import APIView
-from rest_framework.permissions import BasePermission, IsAuthenticated
+
+
+from rest_framework import viewsets, permissions
+from rest_framework.decorators import action
+from rest_framework_simplejwt.tokens import RefreshToken
+
+class LoginViewSet(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+
+    @action(detail=False, methods=['post'])
+    def login(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = IsAuthenticated(username=username, password=password)
+        if user:
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        return Response({'error': 'Invalid credentials'}, status=401)
+
+
+
 
 class IsAdminUserGroup(BasePermission):
     def has_permission(self, request, view):
         return request.user and request.user.groups.filter(name = 'admin').exists()
     
-
+class IsInterpreteUserGroup(BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.groups.filter(name = 'interprete').exists() 
+    
+class IsTecnicoUserGroup(BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.groups.filter(name = 'tecnico').exists()       
+    
 class AgregarUserDataView(APIView):
     def post(self,request):
         username = request.data.get("username")
@@ -48,7 +79,7 @@ class AgregarUserDataView(APIView):
         })
 
 class UserDataListCreateView(ListCreateAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUserGroup,IsAuthenticated]
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer 
     

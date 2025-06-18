@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import '../Styles/FormLogin.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useHistory } from 'react-router-dom'
 import fetchUsers from '../Services/fetchUsers'
 import Cabritas from '../assets/img/CabritasClr.gif'
 
+  
 function FormLogin() {
-
+  
   const [username,  SetUsername] = useState("")
   const [userPassword, SetUserPassword] = useState("")
   const [users, SetUsers] = useState([])
+  const history = useHistory();
   
   const navigate = useNavigate()
 
@@ -40,13 +42,39 @@ function Start() {
     if (usuarioEncontrado.perfilCreado) {
       console.log('El usuario está registrado, por lo que puede ingresar');
       localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));
-      navigate('/SynchroMap');
+      navigate('/AccessLikeL');
     }else{
       console.log('El usuario aún no ha creado un perfil');  
       localStorage.setItem("usuario",JSON.stringify(usuarioEncontrado))
-      navigate('/CreateProfile')
+      navigate('/Register')
     }
    }
+
+   const handleLogin = async () => {
+    const response = await fetch('/api/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, userPassword }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
+      history.push('/'); // Redirige a la página de inicio
+    } else {
+      alert(data.error);
+    }
+  };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      //  Verificar token y redirigir si es válido
+      history.push('/');
+    }
+  }, [history]);
 
 return (
 <div>
@@ -61,7 +89,7 @@ return (
             <p className='textLogin'>Lleve su producción <br /> por buen camino</p><br />
             <input className='inpL' placeholder="Alias" required onChange={(e)=>SetUsername(e.target.value)}type="text"/><br /><br />
             <input className='inpL' placeholder="Contraseña" required onChange={(e)=>SetUserPassword(e.target.value)} type="password" /><br /><br />
-            <button onClick={Start} className='btnIniciarL'>Iniciar</button><br /><br />
+            <button onClick={handleLogin} className='btnIniciarL'>Iniciar</button><br /><br />
             <p>¿Ya tienes una cuenta? <Link to = "/Register">Ir a registrarse</Link></p>      
           </div>
         </div>
@@ -86,7 +114,7 @@ return (
     </div>
         
     <div>
-        <div class="footer"><h3>Contáctenos</h3>
+        <div className="footer"><h3>Contáctenos</h3>
         <div>
             <h4>ShowScout@gmail.com</h4>
             <a class="cierre" href="login/login.html">Cerrar sesión</a></div>
