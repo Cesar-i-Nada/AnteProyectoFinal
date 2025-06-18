@@ -3,7 +3,6 @@ import '../Styles/CreateProfileU.css'
 import { useNavigate } from 'react-router-dom'
 import fetchUsers from '../Services/fetchUsers'
 
-
 function CreateProfileU() {
 
   const [username,  SetUsername] = useState("")
@@ -74,7 +73,6 @@ const Object = {
   user_social_media: "user_social_media",
   }
 
-  
 return (
 
 <div>

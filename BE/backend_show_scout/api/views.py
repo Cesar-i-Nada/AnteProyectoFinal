@@ -12,37 +12,31 @@ from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
 
-class LoginViewSet(viewsets.ViewSet):
+class LoginViewSet(APIView):
     permission_classes = [permissions.AllowAny]
-
-    @action(detail=False, methods=['post'])
-    def login(self, request):
+    def post(self, request):
         username = request.data.get('username')
-        password = request.data.get('password')
-        user = IsAuthenticated(username=username, password=password)
-        if user:
-            refresh = RefreshToken.for_user(user)
+        password = request.data.get('userPassword')
+        
+        if not username or not password:
+            return Response({'error': 'usuario y contraseña son requeridos'}, status=400)
+        
+        usuario = UserData.objects.filter(username=username, user_password=password).first()
+        
+        if usuario:
+            refresh = RefreshToken.for_user(usuario)
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
+                "exito" :"usuario autenticado correctamente",
             })
-        return Response({'error': 'Invalid credentials'}, status=401)
-
-
+        return Response({'error': 'credenciales invalidas'}, status=401)
 
 
 class IsAdminUserGroup(BasePermission):
     def has_permission(self, request, view):
         return request.user and request.user.groups.filter(name = 'admin').exists()
-    
-class IsInterpreteUserGroup(BasePermission):
-    def has_permission(self, request, view):
-        return request.user and request.user.groups.filter(name = 'interprete').exists() 
-    
-class IsTecnicoUserGroup(BasePermission):
-    def has_permission(self, request, view):
-        return request.user and request.user.groups.filter(name = 'tecnico').exists()       
-    
+        
 class AgregarUserDataView(APIView):
     def post(self,request):
         username = request.data.get("username")
