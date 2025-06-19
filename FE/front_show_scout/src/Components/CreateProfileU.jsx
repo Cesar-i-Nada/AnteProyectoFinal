@@ -45,7 +45,7 @@ function Create() {
     
     const usuarioEncontrado = registered [0]; 
     
-      //valida si el  perfil ya se realizó
+      //valida si el perfil ya se realizó
     if (usuarioEncontrado.perfilCreado) {
       console.log('El usuario está registrado, por lo que puede ingresar');
       localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));

@@ -2,8 +2,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import BasePermission, IsAuthenticated
-from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData
-from .serializers import UserDataSerializer, CompanyDataSerializer, OrganizationDataSerializer, UserCompanyDataSerializer, UserOrganizationDataSerializer
+from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData, PiecesData, BudgetData
+from .serializers import UserDataSerializer, CompanyDataSerializer, OrganizationDataSerializer, UserCompanyDataSerializer, UserOrganizationDataSerializer, PiecesDataSerializer, BudgetDataSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
@@ -122,3 +122,23 @@ class UserOrganizationDataDetailView(RetrieveUpdateDestroyAPIView):
     #permission_classes = [IsAuthenticated]
     queryset = UserOrganizationData.objects.all()
     serializer_class = UserOrganizationDataSerializer
+        
+class PiecesDataListCreateView(ListCreateAPIView):
+    #permission_classes = [IsAuthenticated]
+    queryset = PiecesData.objects.all()
+    serializer_class = PiecesDataSerializer 
+    
+class PiecesDataDetailView(RetrieveUpdateDestroyAPIView):
+    #permission_classes = [IsAuthenticated]
+    queryset = PiecesData.objects.all()
+    serializer_class = PiecesDataSerializer
+    
+class BudgetDataListCreateView(ListCreateAPIView):
+    #permission_classes = [IsAuthenticated]
+    queryset = BudgetData.objects.all()
+    serializer_class = BudgetDataSerializer 
+    
+class BudgetDataDetailView(RetrieveUpdateDestroyAPIView):
+    #permission_classes = [IsAuthenticated]
+    queryset = BudgetData.objects.all()
+    serializer_class = BudgetDataSerializer 

@@ -1,4 +1,4 @@
-from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData
+from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData, PiecesData
 from rest_framework import serializers
 
 class UserDataSerializer(serializers.ModelSerializer):
@@ -24,4 +24,9 @@ class UserCompanyDataSerializer(serializers.ModelSerializer):
 class UserOrganizationDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserOrganizationData
+        fields = '__all__'
+        
+class PiecesDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PiecesData
         fields = '__all__'
