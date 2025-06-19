@@ -55,3 +55,28 @@ class UserOrganizationData(models.Model):
     user_data = models.ForeignKey(UserData, on_delete=models.CASCADE, blank=False, null=False)
     organization_data = models.ForeignKey(OrganizationData, on_delete=models.CASCADE, blank=False, null=False)
           
+          
+          
+
+
+class PiecesData(models.Model):
+    #obligatorios
+    pieces_start_date = models.DateField(blank=False, null=False)
+    pieces_submission_date = models.DateField(blank=False, null=False)
+    
+    #adicionales
+    pieces_name = models.CharField(max_length=200, blank=False, null=False)
+    pieces_director = models.CharField(max_length=200, blank=False, null=False)
+    pieces_cast = models.CharField(max_length=200, blank=False, null=False)
+    pieces_description = models.TextField(blank=False, null=False)
+    pieces_duration = models.IntegerField(blank=False, null=False) #Duración en minutos
+    pieces_genre = models.CharField(max_length=30, blank=False, null=False)
+    pieces_year = models.IntegerField(blank=False, null=False)
+    pieces_website = models.CharField(max_length=200, blank=False, null=False)
+    pieces_social_media = models.CharField(max_length=200, blank=False, null=False)
+    pieces_trailer = models.CharField(max_length=200, blank=True, null=True)
+    pieces_poster = models.ImageField(upload_to='pieces_posters/', blank=True, null=True)
+    pieces_video = models.FileField(upload_to='pieces_videos/', blank=True, null=True)
+    
+    
+        
