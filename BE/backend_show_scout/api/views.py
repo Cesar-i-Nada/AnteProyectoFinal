@@ -141,4 +141,4 @@ class BudgetDataListCreateView(ListCreateAPIView):
 class BudgetDataDetailView(RetrieveUpdateDestroyAPIView):
     #permission_classes = [IsAuthenticated]
     queryset = BudgetData.objects.all()
-    serializer_class = BudgetDataSerializer 
+    serializer_class = BudgetDataSerializer
