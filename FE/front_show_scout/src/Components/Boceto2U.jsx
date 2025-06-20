@@ -13,6 +13,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import EditIcon from '@mui/icons-material/Edit';
 import '../Styles/Boceto2U.css'
 
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
   if (b[orderBy] > a[orderBy]) return 1;
@@ -37,7 +38,7 @@ const headCells = [
   { id: 'user_type_profile', numeric: true, disablePadding: false, label: 'Categoría' },
   { id: 'user_website', numeric: true, disablePadding: false, label: 'Sitio oficial' },
   { id: 'user_social_media', numeric: true, disablePadding: false, label: 'Redes sociales' },
-  { id: 'actions', numeric: true, disablePadding: false, label: 'Acciones' },
+  { id: 'actions', numeric: true, disablePadding: false, label: 'Acciones', colSpan: 2 },
 
 ];
 
@@ -118,8 +119,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-
-
+//logica para eliminar el item 
 
 
 
@@ -251,6 +251,11 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
+  const deleteUser = async(id)=>{
+    const peticion = await fetchUsers.deleteUsers(id)
+    console.log(peticion);
+  }
+
   const handleChangeDense = (event) => setDense(event.target.checked);
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - usuarios.length) : 0;
@@ -312,11 +317,17 @@ export default function EnhancedTable() {
                     <TableCell align="right">{row.user_type_profile}</TableCell>
                     <TableCell align="right">{row.user_website}</TableCell>
                     <TableCell align="right">{row.user_social_media}</TableCell>
-                    <TableCell align="right">
-                      <button>Eliminar</button>
-                    </TableCell>
-                    <TableCell align="right">
-                      <button>Actualizar</button>
+  
+                    <TableCell align='center' colspan="2">{row.actions}
+                      
+                        <TableCell align="right">
+                        <button onClick={()=>deleteUser(row.id)}>Eliminar</button>
+                        </TableCell>
+
+                        <TableCell align="right">
+                        <button>Actualizar</button>
+                        </TableCell>
+                      
                     </TableCell>
                   </TableRow>
                 );
