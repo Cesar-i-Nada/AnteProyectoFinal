@@ -26,16 +26,14 @@ function Routing() {
 
                 <Route path="/Boceto2page" element={<Boceto2page/>}/>
 
-
+                <Route path="/ProfileUForm" element={<ProfileUForm/>}/>
 
                 {/* rutas privadas */}
                 <Route path="/AdminCentral" element={<PrivateRoute topSecret={<AdminCentral/>}/>}/>
                 <Route path="/AccessLikeR" element={<PrivateRoute topSecret={<AccessLikeR/>}/>}/>
                 <Route path="/AccessLikeL" element={<PrivateRoute topSecret={<AccessLikeL/>}/>}/>
-                <Route path="/ProfileUForm" element={<PrivateRoute topSecret={<ProfileUForm/>}/>}/>
                 <Route path="/ProfileCForm" element={<PrivateRoute topSecret={<ProfileCForm/>}/>}/>
                 <Route path="/ProfileOForm" element={<PrivateRoute topSecret={<ProfileOForm/>}/>}/>
-
 
         </Routes>
       </Router>

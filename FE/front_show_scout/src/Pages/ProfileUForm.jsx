@@ -1,12 +1,15 @@
 import React from 'react'
-import NavBarGeneral from '../Components/NavBarGeneral'
 import CreateProfileU from '../Components/CreateProfileU'
+import '../Styles/MarginPages/CreateProfileUMP.css'
+import NavBarIntro from '../Components/NavBarIntro'
 
 function ProfileUForm() {
   return (
     <div>
-        <NavBarGeneral />
-        <CreateProfileU />
+        <NavBarIntro />
+        <div className='createProfileUMargin'>
+          <CreateProfileU />
+        </div>
     </div>
   )
 }

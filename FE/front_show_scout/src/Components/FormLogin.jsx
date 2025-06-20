@@ -7,7 +7,7 @@ import Cabritas from '../assets/img/CabritasClr.gif'
 function FormLogin() {
   
   const [username,  SetUsername] = useState("")
-  const [userPassword, SetUserPassword] = useState("")
+  const [user_password, SetUserPassword] = useState("")
   const [users, SetUsers] = useState([])
   
   
@@ -26,7 +26,7 @@ function FormLogin() {
 
 function Start() { 
 
-    const registered = users.filter(user => user.user === username && user.password === userPassword)
+    const registered = users.filter(user => user.username === username && user.userPassword === user_password)
     
     console.log(registered);
     

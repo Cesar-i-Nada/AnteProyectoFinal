@@ -13,7 +13,7 @@ from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class LoginViewSet(APIView):
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('userPassword')
@@ -73,7 +73,7 @@ class AgregarUserDataView(APIView):
         })
 
 class UserDataListCreateView(ListCreateAPIView):
-    permission_classes = [IsAdminUserGroup,IsAuthenticated]
+    # permission_classes = [IsAdminUserGroup,IsAuthenticated]
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer 
     

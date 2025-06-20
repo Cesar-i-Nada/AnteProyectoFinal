@@ -11,6 +11,7 @@ import fetchUsers from '../Services/fetchUsers';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import EditIcon from '@mui/icons-material/Edit';
+import '../Styles/Boceto2U.css'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
@@ -45,18 +46,18 @@ function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowC
 
   return (
     <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
+      <TableRow className='tableRowUColor'>
+        <TableCell className='tableCellUColor' padding="checkbox">
+          <Checkbox 
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ 'aria-label': 'select all users' }}
           />
-        </TableCell>
+        </TableCell >
         {headCells.map((headCell) => (
-          <TableCell
+          <TableCell className='tableCellUColor'
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -92,7 +93,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar({ numSelected }) {
   return (
-    <Toolbar sx={{
+    <Toolbar className='toolUColor' sx={{
       pl: { sm: 2 }, pr: { xs: 1, sm: 1 },
       ...(numSelected > 0 && {
         bgcolor: (theme) =>
@@ -100,7 +101,7 @@ function EnhancedTableToolbar({ numSelected }) {
       }),
     }}>
       {numSelected > 0 ? (
-        <Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
+        <Typography className='typoUColor' sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
           {numSelected} seleccionados
         </Typography>
       ) : (
@@ -116,6 +117,11 @@ function EnhancedTableToolbar({ numSelected }) {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
+
+
+
+
+
 
 export function EditUserDialog({ open, user, onClose, onSave }) {
   const [formData, setFormData] = useState(user || {});
@@ -196,6 +202,7 @@ export default function EnhancedTable() {
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [usuarios, setUsuarios] = useState([]);
+  
 
   useEffect(() => {
     const traeUsuarios = async () => {
@@ -256,7 +263,7 @@ export default function EnhancedTable() {
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
-  
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -271,13 +278,13 @@ export default function EnhancedTable() {
               onRequestSort={handleRequestSort}
               rowCount={usuarios.length}
             />
-            <TableBody>
+            <TableBody className='tableBodyUColor'>
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
-                  <TableRow
+                  <TableRow className='tableRowUColor'
                     hover
                     onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
@@ -316,7 +323,7 @@ export default function EnhancedTable() {
               })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={12} />
+                  <TableCell colSpan={1} />
                 </TableRow>
               )}
             </TableBody>

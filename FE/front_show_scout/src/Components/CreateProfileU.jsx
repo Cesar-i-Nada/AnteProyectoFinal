@@ -5,6 +5,7 @@ import fetchUsers from '../Services/fetchUsers'
 
 function CreateProfileU() {
 
+  const [Img, setImg]=useState(null)
   const [username,  SetUsername] = useState("")
   const [user_password, SetUserPassword] = useState("")
   const [user_first_name, SetUserFirstName] = useState("")
@@ -58,6 +59,17 @@ function Create() {
    
   }
 
+  const subirImagen=(evento)=>{
+  const archivo = evento.target.files[0]
+  if (archivo) {
+const lector = new FileReader()
+lector.onloadend = ()=>{
+  setImg(lector.result)
+}
+lector.readAsDataURL(archivo) 
+}
+}
+
 const Object = {
   user: 'username',
   user_first_name: "user_first_name",
@@ -85,6 +97,10 @@ return (
         <div>  
           <div className='espCreateU'>
             <p className='textCreateU'>Cree su perfil</p><br />
+            <p className='textPhotoCharge'>Cargue la fotografía de su perfil</p><br />
+            <input className='inpUPhFil' type="file" onChange={subirImagen}/>
+            <input className='inpUPhSub' type="submit" /><br /><br />
+
             <input className='inpU' value={username} onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='Alias'/>
             <input className='inpU' value={user_password} onChange={(e)=>SetUserPassword(e.target.value)} type="text" placeholder='Contraseña'/>
             <input className='inpU' value={user_first_name} onChange={(e)=>SetUserFirstName(e.target.value)} type="text" placeholder='Nombre'/>
@@ -93,18 +109,18 @@ return (
             <input className='inpU' value={user_age} onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='Edad'/>
             <input className='inpU' value={user_phone} onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='Teléfono'/>
 
-            <select className='inpU' name="country" value={user_country} id="country-select" onChange={(e)=>SetUserCountry(e.target.value)}>
+            <select className='inpSelectU' name="country" value={user_country} id="country-select" onChange={(e)=>SetUserCountry(e.target.value)}>
             <option value="" disabled selected>Selecciona un país</option>
             <option value="CR">Costa Rica</option>
             <option value="MX">México</option>
             <option value="AR">Argentina</option>
             <option value="BR">Brasil</option>
             <option value="US">Estados Unidos</option>
-            </select>
+            </select><br />
 
             <input className='inpU' value={user_address} onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='Dirección'/>
             
-            <select className='inpU' name="category" value={user_type_profile} id="type_profile-select" onChange={(e)=>SetUserTypeProfile(e.target.value)}>
+            <select className='inpSelectU' name="category" value={user_type_profile} id="type_profile-select" onChange={(e)=>SetUserTypeProfile(e.target.value)}>
             <option value="" disabled selected>Selecciona un tipo de perfil</option>
             <option value="I">Intérprete</option>
             <option value="T">Técnico</option>
@@ -113,12 +129,12 @@ return (
             
             <input className='inpU' value={user_website} onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='Sitio Web'/>
             
-            <select className='inpU' name="social_media" value={user_social_media} id="social_media-select" onChange={(e)=>SetUserSocialMedia(e.target.value)}>
+            <select className='inpSelectU' name="social_media" value={user_social_media} id="social_media-select" onChange={(e)=>SetUserSocialMedia(e.target.value)}>
             <option value="" disabled selected>Selecciona una red social</option>
             <option value="IG">Instagram</option>
             <option value="FB">Facebook</option>
             <option value="TT">Tik Tok</option>
-            </select>
+            </select><br /><br />
 
             <button onClick={Create} className='btnIniciarU'>Crear</button><br /><br />
           </div>

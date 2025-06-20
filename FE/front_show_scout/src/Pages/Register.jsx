@@ -9,7 +9,7 @@ function Register() {
     <div>
       <NavBarIntro />
       <div className='formRegisterMargin'>
-      <FormRegister />
+        <FormRegister />
       </div>
     </div>
   )
