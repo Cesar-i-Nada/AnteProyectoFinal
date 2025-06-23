@@ -119,10 +119,6 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-//logica para eliminar el item 
-
-
-
 export function EditUserDialog({ open, user, onClose, onSave }) {
   const [formData, setFormData] = useState(user || {});
 

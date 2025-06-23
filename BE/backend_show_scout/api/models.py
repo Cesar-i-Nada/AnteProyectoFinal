@@ -74,27 +74,37 @@ class PiecesData(models.Model):
     pieces_poster = models.ImageField(upload_to='pieces_posters/', blank=True, null=True)
     pieces_video = models.FileField(upload_to='pieces_videos/', blank=True, null=True)
     
-class BudgetData(models.Model):
-    budget_pieces_name = models.CharField(max_length=200, blank=False, null=False)
-    budget_pieces_year = models.IntegerField(blank=False, null=False)
-    budget_pieces_income = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_sponsorships = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_ticket_sales = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_expenses = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_marketing = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_production = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_costumes = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_set_design = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_art_design = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_music = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_lighting = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_sound = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_transportation = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_accommodation = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_miscellaneous = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_fees = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_food = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_pieces_rental = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)   
-    budget_pieces_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+class BudgetIncomeData(models.Model):
+    #obligatorios
+    budget_income_pieces_name = models.CharField(max_length=200, blank=False, null=False)
+    budget_income_pieces_year = models.IntegerField(blank=False, null=False)
+    
+    #adicionales
+    budget_income_pieces_sponsorships = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_income_pieces_ticket_sales = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_income_pieces_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+
+    
+class BudgetExpenseData(models.Model):
+    #obligatorios
+    budget_expense_pieces_name = models.CharField(max_length=200, blank=False, null=False)
+    budget_expense_pieces_year = models.IntegerField(blank=False, null=False)
+    
+    #adicionales
+    budget_expense_pieces_marketing = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_production = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_costumes = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_set_design = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_art_design = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_music = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_lighting = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_sound = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_transportation = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_accommodation = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_miscellaneous = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_fees = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_food = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_expense_pieces_rental = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)   
+    budget_expense_pieces_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
     
         

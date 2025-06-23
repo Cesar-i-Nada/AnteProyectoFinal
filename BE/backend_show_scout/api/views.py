@@ -2,8 +2,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import BasePermission, IsAuthenticated
-from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData, PiecesData, BudgetData
-from .serializers import UserDataSerializer, CompanyDataSerializer, OrganizationDataSerializer, UserCompanyDataSerializer, UserOrganizationDataSerializer, PiecesDataSerializer, BudgetDataSerializer
+from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData, PiecesData, BudgetIncomeData, BudgetExpenseData
+from .serializers import UserDataSerializer, CompanyDataSerializer, OrganizationDataSerializer, UserCompanyDataSerializer, UserOrganizationDataSerializer, PiecesDataSerializer, BudgetIncomeDataSerializer, BudgetExpenseDataSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
@@ -133,12 +133,22 @@ class PiecesDataDetailView(RetrieveUpdateDestroyAPIView):
     queryset = PiecesData.objects.all()
     serializer_class = PiecesDataSerializer
     
-class BudgetDataListCreateView(ListCreateAPIView):
+class BudgetIncomeDataListCreateView(ListCreateAPIView):
     #permission_classes = [IsAuthenticated]
-    queryset = BudgetData.objects.all()
-    serializer_class = BudgetDataSerializer 
+    queryset = BudgetIncomeData.objects.all()
+    serializer_class = BudgetIncomeDataSerializer 
     
-class BudgetDataDetailView(RetrieveUpdateDestroyAPIView):
+class BudgetIncomeDataDetailView(RetrieveUpdateDestroyAPIView):
     #permission_classes = [IsAuthenticated]
-    queryset = BudgetData.objects.all()
-    serializer_class = BudgetDataSerializer
+    queryset = BudgetIncomeData.objects.all()
+    serializer_class = BudgetIncomeDataSerializer
+    
+class BudgetExpenseDataListCreateView(ListCreateAPIView):
+    #permission_classes = [IsAuthenticated]
+    queryset = BudgetExpenseData.objects.all()
+    serializer_class = BudgetExpenseDataSerializer 
+    
+class BudgetExpenseDataDetailView(RetrieveUpdateDestroyAPIView):
+    #permission_classes = [IsAuthenticated]
+    queryset = BudgetExpenseData.objects.all()
+    serializer_class = BudgetExpenseDataSerializer    
