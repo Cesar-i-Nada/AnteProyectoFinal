@@ -11,8 +11,8 @@
   
   .flex-containerF > div {
     background-color: #8c52ff;
-    width: 180px;
-    margin: 6px;
+    width: 160px;
+    margin: 20px;
     line-height: 20px;
     font-size: 10px;
     margin-top: 20px;
@@ -23,19 +23,14 @@
     color: #F24405;
   }
 
-  .listaFooter {
-    list-style-type: none;
-    text-decoration: none;
-  }
-
   .titleFooterH {
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
     color: #ffffff;
   }
 
   .titleFooter {
-    font-size: 15px;
+    font-size: 14px;
     list-style-type: none;
     text-decoration: none;
     color: #ffffff;
