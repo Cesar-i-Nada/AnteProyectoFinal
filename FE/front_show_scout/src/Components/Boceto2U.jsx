@@ -252,6 +252,11 @@ export default function EnhancedTable() {
     console.log(peticion);
   }
 
+  const updateUser = async(id)=>{
+    const peticion = await fetchUsers.updateUsers(id)
+    console.log(peticion);
+  }
+
   const handleChangeDense = (event) => setDense(event.target.checked);
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - usuarios.length) : 0;
@@ -321,7 +326,7 @@ export default function EnhancedTable() {
                         </TableCell>
 
                         <TableCell align="right">
-                        <button>Actualizar</button>
+                        <button onClick={()=>updateUser(row.id)}>Actualizar</button>
                         </TableCell>
                       
                     </TableCell>
