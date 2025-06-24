@@ -8,7 +8,9 @@ import AccessLikeL from '../Pages/AccessLikeL';
 import ProfileUForm from '../Pages/ProfileUForm';
 import ProfileCForm from '../Pages/ProfileCForm';
 import ProfileOForm from '../Pages/ProfileOForm';
-import Boceto2page from '../Pages/boceto2page';
+import Boceto2page from '../Pages/Boceto2page';
+import BudgetIPage from '../Pages/BudgetIPage';
+
 
 import PrivateRoute from './PrivateRoute';
 
@@ -27,6 +29,9 @@ function Routing() {
                 <Route path="/Boceto2page" element={<Boceto2page/>}/>
 
                 <Route path="/ProfileUForm" element={<ProfileUForm/>}/>
+
+                <Route path="/BudgetIPage" element={<BudgetIPage/>}/>
+
 
                 {/* rutas privadas */}
                 <Route path="/AdminCentral" element={<PrivateRoute topSecret={<AdminCentral/>}/>}/>

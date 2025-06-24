@@ -80,8 +80,8 @@ class BudgetIncomeData(models.Model):
     budget_income_pieces_year = models.IntegerField(blank=False, null=False)
     
     #adicionales
-    budget_income_pieces_sponsorships = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
     budget_income_pieces_ticket_sales = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
+    budget_income_pieces_sponsorships = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
     budget_income_pieces_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
 
     
