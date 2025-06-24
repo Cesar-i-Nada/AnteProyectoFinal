@@ -1,6 +1,6 @@
 .textCreateB {
     color: #F24405;
-    font-size: 50px;
+    font-size: 30px;
     text-align: center;
 }
 
@@ -20,16 +20,15 @@
 }
 
 .inpB {
-    border-radius:20px;
     text-align: center;
     width: 180px;
+    margin-left: 120px;
     font-weight: bold;
     font-size: 13px;
     font-family: Arial, Helvetica, sans-serif;
     border-width: 1px;
     border-color: #000000;
     border-style: solid;
-    
 }
 
 .inpSelectB {
@@ -56,7 +55,7 @@
 .containerB {
     display: grid;
     grid-template-columns: auto auto;
-    background-color: #ffffff;
+    background-color: blue;
     padding: 15px;
     margin-top: 0px;
 }
@@ -66,7 +65,7 @@
     border: 1px solid #ffffff;
     padding: 1px;
     font-size: 15px;
-    text-align: center;
+    text-align: left;
     width: 500px;
     height: 310px;
     margin-left: 80px;
@@ -74,6 +73,14 @@
     color: #f24405;
     margin-top: 100px;
     margin-bottom: 10px;
+}
+
+.labelB {
+    font-size: 20px;
+}
+
+.totalIncomeB {
+    font-size: 20px;
 }
 
 .footer{

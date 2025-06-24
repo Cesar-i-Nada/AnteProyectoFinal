@@ -55,15 +55,22 @@ return (
         </div>
 
         <div>  
-          <div className='espCreateB'>
             <p className='textCreateB'>Complete la información de los ingresos de la pieza</p><br />
-            
-            <input className='inpB' value={budget_income_pieces_name} onChange={(e)=>SetBudgetIncomePiecesName(e.target.value)} type="text" placeholder='Nombre de la pieza'/>
-            <input className='inpB' value={budget_income_pieces_year} onChange={(e)=>SetBudgetIncomePiecesYear(e.target.value)} type="text" placeholder='Año de la pieza'/>
-            <input className='inpB' value={budget_income_pieces_ticket_sales} onChange={(e)=>SetBudgetIncomePiecesTicketSales(e.target.value)} type="text" placeholder='Venta de tiquetes'/>
-            <input className='inpB' value={budget_income_pieces_sponsorships} onChange={(e)=>SetBudgetIncomePiecesSponsorships(e.target.value)} type="text" placeholder='Patrocinio'/>
-            <button type='button' onClick={handleSubmit} className='btnIniciarB'>Cargar ingresos</button><br /><br />
-            <p>Total de ingresos</p>
+            <div className='espCreateB'>
+                <label className='labelB'>Nombre de la pieza</label>
+                <input className='inpB' value={budget_income_pieces_name} onChange={(e)=>SetBudgetIncomePiecesName(e.target.value)} type="text" placeholder='Ingrese el nombre'/>
+                <br />
+                <label className='labelB'>Año en curso</label>
+                <input className='inpB' value={budget_income_pieces_year} onChange={(e)=>SetBudgetIncomePiecesYear(e.target.value)} type="text" placeholder='Ingrese el año'/>
+                <br />
+                <label className='labelB'>Venta de tiquetes</label>
+                <input className='inpB' value={budget_income_pieces_ticket_sales} onChange={(e)=>SetBudgetIncomePiecesTicketSales(e.target.value)} type="text" placeholder='Ingrese cantidad'/>
+                <br />
+                <label className='labelB'>Patrocinio</label>
+                <input className='inpB' value={budget_income_pieces_sponsorships} onChange={(e)=>SetBudgetIncomePiecesSponsorships(e.target.value)} type="text" placeholder='Ingrese cantidad'/>
+                <br /><br />
+                <button type='button' onClick={handleSubmit} className='btnIniciarB'>Cargar ingresos</button><br /><br />
+            <p className='totalIncomeB'>Total de ingresos</p>
           </div>
         </div>
     </div>
