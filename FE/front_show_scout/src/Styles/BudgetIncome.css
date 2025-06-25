@@ -1,35 +1,4 @@
-.textCreateB {
-    color: #F24405;
-    font-size: 30px;
-    text-align: center;
-}
-
-.btnIniciarB {
-    background-color: #F24405;
-    border-radius: 20px;
-    cursor: pointer;
-    width: 170px;
-    padding: 5px;
-    transition: all .3s ease-in-out;
-    text-align: center;
-    color: #ffffff;
-}
-
-.btnIniciarB:hover{
-    opacity: .75;
-}
-
-.inpB {
-    text-align: center;
-    width: 180px;
-    margin-left: 120px;
-    font-weight: bold;
-    font-size: 13px;
-    font-family: Arial, Helvetica, sans-serif;
-    border-width: 1px;
-    border-color: #000000;
-    border-style: solid;
-}
+/*
 
 .inpSelectB {
     border-radius: 20px;
@@ -42,51 +11,119 @@
     border-style: solid;
 }
 
+.totalIncomeB {
+    font-size: 20px;
+}
+*/
+
+  /**/
+
+ .espBInc1 {
+    place-content: center;
+    margin-bottom: 1px;
+ } 
+
 .Cabritas {
     width: 300px;
     height: 300px;
+    margin-left: 90px;
 }
 
-.CabraZacIzq {
-    width: 200px;
-    height: 200px;
+.textBInc {
+    color: #F24405;
+    font-size: 30px;
+    text-align: center;
 }
 
 .containerB {
-    display: grid;
-    grid-template-columns: auto auto;
-    background-color: blue;
-    padding: 15px;
-    margin-top: 0px;
+    display: flex;
+    grid-template-columns: 30px;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-top: 50px;
+    margin-bottom: 1px;
+    gap: 1px;
+    height: 500px;
 }
 
-  .containerB > div {
+.containerB > div {
     background-color: #ffffff;
     border: 1px solid #ffffff;
     padding: 1px;
     font-size: 15px;
     text-align: left;
     width: 500px;
-    height: 310px;
+    height: 350px;
     margin-left: 80px;
-    margin-right: auto;
     color: #f24405;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 10px;
 }
 
-.labelB {
-    font-size: 20px;
+.labelBInc {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    text-align: left;
 }
 
-.totalIncomeB {
-    font-size: 20px;
-}
-
-.footer{
+.inpLabBInc{
+    margin-left: 10px;
     text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+}
+
+.tableBInc {
+  background-color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 2px;
+}
+
+tr:nth-child(even) {
+  background-color: #eae9e8;
+}
+
+.tdBInc {
+    font-size: 15px;
+    text-align: left;
+}
+
+.thBInc {
+    font-size: 15px;
+}
+
+.inpBInc {
+    text-align: center;
+    width: 119px;
+    margin-left: 10px;
     font-size: 13px;
-  }
+    font-family: Arial, Helvetica, sans-serif;
+    border-width: 1px;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.btnBInc {
+    background-color: #F24405;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 170px;
+    padding: 5px;
+    transition: all .3s ease-in-out;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btnBInc:hover{
+    opacity: .75;
+}
   
 
 /*Paleta de colores usada*/
