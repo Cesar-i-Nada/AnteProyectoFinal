@@ -80,10 +80,19 @@ class BudgetIncomeData(models.Model):
     budget_income_pieces_year = models.IntegerField(blank=False, null=False)
     
     #adicionales
-    budget_income_pieces_ticket_sales = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_income_pieces_sponsorships = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    budget_income_pieces_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-
+    budget_income_pieces_ticket_quantity = models.IntegerField(blank=False, null=True)
+    budget_income_pieces_ticket_price = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_ticket_subtotal = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_state_subsidies_quantity = models.IntegerField(blank=False, null=True)
+    budget_income_pieces_state_subsidies_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_state_subsidies_subtotal = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_donations_quantity  = models.IntegerField(blank=False, null=True)
+    budget_income_pieces_donations_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_donations_subtotal = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_sponsorships_quantity = models.IntegerField(blank=False, null=True)
+    budget_income_pieces_sponsorships_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_sponsorships_subtotal = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    budget_income_pieces_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
     
 class BudgetExpenseData(models.Model):
     #obligatorios

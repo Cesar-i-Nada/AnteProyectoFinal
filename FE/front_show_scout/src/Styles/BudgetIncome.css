@@ -1,24 +1,5 @@
-/*
 
-.inpSelectB {
-    border-radius: 20px;
-    text-align: center;
-    width: 180px;
-    font-size: 13px;
-    font-family: Arial, Helvetica, sans-serif;
-    border-width: 1px;
-    border-color: #000000;
-    border-style: solid;
-}
-
-.totalIncomeB {
-    font-size: 20px;
-}
-*/
-
-  /**/
-
- .espBInc1 {
+.espBInc1 {
     place-content: center;
     margin-bottom: 1px;
  } 
@@ -30,9 +11,15 @@
 }
 
 .textBInc {
-    color: #F24405;
+    color: #f24405;
     font-size: 30px;
     text-align: center;
+}
+
+.labInpBinc {
+display: grid;
+    gap: 1px;
+    
 }
 
 .containerB {
@@ -55,7 +42,7 @@
     width: 500px;
     height: 350px;
     margin-left: 80px;
-    color: #f24405;
+    color: #8c52ff;
     margin-top: 50px;
     margin-bottom: 10px;
 }
@@ -70,7 +57,7 @@
     margin-left: 10px;
     text-align: center;
     background-color: #ffffff;
-    border: 1px solid #dddddd;
+    border: 1px solid #F24405;
 }
 
 .tableBInc {
@@ -81,7 +68,7 @@
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #ffffff;
   text-align: center;
   padding: 2px;
 }
@@ -110,11 +97,16 @@ tr:nth-child(even) {
     border-style: solid;
 }
 
+.btnsBInc {
+    display: flex;
+    gap: 5px;
+}
+
 .btnBInc {
     background-color: #F24405;
     border-radius: 20px;
     cursor: pointer;
-    width: 170px;
+    width: 150px;
     padding: 5px;
     transition: all .3s ease-in-out;
     text-align: center;
