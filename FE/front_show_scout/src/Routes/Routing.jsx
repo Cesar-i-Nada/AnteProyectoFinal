@@ -32,6 +32,9 @@ function Routing() {
 
                 <Route path="/BudgetIPage" element={<BudgetIPage/>}/>
 
+                <Route path="/BudgetEPage" element={<BudgetEPage/>}/>
+
+
 
                 {/* rutas privadas */}
                 <Route path="/AdminCentral" element={<PrivateRoute topSecret={<AdminCentral/>}/>}/>

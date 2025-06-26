@@ -1,0 +1,134 @@
+
+.espBExp1 {
+    place-content: center;
+    margin-bottom: 1px;
+ } 
+
+.Cabritas {
+    width: 300px;
+    height: 300px;
+    margin-left: 90px;
+}
+
+.textBExp {
+    color: #f24405;
+    font-size: 30px;
+    text-align: center;
+}
+
+.labInpBExp {
+display: grid;
+    gap: 1px;
+    
+}
+
+.containerBExp {
+    display: flex;
+    grid-template-columns: 30px;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-top: 50px;
+    margin-bottom: 1px;
+    gap: 1px;
+    height: 500px;
+}
+
+.containerBExp > div {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 1px;
+    font-size: 15px;
+    text-align: left;
+    width: 500px;
+    height: 350px;
+    margin-left: 80px;
+    color: #8c52ff;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.labelBExp {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    text-align: left;
+}
+
+.inpLabBExp{
+    margin-left: 10px;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #F24405;
+}
+
+.tableBExp {
+  background-color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ffffff;
+  text-align: center;
+  padding: 2px;
+}
+
+tr:nth-child(even) {
+  background-color: #eae9e8;
+}
+
+.tdBExp {
+    font-size: 15px;
+    text-align: left;
+}
+
+.thBExp {
+    font-size: 15px;
+}
+
+.inpBExp {
+    text-align: center;
+    width: 119px;
+    margin-left: 10px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-width: 1px;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.btnsBExp {
+    display: flex;
+    gap: 5px;
+}
+
+.btnBExp {
+    background-color: #F24405;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 150px;
+    padding: 5px;
+    transition: all .3s ease-in-out;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btnBExp:hover{
+    opacity: .75;
+}
+  
+
+/*Paleta de colores usada*/
+
+.color1 {color: #000000;}
+.color2 {color: #ffffff;}
+.color3 {color: #feffdf;}
+.color4 {color: #ffde59;}
+.color5 {color: #ffbd59;}
+.color6 {color: #ff914d;}
+.color7 {color: #f24405;}
+.color8 {color: #ff5757;}
+.color9 {color: #f24405;}
+.color10 {color: #e7191f;}
+.color11 {color: #8c52ff;}
+.color12 {color: #eae9e8;}
