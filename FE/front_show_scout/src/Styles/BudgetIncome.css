@@ -22,7 +22,7 @@ display: grid;
     
 }
 
-.containerB {
+.containerBInc {
     display: flex;
     grid-template-columns: 30px;
     background-color: #ffffff;
@@ -33,7 +33,7 @@ display: grid;
     height: 500px;
 }
 
-.containerB > div {
+.containerBInc > div {
     background-color: #ffffff;
     border: 1px solid #ffffff;
     padding: 1px;

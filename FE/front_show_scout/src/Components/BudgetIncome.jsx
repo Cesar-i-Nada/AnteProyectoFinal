@@ -85,7 +85,7 @@ function CalcBInc() {
 return (
     <div>
 
-        <div className="containerB">
+        <div className="containerBInc">
 
             <div className='espBInc1'>
                 <img className='Cabritas' src="src/assets/img/CabritasClr.gif"/>   

@@ -10,6 +10,7 @@ import ProfileCForm from '../Pages/ProfileCForm';
 import ProfileOForm from '../Pages/ProfileOForm';
 import Boceto2page from '../Pages/Boceto2page';
 import BudgetIPage from '../Pages/BudgetIPage';
+import BudgetEPage from '../Pages/BudgetEPage';
 
 
 import PrivateRoute from './PrivateRoute';
