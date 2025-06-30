@@ -1,18 +1,17 @@
 import { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
-import {
-  Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,
-  TableSortLabel, Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip,
-  FormControlLabel, Switch
-} from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, 
+  TableRow, TableSortLabel, Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip,
+  FormControlLabel, Switch } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import fetchUsers from '../Services/fetchUsers';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import EditIcon from '@mui/icons-material/Edit';
 import '../Styles/Boceto2U.css'
-
+import { Dialog, DialogActions, DialogContent, DialogContentText, 
+  DialogTitle, TextField, Button } from '@mui/material';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
@@ -45,42 +44,42 @@ const headCells = [
 function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort }) {
   const createSortHandler = (property) => (event) => onRequestSort(event, property);
 
-  return (
-    <TableHead>
-      <TableRow className='tableRowUColor'>
-        <TableCell className='tableCellUColor' padding="checkbox">
-          <Checkbox 
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all users' }}
-          />
-        </TableCell >
-        {headCells.map((headCell) => (
-          <TableCell className='tableCellUColor'
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
+return (
+  <TableHead>
+    <TableRow className='tableRowUColor'>
+      <TableCell className='tableCellUColor' padding="checkbox">
+        <Checkbox 
+          color="primary"
+          indeterminate={numSelected > 0 && numSelected < rowCount}
+          checked={rowCount > 0 && numSelected === rowCount}
+          onChange={onSelectAllClick}
+          inputProps={{ 'aria-label': 'select all users' }}
+        />
+      </TableCell >
+      {headCells.map((headCell) => (
+        <TableCell className='tableCellUColor'
+          key={headCell.id}
+          align={headCell.numeric ? 'right' : 'left'}
+          padding={headCell.disablePadding ? 'none' : 'normal'}
+          sortDirection={orderBy === headCell.id ? order : false}
+        >
+          <TableSortLabel
+            active={orderBy === headCell.id}
+            direction={orderBy === headCell.id ? order : 'asc'}
+            onClick={createSortHandler(headCell.id)}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
+            {headCell.label}
+            {orderBy === headCell.id ? (
+              <Box component="span" sx={visuallyHidden}>
+                {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+              </Box>
+            ) : null}
+          </TableSortLabel>
+        </TableCell>
+      ))}
+    </TableRow>
+  </TableHead>
+);
 }
 
 EnhancedTableHead.propTypes = {
@@ -198,7 +197,9 @@ export default function EnhancedTable() {
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [usuarios, setUsuarios] = useState([]);
-  
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     const traeUsuarios = async () => {
@@ -240,23 +241,43 @@ export default function EnhancedTable() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => setPage(newPage);
+  const handleEditClick = (user) => {
+    setSelectedUser(user);
+    setEditDialogOpen(true);
+  };
 
+  const handleDeleteClick = (user) => {
+    setSelectedUser(user);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleEditSave = async (updatedUser) => {
+    try {
+      await fetchUsers.updateUsers(updatedUser.id, updatedUser);
+      setUsuarios((prev) =>
+        prev.map((u) => (u.id === updatedUser.id ? updatedUser : u))
+      );
+      setEditDialogOpen(false);
+    } catch (error) {
+      console.error('Error al actualizar:', error);
+    }
+  };
+
+  const handleDeleteConfirm = async (userId) => {
+    try {
+      await fetchUsers.deleteUsers(userId);
+      setUsuarios((prev) => prev.filter((u) => u.id !== userId));
+      setDeleteDialogOpen(false);
+    } catch (error) {
+      console.error('Error al eliminar:', error);
+    }
+  };
+
+  const handleChangePage = (event, newPage) => setPage(newPage);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const deleteUser = async(id)=>{
-    const peticion = await fetchUsers.deleteUsers(id)
-    console.log(peticion);
-  }
-
-  const updateUser = async(id)=>{
-    const peticion = await fetchUsers.updateUsers(id)
-    console.log(peticion);
-  }
-
   const handleChangeDense = (event) => setDense(event.target.checked);
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - usuarios.length) : 0;
@@ -268,7 +289,6 @@ export default function EnhancedTable() {
   }, [usuarios, order, orderBy, page, rowsPerPage]);
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
-
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -284,15 +304,15 @@ export default function EnhancedTable() {
               onRequestSort={handleRequestSort}
               rowCount={usuarios.length}
             />
-            <TableBody className='tableBodyUColor'>
+            <TableBody className="tableBodyUColor">
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
-                  <TableRow className='tableRowUColor'
+                  <TableRow
+                    className="tableRowUColor"
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
@@ -307,7 +327,9 @@ export default function EnhancedTable() {
                         inputProps={{ 'aria-labelledby': labelId }}
                       />
                     </TableCell>
-                    <TableCell component="th" id={labelId} scope="row" padding="none">{row.username}</TableCell>
+                    <TableCell component="th" id={labelId} scope="row" padding="none">
+                      {row.username}
+                    </TableCell>
                     <TableCell align="right">{row.user_first_name}</TableCell>
                     <TableCell align="right">{row.user_last_name}</TableCell>
                     <TableCell align="right">{row.user_email}</TableCell>
@@ -318,24 +340,24 @@ export default function EnhancedTable() {
                     <TableCell align="right">{row.user_type_profile}</TableCell>
                     <TableCell align="right">{row.user_website}</TableCell>
                     <TableCell align="right">{row.user_social_media}</TableCell>
-  
-                    <TableCell align='center' colspan="2">{row.actions}
-                      
-                        <TableCell align="right">
-                        <button onClick={()=>deleteUser(row.id)}>Eliminar</button>
-                        </TableCell>
-
-                        <TableCell align="right">
-                        <button onClick={()=>updateUser(row.id)}>Actualizar</button>
-                        </TableCell>
-                      
+                    <TableCell align="center" colSpan={2}>
+                      <Tooltip title="Editar">
+                        <IconButton onClick={() => handleEditClick(row)}>
+                          <EditIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Eliminar">
+                        <IconButton onClick={() => handleDeleteClick(row)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
                     </TableCell>
                   </TableRow>
                 );
               })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={1} />
+                  <TableCell colSpan={12} />
                 </TableRow>
               )}
             </TableBody>
@@ -355,7 +377,22 @@ export default function EnhancedTable() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Compactar"
       />
+
+      <EditUserDialog
+        open={editDialogOpen}
+        user={selectedUser}
+        onClose={() => setEditDialogOpen(false)}
+        onSave={handleEditSave}
+      />
+
+      <ConfirmDeleteDialog
+        open={deleteDialogOpen}
+        user={selectedUser}
+        onClose={() => setDeleteDialogOpen(false)}
+        onConfirm={handleDeleteConfirm}
+      />
     </Box>
   );
 }
+
 
