@@ -12,7 +12,6 @@ import Boceto2page from '../Pages/Boceto2page';
 import BudgetIPage from '../Pages/BudgetIPage';
 import BudgetEPage from '../Pages/BudgetEPage';
 
-
 import PrivateRoute from './PrivateRoute';
 
 function Routing() {
@@ -34,6 +33,8 @@ function Routing() {
                 <Route path="/BudgetIPage" element={<BudgetIPage/>}/>
 
                 <Route path="/BudgetEPage" element={<BudgetEPage/>}/>
+
+
 
 
 

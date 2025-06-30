@@ -80,6 +80,26 @@
     margin-left: 5px;
   }
 
+  /* Submenú estilo cascada */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-content-submenu {
+  display: none;
+  position: absolute;
+  left: 120px; /* cascada a la derecha */
+  top: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+  color: #ffffff;
+}
+
+.dropdown-submenu:hover .dropdown-content-submenu {
+  display: block;
+}
+
 /*Paleta de colores usada*/
 
 .color1 {color: #000000;}
