@@ -10,6 +10,7 @@ import ProfileCForm from '../Pages/ProfileCForm';
 import ProfileOForm from '../Pages/ProfileOForm';
 import UsersManagementPage from '../Pages/UsersManagementPage';
 import OrganizationsManagementPage from '../Pages/OrganizationsManagementPage';
+import CompaniesManagementPage from '../Pages/CompaniesManagementPage';
 import BudgetIPage from '../Pages/BudgetIPage';
 import BudgetEPage from '../Pages/BudgetEPage';
 import AboutUsPage from '../Pages/AboutUsPage';
@@ -30,6 +31,8 @@ function Routing() {
 
                 <Route path="/UsersManagementPage" element={<UsersManagementPage/>}/>
                 <Route path="/OrganizationsManagementPage" element={<OrganizationsManagementPage/>}/>
+                <Route path="/CompaniesManagementPage" element={<CompaniesManagementPage/>}/>
+
 
 
                 <Route path="/ProfileUForm" element={<ProfileUForm/>}/>
