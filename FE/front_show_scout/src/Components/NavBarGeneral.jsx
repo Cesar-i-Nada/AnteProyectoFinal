@@ -19,9 +19,9 @@ function Welcome() {
               <i className="fa fa-caret-down"></i>
             </button>
             <div className="dropdown-content">
-              <Link to={"/ProfileACreated"}>Intérprete</Link>
-              <Link to={"/ProfileCCreated"}>Compañía</Link>
-              <Link to={"/ProfileOCreated"}>Organización</Link>
+              <Link to={"/CreateProfileU"}>Intérprete</Link>
+              <Link to={"/CreateProfileC"}>Compañía</Link>
+              <Link to={"/CreateProfileO"}>Organización</Link>
             </div>
           </div>
 
