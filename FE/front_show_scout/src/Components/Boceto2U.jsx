@@ -55,7 +55,7 @@ return (
           onChange={onSelectAllClick}
           inputProps={{ 'aria-label': 'select all users' }}
         />
-      </TableCell >
+      </TableCell >      
       {headCells.map((headCell) => (
         <TableCell className='tableCellUColor'
           key={headCell.id}
@@ -195,7 +195,7 @@ export default function EnhancedTable() {
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [registrosPorPagina, setRegistrosPorPagina] = useState(5);
   const [usuarios, setUsuarios] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -274,19 +274,19 @@ export default function EnhancedTable() {
   };
 
   const handleChangePage = (event, newPage) => setPage(newPage);
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+  const handleChangeRegistrosPorPagina = (event) => {
+    setRegistrosPorPagina(parseInt(event.target.value, 10));
     setPage(0);
   };
   const handleChangeDense = (event) => setDense(event.target.checked);
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - usuarios.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * registrosPorPagina - usuarios.length) : 0;
 
   const visibleRows = useMemo(() => {
     return [...usuarios]
       .sort(getComparator(order, orderBy))
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }, [usuarios, order, orderBy, page, rowsPerPage]);
+      .slice(page * registrosPorPagina, page * registrosPorPagina + registrosPorPagina);
+  }, [usuarios, order, orderBy, page, registrosPorPagina]);
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
@@ -364,13 +364,13 @@ export default function EnhancedTable() {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          registrosPorPaginaOptions={[5, 10, 25]}
           component="div"
           count={usuarios.length}
-          rowsPerPage={rowsPerPage}
+          registrosPorPagina={registrosPorPagina}
           page={page}
           onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+          onRegistrosPorPaginaChange={handleChangeRegistrosPorPagina}
         />
       </Paper>
       <FormControlLabel

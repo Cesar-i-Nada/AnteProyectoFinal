@@ -11,6 +11,7 @@ import ProfileOForm from '../Pages/ProfileOForm';
 import Boceto2page from '../Pages/Boceto2page';
 import BudgetIPage from '../Pages/BudgetIPage';
 import BudgetEPage from '../Pages/BudgetEPage';
+import AboutUsPage from '../Pages/AboutUsPage';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -34,7 +35,7 @@ function Routing() {
 
                 <Route path="/BudgetEPage" element={<BudgetEPage/>}/>
 
-
+                <Route path="/AboutUsPage" element={<AboutUsPage/>}/>
 
 
 
