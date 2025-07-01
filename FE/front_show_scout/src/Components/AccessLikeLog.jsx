@@ -10,7 +10,7 @@ function AccessLikeLog() {
 
       <h3 className='tituloAccessLikeLog'>Ingresar como</h3><br />
 
-      <p className='titleSelectCat'>Seleccione la categoría con la que deseas trabajar </p><br />
+      <p className='titleSelectCatL'>Seleccione la categoría con la que deseas trabajar </p><br />
 
         <div className="flex-container">
           <div>

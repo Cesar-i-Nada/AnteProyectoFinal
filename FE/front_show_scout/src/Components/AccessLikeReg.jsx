@@ -10,7 +10,7 @@ function AccessLikeReg() {
 
       <h3 className='tituloAccessLikeReg'>Ingresar como</h3><br />
 
-      <p className='titleSelectCat'>Seleccione la categoría con la que desea ingresar</p><br />
+      <p className='titleSelectCatR'>Seleccione la categoría con la que desea ingresar</p><br />
 
         <div className="flex-container">
           <div>

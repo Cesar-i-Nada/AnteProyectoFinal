@@ -12,18 +12,18 @@
     bottom: 220px;
 }
 
-.titleSelectCat {
+.titleSelectCatR {
     display: flex;
     justify-items: center;
     color: #8c52ff;
 }
 
-.flex-container {
+.flex-containerR {
   display: flex;
   justify-content: center;
   background-color: #ffffff;
 }
-.flex-container > div {
+.flex-containerR > div {
   background-color: #f1f1f1;
   width: 300px;
   height: 300px;
