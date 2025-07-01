@@ -8,7 +8,7 @@ import AccessLikeL from '../Pages/AccessLikeL';
 import ProfileUForm from '../Pages/ProfileUForm';
 import ProfileCForm from '../Pages/ProfileCForm';
 import ProfileOForm from '../Pages/ProfileOForm';
-import Boceto2page from '../Pages/Boceto2page';
+import UsersManagementPage from '../Pages/UsersManagementPage';
 import BudgetIPage from '../Pages/BudgetIPage';
 import BudgetEPage from '../Pages/BudgetEPage';
 import AboutUsPage from '../Pages/AboutUsPage';
@@ -27,7 +27,7 @@ function Routing() {
                 <Route path="/Register" element={<Register/>}/>
                 <Route path="/AdminCentral" element={<AdminCentral/>}/>
 
-                <Route path="/Boceto2page" element={<Boceto2page/>}/>
+                <Route path="/UsersManagementPage" element={<UsersManagementPage/>}/>
 
                 <Route path="/ProfileUForm" element={<ProfileUForm/>}/>
 

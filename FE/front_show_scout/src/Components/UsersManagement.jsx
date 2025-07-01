@@ -1,136 +1,397 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { alpha } from '@mui/material/styles';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, 
+  TableRow, TableSortLabel, Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip,
+  FormControlLabel, Switch } from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
+import fetchUsers from '../Services/fetchUsers';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import EditIcon from '@mui/icons-material/Edit';
 import '../Styles/UsersManagement.css'
-import fetchUsers from '../Services/fetchUsers'
+import { Dialog, DialogActions, DialogContent, DialogContentText, 
+  DialogTitle, TextField, Button } from '@mui/material';
 
-function AdminUsers() {
-  const [username, SetUsername] = useState("")
-  const [user_first_name, SetUserFirstName] = useState("")
-  const [user_last_name, SetUserLastName] = useState("")
-  const [user_email, SetUserEmail] = useState("")
-  const [user_age, SetUserAge] = useState(0)
-  const [user_phone, SetUserPhone] = useState("")
-  const [user_country, SetUserCountry] = useState("")
-  const [user_address, SetUserAddress] = useState("")
-  const [user_type_profile, SetUserTypeProfile] = useState("")
-  const [user_website, SetUserWebsite] = useState("")
-  const [user_social_media, SetUserSocialMedia] = useState("")
-  const [users, SetUsers] = useState([])
-  const [mostrar,setMostrar]=useState(false)
-  const [recarga,setRecarga] = useState(false)
-
-  useEffect (() => {
-    async function fetchDataUsers() {
-      const datos = await fetchUsers.getUsers()
-      SetUsers(datos)
-    };
-
-    fetchDataUsers();
-  }, [recarga]
-)
-
-function eliminar(id) {
-  fetchUsers.deleteUsers(id)
-  setRecarga(!recarga)
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) return -1;
+  if (b[orderBy] > a[orderBy]) return 1;
+  return 0;
 }
 
-async function editar(id) {
-   const objetoEditar= {
-    username:username,
-    user_first_name:user_first_name,
-    user_last_name:user_last_name,
-    user_email:user_email,
-    user_age:user_age,
-    user_phone:user_phone,
-    user_country:user_country,
-    user_address:user_address,
-    user_type_profile:user_type_profile,
-    user_website:user_website,
-    user_social_media:user_social_media,
-   }
-   
-  const peticion =await fetchUsers.updateUsers(objetoEditar,id)
-   console.log(peticion);
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
 }
+
+const headCells = [
+  { id: 'username', numeric: false, disablePadding: true, label: 'Alias' },
+  { id: 'user_first_name', numeric: true, disablePadding: false, label: 'Nombre' },
+  { id: 'user_last_name', numeric: true, disablePadding: false, label: 'Apellido' },
+  { id: 'user_email', numeric: true, disablePadding: false, label: 'Correo' },
+  { id: 'user_age', numeric: true, disablePadding: false, label: 'Edad' },
+  { id: 'user_phone', numeric: true, disablePadding: false, label: 'Teléfono' },
+  { id: 'user_country', numeric: true, disablePadding: false, label: 'País' },
+  { id: 'user_address', numeric: true, disablePadding: false, label: 'Dirección' },
+  { id: 'user_type_profile', numeric: true, disablePadding: false, label: 'Categoría' },
+  { id: 'user_website', numeric: true, disablePadding: false, label: 'Sitio oficial' },
+  { id: 'user_social_media', numeric: true, disablePadding: false, label: 'Redes sociales' },
+  { id: 'actions', numeric: true, disablePadding: false, label: 'Acciones', colSpan: 2 },
+
+];
+
+function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort }) {
+  const createSortHandler = (property) => (event) => onRequestSort(event, property);
+
+return (
+  <TableHead>
+    <TableRow className='tableRowUColor'>
+      <TableCell className='tableCellUColor' padding="checkbox">
+        <Checkbox 
+          color="primary"
+          indeterminate={numSelected > 0 && numSelected < rowCount}
+          checked={rowCount > 0 && numSelected === rowCount}
+          onChange={onSelectAllClick}
+          inputProps={{ 'aria-label': 'select all users' }}
+        />
+      </TableCell >      
+      {headCells.map((headCell) => (
+        <TableCell className='tableCellUColor'
+          key={headCell.id}
+          align={headCell.numeric ? 'right' : 'left'}
+          padding={headCell.disablePadding ? 'none' : 'normal'}
+          sortDirection={orderBy === headCell.id ? order : false}
+        >
+          <TableSortLabel
+            active={orderBy === headCell.id}
+            direction={orderBy === headCell.id ? order : 'asc'}
+            onClick={createSortHandler(headCell.id)}
+          >
+            {headCell.label}
+            {orderBy === headCell.id ? (
+              <Box component="span" sx={visuallyHidden}>
+                {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+              </Box>
+            ) : null}
+          </TableSortLabel>
+        </TableCell>
+      ))}
+    </TableRow>
+  </TableHead>
+);
+}
+
+EnhancedTableHead.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
+};
+
+function EnhancedTableToolbar({ numSelected }) {
+  return (
+    <Toolbar className='toolUColor' sx={{
+      pl: { sm: 2 }, pr: { xs: 1, sm: 1 },
+      ...(numSelected > 0 && {
+        bgcolor: (theme) =>
+          alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+      }),
+    }}>
+      {numSelected > 0 ? (
+        <Typography className='typoUColor' sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
+          {numSelected} seleccionados
+        </Typography>
+      ) : (
+        <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
+          Gestión de usuarios
+        </Typography>
+      )}
+      
+    </Toolbar>
+  );
+}
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+};
+
+export function EditUserDialog({ open, user, onClose, onSave }) {
+  const [formData, setFormData] = useState(user || {});
+
+  useEffect(() => {
+    setFormData(user || {});
+  }, [user]);
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSave = () => onSave(formData);
 
   return (
-    
-    <div>
-      <div>
-        <ul className='buscador'>
-          <p className='tituloUsers'>REGISTROS Y DATOS DE USUARIOS</p><br />
-            
-            {users.map((users,index) =>(
-              <li key = {index}>
-                <tableContainer>
-                  <table className='usersTable'>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Alias{users.username}</TableCell>
-                        <TableCell>Nombre{users.user_first_name}</TableCell>
-                        <TableCell>Apellido{users.user_last_name}</TableCell>
-                        <TableCell>Correo{users.user_email}</TableCell>
-                        <TableCell>Edad{users.user_age}</TableCell>
-                        <TableCell>Teléfono{users.user_phone}</TableCell>
-                        <TableCell>País{users.user_country}</TableCell>
-                        <TableCell>Dirección{users.user_address}</TableCell>
-                        <TableCell>Categoría{users.user_type_profile}</TableCell>
-                        <TableCell>Sitio Web{users.user_website}</TableCell>
-                        <TableCell>Redes Sociales{users.user_social_media}</TableCell>
-                      </TableRow>
-                   </TableHead>
-                   
-                   <TableBody>
-                    {users.map(celda=>(
-                      <TableRoW>
-                        <TableCell>{celda.alias}</TableCell>
-                        <TableCell>{celda.nombre}</TableCell>
-                        <TableCell>{celda.apellido}</TableCell>
-                        <TableCell>{celda.correo}</TableCell>
-                        <TableCell>{celda.edad}</TableCell>
-                        <TableCell>{celda.telefono}</TableCell>
-                        <TableCell>{celda.pais}</TableCell>
-                        <TableCell>{celda.direccion}</TableCell>
-                        <TableCell>{celda.categoria}</TableCell>
-                        <TableCell>{celda.sitio}</TableCell>
-                        <TableCell>{celda.redes}</TableCell>
-                      </TableRoW>
-                    ))}
-                   </TableBody>
-                  </table>
-                </tableContainer>  
-                       
-            <div>
-              <button className='filtrador' onClick={()=>{
-                setMostrar(!mostrar)
-                localStorage.setItem("idUsuario",users.id)
-              }
-                }>Editar</button>
-                  <button className='filtrador' onClick={()=>eliminar(users.id)
-                  
-                }>Eliminar</button> </div><hr />
-              </li>
-            ))}
-          </ul>
-            {mostrar && (
-              <>
-              <input  onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='alias'/>
-              <input  onChange={(e)=>SetUserFirstName(e.target.value)} type="text" placeholder='nombre'/>
-              <input  onChange={(e)=>SetUserLastName(e.target.value)} type="text" placeholder='apellido'/>
-              <input  onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='correo'/>
-              <input  onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='edad'/>
-              <input  onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='telefono'/>
-              <input  onChange={(e)=>SetUserCountry(e.target.value)} type="text" placeholder='país'/>
-              <input  onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='dirección'/>
-              <input  onChange={(e)=>SetUserTypeProfile(e.target.value)} type="text" placeholder='tipo perfil'/>
-              <input  onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='sitioWeb'/>
-              <input  onChange={(e)=>SetUserSocialMedia(e.target.value)} type="text" placeholder='redesSociales'/>
-              <button className='filtrador' onClick={()=>editar(localStorage.getItem("idUsuario"))}>Confirmar edición</button>
-              </>
-          )
-        }
-      </div>
-    </div>
-  )
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+      <DialogTitle>Editar usuario</DialogTitle>
+      <DialogContent>
+        {Object.entries(formData).map(([key, value]) => (
+          typeof value === 'string' || typeof value === 'number' ? (
+            <TextField
+              key={key}
+              margin="dense"
+              name={key}
+              label={key.replace(/_/g, ' ')}
+              fullWidth
+              value={value}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          ) : null
+        ))}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose}>Cancelar</Button>
+        <Button onClick={handleSave} variant="contained">Guardar</Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
 
-export default AdminUsers
+EditUserDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+};
+
+export function ConfirmDeleteDialog({ open, user, onClose, onConfirm }) {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Eliminar usuario</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          ¿Estás seguro de que deseas eliminar al usuario <strong>{user?.username}</strong>?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose}>Cancelar</Button>
+        <Button onClick={() => onConfirm(user?.id)} variant="contained" color="error">
+          Eliminar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
+ConfirmDeleteDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+};
+
+export default function EnhancedTable() {
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('username');
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(false);
+  const [registrosPorPagina, setRegistrosPorPagina] = useState(5);
+  const [usuarios, setUsuarios] = useState([]);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  useEffect(() => {
+    const traeUsuarios = async () => {
+      try {
+        const data = await fetchUsers.getUsers();
+        setUsuarios(data);
+      } catch (error) {
+        console.error('Error al cargar usuarios:', error);
+      }
+    };
+    traeUsuarios();
+  }, []);
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelected = usuarios.map((n) => n.id);
+      setSelected(newSelected);
+    } else {
+      setSelected([]);
+    }
+  };
+
+  const handleClick = (event, id) => {
+    const selectedIndex = selected.indexOf(id);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = [...selected, id];
+    } else {
+      newSelected = selected.filter((item) => item !== id);
+    }
+
+    setSelected(newSelected);
+  };
+
+  const handleEditClick = (user) => {
+    setSelectedUser(user);
+    setEditDialogOpen(true);
+  };
+
+  const handleDeleteClick = (user) => {
+    setSelectedUser(user);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleEditSave = async (updatedUser) => {
+    try {
+      await fetchUsers.updateUsers(updatedUser.id, updatedUser);
+      setUsuarios((prev) =>
+        prev.map((u) => (u.id === updatedUser.id ? updatedUser : u))
+      );
+      setEditDialogOpen(false);
+    } catch (error) {
+      console.error('Error al actualizar:', error);
+    }
+  };
+
+  const handleDeleteConfirm = async (userId) => {
+    try {
+      await fetchUsers.deleteUsers(userId);
+      setUsuarios((prev) => prev.filter((u) => u.id !== userId));
+      setDeleteDialogOpen(false);
+    } catch (error) {
+      console.error('Error al eliminar:', error);
+    }
+  };
+
+  const handleChangePage = (event, newPage) => setPage(newPage);
+  const handleChangeRegistrosPorPagina = (event) => {
+    setRegistrosPorPagina(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+  const handleChangeDense = (event) => setDense(event.target.checked);
+
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * registrosPorPagina - usuarios.length) : 0;
+
+  const visibleRows = useMemo(() => {
+    return [...usuarios]
+      .sort(getComparator(order, orderBy))
+      .slice(page * registrosPorPagina, page * registrosPorPagina + registrosPorPagina);
+  }, [usuarios, order, orderBy, page, registrosPorPagina]);
+
+  const isSelected = (id) => selected.indexOf(id) !== -1;
+
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
+        <EnhancedTableToolbar numSelected={selected.length} />
+        <TableContainer>
+          <Table sx={{ minWidth: 750 }} size={dense ? 'small' : 'medium'}>
+            <EnhancedTableHead
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={usuarios.length}
+            />
+            <TableBody className="tableBodyUColor">
+              {visibleRows.map((row, index) => {
+                const isItemSelected = isSelected(row.id);
+                const labelId = `enhanced-table-checkbox-${index}`;
+
+                return (
+                  <TableRow
+                    className="tableRowUColor"
+                    hover
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={row.id}
+                    selected={isItemSelected}
+                    sx={{ cursor: 'pointer' }}
+                  >
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        color="primary"
+                        checked={isItemSelected}
+                        onChange={(event) => handleClick(event, row.id)}
+                        inputProps={{ 'aria-labelledby': labelId }}
+                      />
+                    </TableCell>
+                    <TableCell component="th" id={labelId} scope="row" padding="none">
+                      {row.username}
+                    </TableCell>
+                    <TableCell align="right">{row.user_first_name}</TableCell>
+                    <TableCell align="right">{row.user_last_name}</TableCell>
+                    <TableCell align="right">{row.user_email}</TableCell>
+                    <TableCell align="right">{row.user_age}</TableCell>
+                    <TableCell align="right">{row.user_phone}</TableCell>
+                    <TableCell align="right">{row.user_country}</TableCell>
+                    <TableCell align="right">{row.user_address}</TableCell>
+                    <TableCell align="right">{row.user_type_profile}</TableCell>
+                    <TableCell align="right">{row.user_website}</TableCell>
+                    <TableCell align="right">{row.user_social_media}</TableCell>
+                    <TableCell align="center" colSpan={2}>
+                      <Tooltip title="Editar">
+                        <IconButton onClick={() => handleEditClick(row)}>
+                          <EditIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Eliminar">
+                        <IconButton onClick={() => handleDeleteClick(row)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableCell colSpan={12} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          registrosPorPaginaOptions={[5, 10, 25]}
+          component="div"
+          count={usuarios.length}
+          registrosPorPagina={registrosPorPagina}
+          page={page}
+          onPageChange={handleChangePage}
+          onRegistrosPorPaginaChange={handleChangeRegistrosPorPagina}
+        />
+      </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Compactar"
+      />
+
+      <EditUserDialog
+        open={editDialogOpen}
+        user={selectedUser}
+        onClose={() => setEditDialogOpen(false)}
+        onSave={handleEditSave}
+      />
+
+      <ConfirmDeleteDialog
+        open={deleteDialogOpen}
+        user={selectedUser}
+        onClose={() => setDeleteDialogOpen(false)}
+        onConfirm={handleDeleteConfirm}
+      />
+    </Box>
+  );
+}

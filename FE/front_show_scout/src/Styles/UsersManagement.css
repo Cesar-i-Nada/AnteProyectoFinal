@@ -1,28 +1,25 @@
-.tituloUsers {
-    font-size: 50px;
-    color: #8c52ff;
-    padding-top: 110px;
-    text-align: center;
+.toolUColor {
+    background-color: #8c52ff;
 }
 
-.usersTable {
-    color: #e7191f;
-    text-align: center;
+.tableCellUColor {
+    background-color: #ff914d;
 }
 
-.buscador {
-    font-size: 20px;
+.typoUColor {
+    background-color: #ffbd59;
 }
 
-.filtrador {
-    background-color: #F24405;
-    border-radius: 20px;
-    cursor: pointer;
-    width: 100px;
-    padding: 5px;
-    transition: all .3s ease-in-out;
-    text-align: center;
-    color: #ffffff;
+.tableRowUColor {
+    background-color: #eae9e8;
+}
+
+.tableCellUColor {
+    background-color: #ff914d;
+}
+
+.tableBodyUColor {
+    background-color: #8c52ff;
 }
 
 /*Paleta de colores usada*/
@@ -38,3 +35,4 @@
 .color9 {color: #f24405;}
 .color10 {color: #e7191f;}
 .color11 {color: #8c52ff;}
+.color12 {color: #eae9e8;}
