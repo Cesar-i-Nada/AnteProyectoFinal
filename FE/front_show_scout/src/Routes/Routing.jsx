@@ -10,7 +10,8 @@ import ProfileCForm from '../Pages/ProfileCForm';
 import ProfileOForm from '../Pages/ProfileOForm';
 import UsersManagementPage from '../Pages/UsersManagementPage';
 import OrganizationsManagementPage from '../Pages/OrganizationsManagementPage';
-import CompaniesManagementPage from '../Pages/CompaniesManagementPage';
+import CompaniesManagementPage from '../Pages/CompaniesManagement';
+
 import BudgetIPage from '../Pages/BudgetIPage';
 import BudgetEPage from '../Pages/BudgetEPage';
 import AboutUsPage from '../Pages/AboutUsPage';
@@ -43,12 +44,16 @@ function Routing() {
 
                 <Route path="/AboutUsPage" element={<AboutUsPage/>}/>
 
+                <Route path="/AccessLikeR" element={<AccessLikeR />} />
+
+                <Route path="/AccessLikeL" element={<AccessLikeL />} />
+
 
 
                 {/* rutas privadas */}
                 <Route path="/AdminCentral" element={<PrivateRoute topSecret={<AdminCentral/>}/>}/>
-                <Route path="/AccessLikeR" element={<PrivateRoute topSecret={<AccessLikeR/>}/>}/>
-                <Route path="/AccessLikeL" element={<PrivateRoute topSecret={<AccessLikeL/>}/>}/>
+                {/*<Route path="/AccessLikeR" element={<PrivateRoute topSecret={<AccessLikeR/>}/>}/>
+                <Route path="/AccessLikeL" element={<PrivateRoute topSecret={<AccessLikeL/>}/>}/>*/}
                 <Route path="/ProfileCForm" element={<PrivateRoute topSecret={<ProfileCForm/>}/>}/>
                 <Route path="/ProfileOForm" element={<PrivateRoute topSecret={<ProfileOForm/>}/>}/>
 

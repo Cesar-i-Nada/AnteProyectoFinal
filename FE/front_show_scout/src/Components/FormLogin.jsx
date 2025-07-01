@@ -26,8 +26,8 @@ function FormLogin() {
 
 function Start() { 
 
-    const registered = users.filter(user => user.username === username && user.userPassword === user_password)
-    
+    const registered = users.filter(user => user.username === username && user.user_password === user_password)
+
     console.log(registered);
     
     if (registered.length === 0) {
@@ -100,3 +100,31 @@ return (
   };
   
 export default FormLogin
+
+
+
+function Start() { 
+  const registered = users.filter(user => 
+    user.username === username && user.user_password === user_password
+  );
+
+  console.log(registered);
+
+  if (registered.length === 0) {
+    console.log('Usuario no registrado');
+    alert('Alias o contraseña incorrecta');
+    return;
+  }
+
+  const usuarioEncontrado = registered[0]; 
+
+  localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));
+
+  if (usuarioEncontrado.perfilCreado) {
+    console.log('El usuario está registrado, puede ingresar');
+    navigate('/AccessLikeL'); // ✅ Redirección a AccessLikeL
+  } else {
+    console.log('El usuario aún no ha creado un perfil');  
+    navigate('/Register');
+  }
+}
