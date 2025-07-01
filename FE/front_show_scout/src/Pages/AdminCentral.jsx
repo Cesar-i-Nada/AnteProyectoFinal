@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SidebarAdmin from '../Components/SidebarAdmin'
-import Boceto2U from '../Components/Boceto2U'
+import UsersManagement from '../Components/UsersManagement'
 import CompaniesManagement from '../Components/CompaniesManagement'
 import OrganizationsManagement from '../Components/OrganizationsManagement'
 
@@ -27,7 +27,7 @@ function AdminCentral() {
     <div>
         <SidebarAdmin mostrarUsuarios={mostrarTablaDUsuarios} showCompanies={showCompaniesTable} showOrganizations={showOrganizationsTable}/>
         {datosUsuarios &&
-          <Boceto2U />
+          <UsersManagement />
         }
 
         {companiesData &&

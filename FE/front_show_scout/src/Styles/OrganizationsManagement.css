@@ -1,3 +1,27 @@
+.toolOColor {
+    background-color: #8c52ff;
+}
+
+.tableCellOColor {
+    background-color: #ff914d;
+}
+
+.typoOColor {
+    background-color: #ffbd59;
+}
+
+.tableRowOColor {
+    background-color: #eae9e8;
+}
+
+.tableCellOColor {
+    background-color: #ff914d;
+}
+
+.tableBodyOColor {
+    background-color: #8c52ff;
+}
+
 /*Paleta de colores usada*/
 
 .color1 {color: #000000;}
@@ -11,3 +35,4 @@
 .color9 {color: #f24405;}
 .color10 {color: #e7191f;}
 .color11 {color: #8c52ff;}
+.color12 {color: #eae9e8;}
