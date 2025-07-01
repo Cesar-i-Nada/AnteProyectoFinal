@@ -2,10 +2,6 @@
     justify-items: center;
 }
 
-.tituloAccessLikeLog {
-    color: #8c52ff;
-}
-
 .abcL{
     border: none;
     background: transparent;
@@ -14,9 +10,9 @@
 }
 
 .titleSelectCatL {
-    display: flex;
-    justify-items: center;
     color: #8c52ff;
+    font-size: 30px;
+    justify-items: center;
 }
 
 .flex-containerL {
@@ -26,7 +22,7 @@
 }
 
 .flex-containerL > div {
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   width: 300px;
   height: 300px;
   margin: 50px;

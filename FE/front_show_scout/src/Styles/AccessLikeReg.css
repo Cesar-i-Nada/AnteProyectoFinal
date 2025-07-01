@@ -2,9 +2,6 @@
     justify-items: center;
 }
 
-.tituloAccessLikeReg {
-    color: #8c52ff;
-}
 .abcR{
     border: none;
     background: transparent;
@@ -13,9 +10,9 @@
 }
 
 .titleSelectCatR {
-    display: flex;
-    justify-items: center;
     color: #8c52ff;
+    font-size: 30px;
+    justify-items: center;
 }
 
 .flex-containerR {

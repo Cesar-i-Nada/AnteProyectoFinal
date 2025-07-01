@@ -6,32 +6,32 @@ import { Link } from 'react-router-dom'
 function AccessLikeLog() {
   
   return (
-    <div className='cajaAccessLikeLog'>
+    <div>
+    
+      <div className='titleSelectCatL'>
+        <p>Seleccione la categoría con la que deseas trabajar </p>
+      </div>
 
-      <h3 className='tituloAccessLikeLog'>Ingresar como</h3><br />
+      <div className='cajaAccessLikeLog'>
+          <div className="flex-containerL">
+            <div>
+              <img src="src/assets/img/catUser.png" alt="Categoría de usuario" width={300} height={300}/>
+              <button className='abcL'><Link to="#" className="myButtonL">Usuario</Link></button>
+            </div><br />
 
-      <p className='titleSelectCatL'>Seleccione la categoría con la que deseas trabajar </p><br />
-
-        <div className="flex-container">
-          <div>
-            <img src="src/assets/img/catUser.png" alt="Categoría de usuario" width={300} height={300}/>
-            <button className='abcL'><Link to="#" className="myButtonL">Usuario</Link></button>
-          </div><br />
-
-          <div>
-            <img src="src/assets/img/catComp.png" alt="Categoría de compañía" width={300} height={300}/>
-            <button className='abcL'><Link to ="#" className="myButtonL">Compañía</Link></button>
-          </div><br />
-          
-          <div>
-            <img src="src/assets/img/catOrg.png" alt="Categoría de Organización" width={300} height={300}/>
-            <button  className='abcL'><Link to ="#" className="myButtonL">Organización</Link></button>
+            <div>
+              <img src="src/assets/img/catComp.png" alt="Categoría de compañía" width={300} height={300}/>
+              <button className='abcL'><Link to ="#" className="myButtonL">Compañía</Link></button>
+            </div><br />
+            
+            <div>
+              <img src="src/assets/img/catOrg.png" alt="Categoría de Organización" width={300} height={300}/>
+              <button  className='abcL'><Link to ="#" className="myButtonL">Organización</Link></button>
+            </div>
+            
           </div>
-          
-        </div>
-        
+      </div>
     </div>
-
   )
 }
 
