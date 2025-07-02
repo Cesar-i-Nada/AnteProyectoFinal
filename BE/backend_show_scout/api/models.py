@@ -31,7 +31,9 @@ class CompanyData(models.Model):
     company_address = models.CharField(max_length=200, blank=False, null=False)
     company_type_profile = models.CharField(max_length=50, blank=False, null=False)
     company_website = models.CharField(max_length=200, blank=False, null=False)
-    company_social_media = models.CharField(max_length=200, blank=False, null=False) 
+    company_social_media = models.CharField(max_length=200, blank=False, null=False)
+    company_image = models.ImageField(upload_to='company_images/', null=True, blank=True)
+ 
     
 class OrganizationData(models.Model):
     #obligatorios
@@ -47,7 +49,8 @@ class OrganizationData(models.Model):
     organization_type_profile = models.CharField(max_length=50, blank=False, null=False)
     organization_website = models.CharField(max_length=200, blank=False, null=False)
     organization_social_media = models.CharField(max_length=200, blank=False, null=False)
-    
+    organization_image = models.ImageField(upload_to='organization_images/', null=True, blank=True)
+
 class UserCompanyData(models.Model):
     user_data = models.ForeignKey(UserData, on_delete=models.CASCADE, blank=False, null=False)
     company_data = models.ForeignKey(CompanyData, on_delete=models.CASCADE, blank=False, null=False)

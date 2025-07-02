@@ -3,7 +3,6 @@ from django.contrib import admin
 from .views import UserDataListCreateView, UserDataDetailView,CompanyDataListCreateView, CompanyDataDetailView, OrganizationDataListCreateView, OrganizationDataDetailView, UserCompanyDataListCreateView,UserCompanyDataDetailView,UserOrganizationDataListCreateView, UserOrganizationDataDetailView,LoginViewSet, PiecesDataListCreateView, PiecesDataDetailView, BudgetIncomeDataListCreateView, BudgetIncomeDataDetailView, BudgetExpenseDataListCreateView, BudgetExpenseDataDetailView
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
 from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path("validar-usuario/", LoginViewSet.as_view()),
@@ -26,8 +25,7 @@ urlpatterns = [
     
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 
   

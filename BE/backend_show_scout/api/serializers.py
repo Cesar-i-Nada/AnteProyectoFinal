@@ -24,11 +24,6 @@ class UserDataSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("La imagen no es válida.")
 
         return image
-
-class UserDataSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserData
-        fields = '__all__'
          
 class CompanyDataSerializer(serializers.ModelSerializer):
     class Meta:
