@@ -1,5 +1,29 @@
 from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData, PiecesData, BudgetIncomeData, BudgetExpenseData
 from rest_framework import serializers
+from PIL import Image
+import io
+
+class UserDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserData
+        fields = '__all__'
+
+    def validate_user_image(self, image):
+        valid_mime_types = ['image/jpeg', 'image/png', 'image/jpg']
+        if hasattr(image, 'content_type') and image.content_type not in valid_mime_types:
+            raise serializers.ValidationError("Formato de imagen no válido. Solo se permite JPG y PNG.")
+
+        max_size_mb = 2
+        if image.size > max_size_mb * 1024 * 1024:
+            raise serializers.ValidationError(f"La imagen no puede superar los {max_size_mb}MB.")
+
+        try:
+            img = Image.open(image)
+            img.verify()
+        except Exception:
+            raise serializers.ValidationError("La imagen no es válida.")
+
+        return image
 
 class UserDataSerializer(serializers.ModelSerializer):
     class Meta:

@@ -39,71 +39,29 @@ class IsAdminUserGroup(BasePermission):
     def has_permission(self, request, view):
         return request.user and request.user.groups.filter(name = 'admin').exists()
         
-class AgregarUserDataView(APIView):
-    def post(self,request):
-        username = request.data.get("username")
-        user_email = request.data.get("email")
-        user_password = request.data.get("password")
-        user_first_name = request.data.get("first_name")
-        user_last_name = request.data.get("last_name")
-        user_age = request.data.get("user_age")
-        user_phone = request.data.get("user_phone")
-        user_country = request.data.get("user_country")
-        user_address = request.data.get("direccion")
-        user_type_profile = request.data.get("user_type_profile")
-        user_website = request.data.get("user_website")
-        user_social_media = request.data("user_social_media")
-        
-        UserData.objects.create(
-                username=username,
-                user_first_name=user_first_name,
-                user_last_name=user_last_name,
-                user_email=user_email,
-                user_password=user_password,
-                user_age=user_age,
-                user_phone=user_phone,
-                user_country=user_country,
-                user_address=user_address,
-                user_type_profile=user_type_profile,
-                user_website=user_website,
-                user_social_media=user_social_media
-            )
-        
-        return Response({
-            "message":"Usuario creado correctamente"
-        })
-
-class AgregarUserDataView(APIView):
+class UserDataListCreateView(ListCreateAPIView):
+    # permission_classes = [IsAdminUserGroup,IsAuthenticated]
+    queryset = UserData.objects.all()
+    serializer_class = UserDataSerializer
     parser_classes = [JSONParser]
 
-    def post(self, request):
+    def create(self, request, *args, **kwargs):
         data = request.data.copy()
-
         image_data = data.get("user_image")
+
         if image_data:
             try:
-                format, imgstr = image_data.split(';base64,') 
+                format, imgstr = image_data.split(';base64,')
                 ext = format.split('/')[-1]
                 image_file = ContentFile(base64.b64decode(imgstr), name=f"profile.{ext}")
                 data["user_image"] = image_file
             except Exception as e:
-                return Response({"error": "Error al procesar la imagen: " + str(e)}, status=400)
+                return Response({"error": f"Error al procesar imagen: {str(e)}"}, status=400)
 
-        serializer = UserDataSerializer(data=data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "Usuario creado correctamente"}, status=201)
-        return Response(serializer.errors, status=400)
-
-
-
-
-
-class UserDataListCreateView(ListCreateAPIView):
-    # permission_classes = [IsAdminUserGroup,IsAuthenticated]
-    queryset = UserData.objects.all()
-    serializer_class = UserDataSerializer 
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=201)
     
 class UserDataDetailView(RetrieveUpdateDestroyAPIView):
     #permission_classes = [IsAuthenticated]

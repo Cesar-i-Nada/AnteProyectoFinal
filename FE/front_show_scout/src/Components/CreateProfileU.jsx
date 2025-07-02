@@ -29,6 +29,12 @@ function CreateProfileU() {
     fetchDataUsers();
   }, []);
 
+  const userExists = users.some(u => u.username === username);
+    if (userExists) {
+      alert("El nombre de usuario ya está en uso.");
+  return;
+}
+
   const subirImagen = (evento) => {
     const archivo = evento.target.files[0];
     if (archivo) {
