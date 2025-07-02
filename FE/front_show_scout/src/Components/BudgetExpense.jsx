@@ -176,79 +176,79 @@ return (
                             <td><input className='inpBExp' value={budget_expense_pieces_marketing_subtotal} onChange={(e)=>SetBudgetExpensePiecesMarketingSubtotal(e.target.value)} type="subtot tiq"/></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Production</td>
+                            <td className='tdBExp'>Producción</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_production_quantity} onChange={(e)=>SetBudgetExpensePiecesProductionQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_production_amount} onChange={(e)=>SetBudgetExpensePiecesProductionAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_production_subtotal} onChange={(e)=>SetBudgetExpensePiecesProductionSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Costume</td>
+                            <td className='tdBExp'>Vestuario</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_costume_quantity} onChange={(e)=>SetBudgetExpensePiecesCostumeQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_costume_amount} onChange={(e)=>SetBudgetExpensePiecesCostumeAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_costume_subtotal} onChange={(e)=>SetBudgetExpensePiecesCostumeSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Set Design</td>
+                            <td className='tdBExp'>Escenografía</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_set_design_quantity} onChange={(e)=>SetBudgetExpensePiecesSetDesignQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_set_design_amount} onChange={(e)=>SetBudgetExpensePiecesSetDesignAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_set_design_subtotal} onChange={(e)=>SetBudgetExpensePiecesSetDesignSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Art Design</td>
+                            <td className='tdBExp'>Diseño gráfico</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_art_design_quantity} onChange={(e)=>SetBudgetExpensePiecesArtDesignQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_art_design_amount} onChange={(e)=>SetBudgetExpensePiecesArtDesignAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_art_design_subtotal} onChange={(e)=>SetBudgetExpensePiecesArtDesignSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Music</td>
+                            <td className='tdBExp'>Música</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_music_quantity} onChange={(e)=>SetBudgetExpensePiecesMusicQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_music_amount} onChange={(e)=>SetBudgetExpensePiecesMusicAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_music_subtotal} onChange={(e)=>SetBudgetExpensePiecesMusicSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Lighting</td>
+                            <td className='tdBExp'>Iluminación</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_lighting_quantity} onChange={(e)=>SetBudgetExpensePiecesLightingQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_lighting_amount} onChange={(e)=>SetBudgetExpensePiecesLightingAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_lighting_subtotal} onChange={(e)=>SetBudgetExpensePiecesLightingSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Sound</td>
+                            <td className='tdBExp'>Sonido</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_sound_quantity} onChange={(e)=>SetBudgetExpensePiecesSoundQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_sound_amount} onChange={(e)=>SetBudgetExpensePiecesSoundAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_sound_subtotal} onChange={(e)=>SetBudgetExpensePiecesSoundSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Transportation</td>
+                            <td className='tdBExp'>Transporte</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_transportation_quantity} onChange={(e)=>SetBudgetExpensePiecesTransportationQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_transportation_amount} onChange={(e)=>SetBudgetExpensePiecesTransportationAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_transportation_subtotal} onChange={(e)=>SetBudgetExpensePiecesTransportationSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Accommodation</td>
+                            <td className='tdBExp'>Hospedaje</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_accommodation_quantity} onChange={(e)=>SetBudgetExpensePiecesAccommodationQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_accommodation_amount} onChange={(e)=>SetBudgetExpensePiecesAccommodationAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_accommodation_subtotal} onChange={(e)=>SetBudgetExpensePiecesAccommodationSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Miscellaneous</td>
+                            <td className='tdBExp'>Misceláneos</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_miscellaneous_quantity} onChange={(e)=>SetBudgetExpensePiecesMiscellaneousQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_miscellaneous_amount} onChange={(e)=>SetBudgetExpensePiecesMiscellaneousAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_miscellaneous_subtotal} onChange={(e)=>SetBudgetExpensePiecesMiscellaneousSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Fees</td>
+                            <td className='tdBExp'>Honorarios</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_fees_quantity} onChange={(e)=>SetBudgetExpensePiecesFeesQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_fees_amount} onChange={(e)=>SetBudgetExpensePiecesFeesAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_fees_subtotal} onChange={(e)=>SetBudgetExpensePiecesFeesSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Food</td>
+                            <td className='tdBExp'>Alimentación</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_food_quantity} onChange={(e)=>SetBudgetExpensePiecesFoodQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_food_amount} onChange={(e)=>SetBudgetExpensePiecesFoodAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_food_subtotal} onChange={(e)=>SetBudgetExpensePiecesFoodSubtotal(e.target.value)}type="subtot pat" /></td>
                         </tr>
                         <tr>
-                            <td className='tdBExp'>Rental</td>
+                            <td className='tdBExp'>Alquileres</td>
                             <td><input className='inpBExp' value={budget_expense_pieces_rental_quantity} onChange={(e)=>SetBudgetExpensePiecesRentalQuantity(e.target.value)} type="cant pat" placeholder='Ingrese cantidad'/></td>
                             <td><input className='inpBExp' value={budget_expense_pieces_rental_amount} onChange={(e)=>SetBudgetExpensePiecesRentalAmount(e.target.value)}type="mont $ pat" placeholder='Ingrese monto' /></td>                          
                             <td><input className='inpBExp' value={budget_expense_pieces_rental_subtotal} onChange={(e)=>SetBudgetExpensePiecesRentalSubtotal(e.target.value)}type="subtot pat" /></td>

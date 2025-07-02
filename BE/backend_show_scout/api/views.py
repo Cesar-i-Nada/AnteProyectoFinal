@@ -1,13 +1,16 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework.views import APIView
+import base64
+from rest_framework import status
+from rest_framework.parsers import JSONParser
+from django.core.files.base import ContentFile
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from .models import UserData, CompanyData, OrganizationData, UserCompanyData, UserOrganizationData, PiecesData, BudgetIncomeData, BudgetExpenseData
 from .serializers import UserDataSerializer, CompanyDataSerializer, OrganizationDataSerializer, UserCompanyDataSerializer, UserOrganizationDataSerializer, PiecesDataSerializer, BudgetIncomeDataSerializer, BudgetExpenseDataSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import render
-
-
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -32,7 +35,6 @@ class LoginViewSet(APIView):
             })
         return Response({'error': 'credenciales invalidas'}, status=401)
 
-
 class IsAdminUserGroup(BasePermission):
     def has_permission(self, request, view):
         return request.user and request.user.groups.filter(name = 'admin').exists()
@@ -42,7 +44,6 @@ class AgregarUserDataView(APIView):
         username = request.data.get("username")
         user_email = request.data.get("email")
         user_password = request.data.get("password")
-        
         user_first_name = request.data.get("first_name")
         user_last_name = request.data.get("last_name")
         user_age = request.data.get("user_age")
@@ -71,6 +72,33 @@ class AgregarUserDataView(APIView):
         return Response({
             "message":"Usuario creado correctamente"
         })
+
+class AgregarUserDataView(APIView):
+    parser_classes = [JSONParser]
+
+    def post(self, request):
+        data = request.data.copy()
+
+        image_data = data.get("user_image")
+        if image_data:
+            try:
+                format, imgstr = image_data.split(';base64,') 
+                ext = format.split('/')[-1]
+                image_file = ContentFile(base64.b64decode(imgstr), name=f"profile.{ext}")
+                data["user_image"] = image_file
+            except Exception as e:
+                return Response({"error": "Error al procesar la imagen: " + str(e)}, status=400)
+
+        serializer = UserDataSerializer(data=data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Usuario creado correctamente"}, status=201)
+        return Response(serializer.errors, status=400)
+
+
+
+
 
 class UserDataListCreateView(ListCreateAPIView):
     # permission_classes = [IsAdminUserGroup,IsAuthenticated]

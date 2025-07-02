@@ -16,6 +16,7 @@ class UserData(models.Model):
     user_type_profile = models.CharField(max_length=50, default="")
     user_website = models.CharField(max_length=200, default="")
     user_social_media = models.CharField(max_length=200,default="")
+    user_image = models.ImageField(upload_to='user_images/', null=True, blank=True)
                 
 class CompanyData(models.Model):
     #obligatorios

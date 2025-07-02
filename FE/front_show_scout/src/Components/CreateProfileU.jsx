@@ -1,150 +1,140 @@
-import React, { useState, useEffect, } from 'react'
-import '../Styles/CreateProfileU.css'
-import { useNavigate } from 'react-router-dom'
-import fetchUsers from '../Services/fetchUsers'
+import React, { useState, useEffect } from 'react';
+import '../Styles/CreateProfileU.css';
+import { useNavigate } from 'react-router-dom';
+import fetchUsers from '../Services/fetchUsers';
 
 function CreateProfileU() {
+  const [Img, setImg] = useState(null);
+  const [username, SetUsername] = useState('');
+  const [user_password, SetUserPassword] = useState('');
+  const [user_first_name, SetUserFirstName] = useState('');
+  const [user_last_name, SetUserLastName] = useState('');
+  const [user_email, SetUserEmail] = useState('');
+  const [user_age, SetUserAge] = useState('');
+  const [user_phone, SetUserPhone] = useState('');
+  const [user_country, SetUserCountry] = useState('');
+  const [user_address, SetUserAddress] = useState('');
+  const [user_type_profile, SetUserTypeProfile] = useState('');
+  const [user_website, SetUserWebsite] = useState('');
+  const [user_social_media, SetUserSocialMedia] = useState('');
+  const [users, SetUsers] = useState([]);
 
-  const [Img, setImg]=useState(null)
-  const [username,  SetUsername] = useState("")
-  const [user_password, SetUserPassword] = useState("")
-  const [user_first_name, SetUserFirstName] = useState("")
-  const [user_last_name, SetUserLastName] = useState("")    
-  const [user_email, SetUserEmail] = useState("")
-  const [user_age, SetUserAge] = useState("")
-  const [user_phone, SetUserPhone] = useState("")
-  const [user_country, SetUserCountry] = useState("")
-  const [user_address, SetUserAddress] = useState("")
-  const [user_type_profile, SetUserTypeProfile] = useState("")
-  const [user_website, SetUserWebsite] = useState("")
-  const [user_social_media, SetUserSocialMedia] = useState("")
-  const [users, SetUsers] = useState([])
-  
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  useEffect (() => {
-
+  useEffect(() => {
     async function fetchDataUsers() {
-
-      const datos = await fetchUsers.getUsers()
-      SetUsers(datos)
-    };
-
+      const datos = await fetchUsers.getUsers();
+      SetUsers(datos);
+    }
     fetchDataUsers();
   }, []);
 
-function Create() { 
-
-  const registered = users.filter(user => user.username === username && user.userPassword === user_password)
-    
-    console.log(registered);
-    
-    if (registered.length === 0) {
-      console.log('Usuario no registrado');
-      return;
-    } 
-    
-    const usuarioEncontrado = registered [0]; 
-    
-      //valida si el perfil ya se realizó
-    if (usuarioEncontrado.perfilCreado) {
-      console.log('El usuario está registrado, por lo que puede ingresar');
-      localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));
-      navigate('/SynchroMap');
-    }else{
-      console.log('El usuario aún no ha creado un perfil');  
-      localStorage.setItem("usuario",JSON.stringify(usuarioEncontrado))
-      navigate('/CreateProfile')
+  const subirImagen = (evento) => {
+    const archivo = evento.target.files[0];
+    if (archivo) {
+      const lector = new FileReader();
+      lector.onloadend = () => {
+        setImg(lector.result);
+      };
+      lector.readAsDataURL(archivo);
     }
-   
-  }
+  };
 
-  const subirImagen=(evento)=>{
-  const archivo = evento.target.files[0]
-  if (archivo) {
-const lector = new FileReader()
-lector.onloadend = ()=>{
-  setImg(lector.result)
-}
-lector.readAsDataURL(archivo) 
-}
-}
+  const handleCreate = async () => {
+    if (!username || !user_password || !user_first_name || !user_last_name || !user_email) {
+      alert('Por favor, complete los campos obligatorios.');
+      return;
+    }
 
-const Object = {
-  user: 'username',
-  user_first_name: "user_first_name",
-  user_last_name: "user_last_name",
-  user_email: "user_email",
-  user_password: "user_password",
-  user_age: "user_age",
-  user_phone: "user_phone",
-  user_country: "user_country",
-  user_address: "user_addreess",
-  user_type_profile: "user_type_profile",
-  user_website: "user_website",
-  user_social_media: "user_social_media",
-  }
+    const payload = {
+      username,
+      user_password,
+      user_first_name,
+      user_last_name,
+      user_email,
+      user_age,
+      user_phone,
+      user_country,
+      user_address,
+      user_type_profile,
+      user_website,
+      user_social_media,
+      user_image: Img,
+    };
 
-return (
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/userData/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-<div>
-    
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Perfil creado:', data);
+        navigate('/ProfileUPage');
+      } else {
+        const errorData = await response.json();
+        console.error('Error:', errorData);
+        alert('Error al crear perfil.');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+      alert('Error de red al crear perfil.');
+    }
+  };
+
+  return (
     <div className="containerU">
-        <div>
-            <img className='Cabritas' src="src/assets/img/CabritasClr.gif"/>   
-        </div>
+      <div>
+        <img className='Cabritas' src="src/assets/img/CabritasClr.gif" />
+      </div>
+      <div>
+        <div className='espCreateU'>
+          <p className='textCreateU'>Cree su perfil</p><br />
+          <p className='textPhotoCharge'>Cargue la fotografía de su perfil</p><br />
+          <input className='inpUPhFil' type="file" onChange={subirImagen} /><br /><br />
 
-        <div>  
-          <div className='espCreateU'>
-            <p className='textCreateU'>Cree su perfil</p><br />
-            <p className='textPhotoCharge'>Cargue la fotografía de su perfil</p><br />
-            <input className='inpUPhFil' type="file" onChange={subirImagen}/>
-            <input className='inpUPhSub' type="submit" /><br /><br />
+          <input className='inpU' value={username} onChange={(e) => SetUsername(e.target.value)} placeholder='Alias' />
+          <input className='inpU' value={user_password} onChange={(e) => SetUserPassword(e.target.value)} placeholder='Contraseña' />
+          <input className='inpU' value={user_first_name} onChange={(e) => SetUserFirstName(e.target.value)} placeholder='Nombre' />
+          <input className='inpU' value={user_last_name} onChange={(e) => SetUserLastName(e.target.value)} placeholder='Apellido' />
+          <input className='inpU' value={user_email} onChange={(e) => SetUserEmail(e.target.value)} placeholder='Correo' />
+          <input className='inpU' value={user_age} onChange={(e) => SetUserAge(e.target.value)} placeholder='Edad' />
+          <input className='inpU' value={user_phone} onChange={(e) => SetUserPhone(e.target.value)} placeholder='Teléfono' />
 
-            <input className='inpU' value={username} onChange={(e)=>SetUsername(e.target.value)} type="text" placeholder='Alias'/>
-            <input className='inpU' value={user_password} onChange={(e)=>SetUserPassword(e.target.value)} type="text" placeholder='Contraseña'/>
-            <input className='inpU' value={user_first_name} onChange={(e)=>SetUserFirstName(e.target.value)} type="text" placeholder='Nombre'/>
-            <input className='inpU' value={user_last_name} onChange={(e)=>SetUserLastName(e.target.value)} type="text" placeholder='Apellido'/>
-            <input className='inpU' value={user_email} onChange={(e)=>SetUserEmail(e.target.value)} type="text" placeholder='Correo'/>
-            <input className='inpU' value={user_age} onChange={(e)=>SetUserAge(e.target.value)} type="text" placeholder='Edad'/>
-            <input className='inpU' value={user_phone} onChange={(e)=>SetUserPhone(e.target.value)} type="text" placeholder='Teléfono'/>
-
-            <select className='inpSelectU' name="country" value={user_country} id="country-select" onChange={(e)=>SetUserCountry(e.target.value)}>
-            <option value="" disabled selected>Selecciona un país</option>
+          <select className='inpSelectU' value={user_country} onChange={(e) => SetUserCountry(e.target.value)}>
+            <option value="" disabled>Selecciona un país</option>
             <option value="CR">Costa Rica</option>
             <option value="MX">México</option>
             <option value="AR">Argentina</option>
             <option value="BR">Brasil</option>
             <option value="US">Estados Unidos</option>
-            </select><br />
+          </select><br />
 
-            <input className='inpU' value={user_address} onChange={(e)=>SetUserAddress(e.target.value)} type="text" placeholder='Dirección'/>
-            
-            <select className='inpSelectU' name="category" value={user_type_profile} id="type_profile-select" onChange={(e)=>SetUserTypeProfile(e.target.value)}>
-            <option value="" disabled selected>Selecciona un tipo de perfil</option>
+          <input className='inpU' value={user_address} onChange={(e) => SetUserAddress(e.target.value)} placeholder='Dirección' />
+
+          <select className='inpSelectU' value={user_type_profile} onChange={(e) => SetUserTypeProfile(e.target.value)}>
+            <option value="" disabled>Selecciona un tipo de perfil</option>
             <option value="I">Intérprete</option>
             <option value="T">Técnico</option>
             <option value="D">Director</option>
-            </select>
-            
-            <input className='inpU' value={user_website} onChange={(e)=>SetUserWebsite(e.target.value)} type="text" placeholder='Sitio Web'/>
-            
-            <select className='inpSelectU' name="social_media" value={user_social_media} id="social_media-select" onChange={(e)=>SetUserSocialMedia(e.target.value)}>
-            <option value="" disabled selected>Selecciona una red social</option>
+          </select>
+
+          <input className='inpU' value={user_website} onChange={(e) => SetUserWebsite(e.target.value)} placeholder='Sitio Web' />
+
+          <select className='inpSelectU' value={user_social_media} onChange={(e) => SetUserSocialMedia(e.target.value)}>
+            <option value="" disabled>Selecciona una red social</option>
             <option value="IG">Instagram</option>
             <option value="FB">Facebook</option>
             <option value="TT">Tik Tok</option>
-            </select><br /><br />
+          </select><br /><br />
 
-            <button onClick={Create} className='btnIniciarU'>Crear</button><br /><br />
-          </div>
+          <button onClick={handleCreate} className='btnIniciarU'>Crear</button><br /><br />
         </div>
-
       </div>
+    </div>
+  );
+}
 
-</div>
-  
-    );
-  };
-  
-export default CreateProfileU
+export default CreateProfileU;

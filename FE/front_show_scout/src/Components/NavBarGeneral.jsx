@@ -12,14 +12,14 @@ function Welcome() {
     return (
         <div>
           <div className="navbarGeneral">
-            <Link to={"/AboutUs"}>Show Scout</Link>
+            <Link to={"/AboutUsPage"}>Show Scout</Link>
 
           <div className="dropdown">
             <button className="dropbtn">Perfiles 
               <i className="fa fa-caret-down"></i>
             </button>
             <div className="dropdown-content">
-              <Link to={"/CreateProfileU"}>Intérprete</Link>
+              <Link to={"/ProfileU"}>Intérprete</Link>
               <Link to={"/CreateProfileC"}>Compañía</Link>
               <Link to={"/CreateProfileO"}>Organización</Link>
             </div>
