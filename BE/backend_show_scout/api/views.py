@@ -14,6 +14,9 @@ from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
+import uuid
+import imghdr
+
 
 class LoginViewSet(APIView):
     # permission_classes = [permissions.AllowAny]
@@ -68,6 +71,30 @@ class UserDataDetailView(RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer
+    
+    def patch(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = request.data.copy()
+
+        image_data = data.get('user_image')
+        if image_data and isinstance(image_data, str) and image_data.startswith('data:image'):
+            format, imgstr = image_data.split(';base64,')
+            ext = imghdr.what(None, h=base64.b64decode(imgstr))
+            if not ext:
+                return Response({"error": "Formato de imagen inválido."}, status=status.HTTP_400_BAD_REQUEST)
+
+            filename = f"{uuid.uuid4()}.{ext}"
+            decoded_img = ContentFile(base64.b64decode(imgstr), name=filename)
+            data['user_image'] = decoded_img
+
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+    
     
 class CompanyDataListCreateView(ListCreateAPIView):
     #permission_classes = [IsAuthenticated]

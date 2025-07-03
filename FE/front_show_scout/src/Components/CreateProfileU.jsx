@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import '../Styles/CreateProfileU.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import fetchUsers from '../Services/fetchUsers';
 
 function CreateProfileU() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { username: initialUsername, user_password: initialPassword, user_email: initialEmail } = location.state || {};
+
   const [Img, setImg] = useState(null);
-  const [username, SetUsername] = useState('');
-  const [user_password, SetUserPassword] = useState('');
+  const [username, SetUsername] = useState(initialUsername || '');
+  const [user_password, SetUserPassword] = useState(initialPassword || '');
+  const [user_email, SetUserEmail] = useState(initialEmail || '');
   const [user_first_name, SetUserFirstName] = useState('');
   const [user_last_name, SetUserLastName] = useState('');
-  const [user_email, SetUserEmail] = useState('');
   const [user_age, SetUserAge] = useState('');
   const [user_phone, SetUserPhone] = useState('');
   const [user_country, SetUserCountry] = useState('');
@@ -19,29 +24,15 @@ function CreateProfileU() {
   const [user_social_media, SetUserSocialMedia] = useState('');
   const [users, SetUsers] = useState([]);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    async function fetchDataUsers() {
-      const datos = await fetchUsers.getUsers();
-      SetUsers(datos);
-    }
-    fetchDataUsers();
+    fetchUsers.getUsers().then(SetUsers);
   }, []);
 
-  const userExists = users.some(u => u.username === username);
-    if (userExists) {
-      alert("El nombre de usuario ya está en uso.");
-  return;
-}
-
-  const subirImagen = (evento) => {
-    const archivo = evento.target.files[0];
+  const subirImagen = (e) => {
+    const archivo = e.target.files[0];
     if (archivo) {
       const lector = new FileReader();
-      lector.onloadend = () => {
-        setImg(lector.result);
-      };
+      lector.onloadend = () => setImg(lector.result);
       lector.readAsDataURL(archivo);
     }
   };
@@ -52,13 +43,22 @@ function CreateProfileU() {
       return;
     }
 
+    const edad = user_age ? parseInt(user_age) : null;
+    if (user_age && isNaN(edad)) {
+      alert('Edad inválida');
+      return;
+    }
+
+    const existingUser = users.find(u => u.user_email === user_email);
+    const userId = existingUser ? existingUser.id : null;
+
     const payload = {
       username,
       user_password,
       user_first_name,
       user_last_name,
       user_email,
-      user_age,
+      user_age: edad,
       user_phone,
       user_country,
       user_address,
@@ -69,31 +69,31 @@ function CreateProfileU() {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/userData/', {
-        method: 'POST',
+      const response = await fetch(`http://127.0.0.1:8000/api/userData/${userId || ''}`, {
+        method: userId ? 'PATCH' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Perfil creado:', data);
-        navigate('/ProfileUPage');
+        console.log(userId ? 'Perfil actualizado:' : 'Perfil creado:', data);
+        navigate('/ProfileUPage', { state: data });
       } else {
         const errorData = await response.json();
-        console.error('Error:', errorData);
-        alert('Error al crear perfil.');
+        console.error('Error backend:', errorData);
+        alert('Error al crear/actualizar perfil: ' + JSON.stringify(errorData));
       }
-    } catch (error) {
-      console.error('Error de red:', error);
-      alert('Error de red al crear perfil.');
+    } catch (e) {
+      console.error('Error red:', e);
+      alert('Error de red al crear/actualizar perfil.');
     }
   };
 
   return (
     <div className="containerU">
       <div>
-        <img className='Cabritas' src="src/assets/img/CabritasClr.gif" />
+        <img className='Cabritas' src="src/assets/img/CabritasClr.gif" alt="Cabritas" />
       </div>
       <div>
         <div className='espCreateU'>
