@@ -16,8 +16,8 @@ function AboutUs() {
   return (
     <div>
       
-      <div className="logout-container">
-        <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>
+      <div className="containerXAbout">
+        <button className="buttonXAbout" onClick={handleLogout}>Cerrar sesión</button>
       </div>
 
       <div>
@@ -30,17 +30,17 @@ function AboutUs() {
         <div className="flex-containerAbout">
           <div>
             <img src="src/assets/img/catUser.png" alt="Categoría de usuario" width={300} height={300}/>
-            <button className='abcAbout'><Link to="#" className="myButtonAbout">Danza</Link></button>
+            <button className='abcAbout'><Link to="#" className="buttonCatAbout">Danza</Link></button>
           </div><br />
 
           <div>
             <img src="src/assets/img/catComp.png" alt="Categoría de compañía" width={300} height={300}/>
-            <button className='abcAbout'><Link to ="#" className="myButtonAbout">Teatro</Link></button>
+            <button className='abcAbout'><Link to ="#" className="buttonCatAbout">Teatro</Link></button>
           </div><br />
           
           <div>
             <img src="src/assets/img/catOrg.png" alt="Categoría de Organización" width={300} height={300}/>
-            <button  className='abcAbout'><Link to ="#" className="myButtonAbout">Circo</Link></button>
+            <button  className='abcAbout'><Link to ="#" className="buttonCatAbout">Circo</Link></button>
           </div>
         </div>
       </div>

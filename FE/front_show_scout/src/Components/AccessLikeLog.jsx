@@ -1,12 +1,25 @@
 import React from 'react'
 import '../Styles/AccessLikeLog.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 function AccessLikeLog() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    
+    navigate('/');
+  };
   
   return (
     <div>
+
+      <div className="containerXAccL">
+        <button className="buttonXAccL" onClick={handleLogout}>Cerrar sesión</button>
+      </div>
     
       <div className='titleSelectCatL'>
         <p>Seleccione la categoría con la que deseas trabajar </p>
