@@ -4,12 +4,22 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import fetchUsers from '../Services/fetchUsers';
 
 function CreateProfileU() {
-  const location = useLocation();
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  
+    const handleLogout = () => {
+      
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
+      
+      navigate('/');
+    };
+  
+  const location = useLocation();
+  
   const { username: initialUsername, user_password: initialPassword, user_email: initialEmail } = location.state || {};
 
-  const [Img, setImg] = useState(null);
+  /*const [Img, setImg] = useState(null);*/
   const [username, SetUsername] = useState(initialUsername || '');
   const [user_password, SetUserPassword] = useState(initialPassword || '');
   const [user_email, SetUserEmail] = useState(initialEmail || '');
@@ -28,14 +38,14 @@ function CreateProfileU() {
     fetchUsers.getUsers().then(SetUsers);
   }, []);
 
-  const subirImagen = (e) => {
+  /*const subirImagen = (e) => {
     const archivo = e.target.files[0];
     if (archivo) {
       const lector = new FileReader();
       lector.onloadend = () => setImg(lector.result);
       lector.readAsDataURL(archivo);
     }
-  };
+  };*/
 
   const handleCreate = async () => {
     if (!username || !user_password || !user_first_name || !user_last_name || !user_email) {
@@ -65,7 +75,7 @@ function CreateProfileU() {
       user_type_profile,
       user_website,
       user_social_media,
-      user_image: Img,
+      /*user_image: Img,*/
     };
 
     try {
@@ -91,6 +101,13 @@ function CreateProfileU() {
   };
 
   return (
+
+<div>
+    
+      <div className="containerXCrPrU">
+        <button className="buttonXCrPrU" onClick={handleLogout}>Cerrar sesión</button>
+      </div>
+
     <div className="containerU">
       <div>
         <img className='Cabritas' src="src/assets/img/CabritasClr.gif" alt="Cabritas" />
@@ -98,8 +115,8 @@ function CreateProfileU() {
       <div>
         <div className='espCreateU'>
           <p className='textCreateU'>Cree su perfil</p><br />
-          <p className='textPhotoCharge'>Cargue la fotografía de su perfil</p><br />
-          <input className='inpUPhFil' type="file" onChange={subirImagen} /><br /><br />
+          {/*<p className='textPhotoCharge'>Cargue la fotografía de su perfil</p><br />
+          <input className='inpUPhFil' type="file" onChange={subirImagen} /><br /><br />*/}
 
           <input className='inpU' value={username} onChange={(e) => SetUsername(e.target.value)} placeholder='Alias' />
           <input className='inpU' value={user_password} onChange={(e) => SetUserPassword(e.target.value)} placeholder='Contraseña' />
@@ -139,6 +156,7 @@ function CreateProfileU() {
           <button onClick={handleCreate} className='btnIniciarU'>Crear</button><br /><br />
         </div>
       </div>
+    </div>
     </div>
   );
 }

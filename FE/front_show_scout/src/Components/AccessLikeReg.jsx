@@ -1,8 +1,18 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../Styles/AccessLikeReg.css';
 
 function AccessLikeReg() {
+const navigate = useNavigate();
+
+  const handleLogout = () => {
+    
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    
+    navigate('/');
+  };
+
   const loc = useLocation();
   const { username, userPassword, userEmail } = loc.state || {};
 
@@ -10,6 +20,11 @@ function AccessLikeReg() {
   
   return (
       <div>
+
+      <div className="containerXAccR">
+        <button className="buttonXAccR" onClick={handleLogout}>Cerrar sesión</button>
+      </div>
+
         <div className='titleSelectCatR'>
           <p>Seleccione la categoría con la que deseas ingresar </p>
         </div>
