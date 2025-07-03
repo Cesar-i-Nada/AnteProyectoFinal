@@ -7,7 +7,7 @@ function AccessLikeR() {
   return (
     <div>
         <NavBarIntro />
-        <div className='AccessLikeRMargin'>
+          <div className='accessLikeRMargin'>
         <AccessLikeReg />
         </div>
     </div>

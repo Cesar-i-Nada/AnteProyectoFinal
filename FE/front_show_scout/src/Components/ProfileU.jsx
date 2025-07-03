@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate} from 'react-router-dom';
+import '../Styles/MarginPages/ProfileU.css'
 
 function ProfileU() {
 const navigate = useNavigate();

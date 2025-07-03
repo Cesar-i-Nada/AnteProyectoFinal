@@ -7,8 +7,8 @@ function ProfileUForm() {
   return (
     <div>
         <NavBarIntro />
-        <div className='createProfileUMargin'>
-          <CreateProfileU />
+          <div className='createProfileUMargin'>
+        <CreateProfileU />
         </div>
     </div>
   )

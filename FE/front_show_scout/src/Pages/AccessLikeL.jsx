@@ -8,7 +8,7 @@ function AccessLikeL() {
   return (
     <div>
         <NavBarIntro />
-        <div className='AccessLikeLMargin'>
+          <div className='accessLikeLMargin'>
         <AccessLikeLog />
         </div>
     </div>

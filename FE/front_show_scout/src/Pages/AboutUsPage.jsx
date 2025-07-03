@@ -9,7 +9,7 @@ function AboutUsPage() {
   return (
     <div>
         <NavBarGeneral />
-        <div className='AboutUsMargin'>
+          <div className='aboutUsMargin'>
         <AboutUs />
         </div>
         <Footer />
