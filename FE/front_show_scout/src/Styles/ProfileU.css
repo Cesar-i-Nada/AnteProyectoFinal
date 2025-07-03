@@ -1,3 +1,10 @@
+.workingProfileU {
+    font-size: 50PX;
+    text-align: center;
+    color: #8c52ff;
+    margin-bottom: 50px;
+}
+
 .containerXPrU {
   display: flex;
   justify-content: flex-end;
@@ -25,3 +32,18 @@
   background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
   background-color:#f24437;
 }
+
+/*Paleta de colores usada*/
+
+.color1 {color: #000000;}
+.color2 {color: #ffffff;}
+.color3 {color: #feffdf;}
+.color4 {color: #ffde59;}
+.color5 {color: #ffbd59;}
+.color6 {color: #ff914d;}
+.color7 {color: #f24405;}
+.color8 {color: #ff5757;}
+.color9 {color: #f24405;}
+.color10 {color: #e7191f;}
+.color11 {color: #8c52ff;}
+.color12 {color: #eae9e8;}

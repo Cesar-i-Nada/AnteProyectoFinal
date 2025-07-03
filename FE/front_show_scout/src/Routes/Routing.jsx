@@ -16,6 +16,8 @@ import BudgetIPage from '../Pages/BudgetIPage';
 import BudgetEPage from '../Pages/BudgetEPage';
 import AboutUsPage from '../Pages/AboutUsPage';
 import ProfileUPage from '../Pages/ProfileUPage';
+import ProfileCPage from '../Pages/ProfileCPage';
+import ProfileOPage from '../Pages/ProfileOPage';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -48,6 +50,9 @@ function Routing() {
                 <Route path="/AccessLikeL" element={<AccessLikeL />} />
 
                 <Route path="/ProfileUPage" element={<ProfileUPage />} />
+                <Route path="/ProfileCPage" element={<ProfileCPage />} />
+                <Route path="/ProfileOPage" element={<ProfileOPage />} />
+
 
 
 

@@ -1,80 +1,101 @@
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {
+  Box, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText,
+  Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button
+} from '@mui/material';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
-import { faSitemap } from '@fortawesome/free-solid-svg-icons';
-import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faPeopleGroup, faSitemap, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 
-import '../Styles/SidebarAdmin.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
+import '../Styles/SidebarAdmin.css';
 
-
-function SidebarAdmin({mostrarUsuarios, showCompanies, showOrganizations}) {
+function SidebarAdmin({ mostrarUsuarios, showCompanies, showOrganizations }) {
   const [open, setOpen] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
+  const toggleDrawer = (newOpen) => () => setOpen(newOpen);
+
+  const confirmLogout = () => setLogoutDialogOpen(true);
+  const cancelLogout = () => setLogoutDialogOpen(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    setLogoutDialogOpen(false);
+    toast.success('Sesión cerrada correctamente');
+    setTimeout(() => navigate('/'), 1500);
   };
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <ListItemButton onClick={mostrarUsuarios}>
-      <FontAwesomeIcon icon={faCircleUser} />
-      <ListItemIcon >
-        <ListItemText primary={"Gestión de usuarios"}/>
-      </ListItemIcon>
+        <FontAwesomeIcon icon={faCircleUser} />
+        <ListItemIcon>
+          <ListItemText primary="Gestión de usuarios" />
+        </ListItemIcon>
       </ListItemButton>
 
       <ListItemButton onClick={showCompanies}>
-      <FontAwesomeIcon icon={faPeopleGroup} />
-      <ListItemIcon>
-        <ListItemText primary={"Gestión de compañías"}/>
-      </ListItemIcon>
+        <FontAwesomeIcon icon={faPeopleGroup} />
+        <ListItemIcon>
+          <ListItemText primary="Gestión de compañías" />
+        </ListItemIcon>
       </ListItemButton>
 
       <ListItemButton onClick={showOrganizations}>
-      <FontAwesomeIcon icon={faSitemap} />
-      <ListItemIcon>
-        <ListItemText primary={"Gestión de organizaciones"}/>
-      </ListItemIcon>
+        <FontAwesomeIcon icon={faSitemap} />
+        <ListItemIcon>
+          <ListItemText primary="Gestión de organizaciones" />
+        </ListItemIcon>
       </ListItemButton>
 
       <Divider />
+
       <List>
-        {['Salir'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ?<FontAwesomeIcon icon={faDoorOpen} /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem disablePadding>
+          <ListItemButton onClick={confirmLogout}>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faDoorOpen} />
+            </ListItemIcon>
+            <ListItemText primary="Salir" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
 
   return (
     <div>
-      <button onClick={toggleDrawer(true)} className='menuSidebar'>Menú de mantenimiento</button>
+      <button onClick={toggleDrawer(true)} className='menuSidebar'>
+        Menú de mantenimiento
+      </button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
+
+      <Dialog open={logoutDialogOpen} onClose={cancelLogout}>
+        <DialogTitle>Confirmar cierre de sesión</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            ¿Estás seguro de que deseas cerrar sesión?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelLogout}>Cancelar</Button>
+          <Button onClick={handleLogout} variant="contained" color="error">
+            Cerrar sesión
+          </Button>
+        </DialogActions>
+      </Dialog>
+      
+      <ToastContainer position="top-center" autoClose={1200} hideProgressBar />
     </div>
   );
 }
+
 export default SidebarAdmin;

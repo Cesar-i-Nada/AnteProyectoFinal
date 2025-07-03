@@ -24,6 +24,8 @@ const navigate = useNavigate();
         <button className="buttonXPrU" onClick={handleLogout}>Cerrar sesión</button>
       </div>
 
+      <p className='workingProfileU'>PERFIL DE ARTISTA</p>
+
       {/*<h2>Perfil de {user.username}</h2>
       <p>Nombre: {user.user_first_name} {user.user_last_name}</p>
       <p>Email: {user.user_email}</p>
