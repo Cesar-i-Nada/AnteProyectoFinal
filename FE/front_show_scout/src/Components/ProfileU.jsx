@@ -1,6 +1,7 @@
 import React from 'react';
-import { useLocation, useNavigate} from 'react-router-dom';
-import '../Styles/MarginPages/ProfileU.css'
+import { useNavigate} from 'react-router-dom';
+import '../Styles/ProfileU.css'
+
 
 function ProfileU() {
 const navigate = useNavigate();
@@ -13,8 +14,8 @@ const navigate = useNavigate();
     navigate('/');
   };
 
-  const { state: user } = useLocation();
-  if (!user) return <p>Cargando...</p>;
+  {/*const { state: user } = useLocation();
+  if (!user) return <p>Cargando...</p>;*/}
 
   return (
     <div>
@@ -23,7 +24,7 @@ const navigate = useNavigate();
         <button className="buttonXPrU" onClick={handleLogout}>Cerrar sesión</button>
       </div>
 
-      <h2>Perfil de {user.username}</h2>
+      {/*<h2>Perfil de {user.username}</h2>
       <p>Nombre: {user.user_first_name} {user.user_last_name}</p>
       <p>Email: {user.user_email}</p>
       {user.user_image && <img src={user.user_image} alt="Perfil" />}

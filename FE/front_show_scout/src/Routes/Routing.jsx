@@ -17,7 +17,6 @@ import BudgetEPage from '../Pages/BudgetEPage';
 import AboutUsPage from '../Pages/AboutUsPage';
 import ProfileUPage from '../Pages/ProfileUPage';
 
-
 import PrivateRoute from './PrivateRoute';
 
 function Routing() {
@@ -35,8 +34,6 @@ function Routing() {
                 <Route path="/UsersManagementPage" element={<UsersManagementPage/>}/>
                 <Route path="/OrganizationsManagementPage" element={<OrganizationsManagementPage/>}/>
                 <Route path="/CompaniesManagementPage" element={<CompaniesManagementPage/>}/>
-
-
 
                 <Route path="/ProfileUForm" element={<ProfileUForm/>}/>
 
